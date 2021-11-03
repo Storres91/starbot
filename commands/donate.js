@@ -72,14 +72,14 @@ module.exports = {
                 .setColor('#e171fd')
                 .setTitle('<a:starpurplehover:902736901537144883> Giveaway Details <a:starpurplehover:902736901537144883>')
                 .setDescription(`Please review your giveaway:
-        <:starblue:902735005896306709> **Prize:** `+ mRequest[0] + `
-        <:starblue:902735005896306709> **Winners:** ${String(mRequest[2])}
-        <:starblue:902735005896306709> **Time:** ${String(mRequest[3])}
-        <:starblue:902735005896306709> **Extra entries:** ${String(mRequest[4])}
+<:starblue:902735005896306709> **Prize:** `+ mRequest[0] + `
+<:starblue:902735005896306709> **Winners:** ${String(mRequest[2])}
+<:starblue:902735005896306709> **Time:** ${String(mRequest[3])}
+<:starblue:902735005896306709> **Extra entries:** ${String(mRequest[4])}
 
-        <:starblue:902735005896306709> **Requirement:** ${String(mRequest[1])}
-        <:starblue:902735005896306709> **Message:** ${String(mRequest[5])}
-        <:starblue:902735005896306709> **Sponsor:** <@`+ donorID + `>`)
+<:starblue:902735005896306709> **Requirement:** ${String(mRequest[1])}
+<:starblue:902735005896306709> **Message:** ${String(mRequest[5])}
+<:starblue:902735005896306709> **Sponsor:** <@`+ donorID + `>`)
                 .setFooter(`pst! ${footerTT}Giveaway`)
                 .setTimestamp();
 
