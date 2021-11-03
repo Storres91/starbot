@@ -70,7 +70,7 @@ module.exports = {
 
             const reqEmbed = new Discord.MessageEmbed()
                 .setColor('#8f00ff')
-                .setTitle('<a:starpurplehover:902736901537144883> Giveaway Details <a:starpurplehover:902736901537144883>')
+                .setTitle('<a:starpurplehover:905575054161641483> Giveaway Details <a:starpurplehover:905575054161641483>')
                 .setDescription(`Please review your giveaway:
 <:starblue:902735005896306709> **Prize:** `+ mRequest[0] + `
 <:starblue:902735005896306709> **Winners:** ${String(mRequest[2])}
