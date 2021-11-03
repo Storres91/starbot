@@ -21,7 +21,7 @@ module.exports = {
         //Cancelled GA embed
         const reqCancelEmbed = new MessageEmbed()
             .setColor('#e01818')
-            .setTitle('<a:starpurplehover:902736901537144883> Cancelled Giveaway')
+            .setTitle(':x: Cancelled Giveaway :x:')
             .setDescription(`This giveaway has been cancelled`)
             .setTimestamp();
 
@@ -123,7 +123,7 @@ module.exports = {
                                 interaction.editReply({
                                     content: ' ',
                                     components: [],
-                                    embeds: [reqCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle('<a:starpurplehover:902736901537144883> Denied Giveaway').setDescription(`This giveaway has been denied`).setTimestamp()]
+                                    embeds: [reqCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle(':no_entry_sign: Denied Giveaway :no_entry_sign:').setDescription(`This giveaway has been denied`).setTimestamp()]
                                 });
 
                                 interaction.message.reply(`<@${requestData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
