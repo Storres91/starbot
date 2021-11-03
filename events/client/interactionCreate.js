@@ -28,7 +28,7 @@ module.exports = {
         var ttid;
         const staffRoleID='857060867676831805';
         const gaManagerRoleID='869250517791019088';
-        const gaManagerChannelID='905500365875736666';
+        const gaManagerChannelID='869298472648597524';
 
         //Buttons interaction    
         try {

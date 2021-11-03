@@ -20,7 +20,7 @@ module.exports = {
         var gaTemp = 'c#';
         var footerTT = ' ';
 
-        const gaDonationChannelID='905500460285329488';
+        const gaDonationChannelID='869271499800985640';
         const tt0_1ID = '852314328405377074';
         const tt2_19ID = '852314511432220702';
         const tt20ID = '852314705196613653';
