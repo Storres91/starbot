@@ -69,17 +69,17 @@ module.exports = {
 
 
             const reqEmbed = new Discord.MessageEmbed()
-                .setColor('#8f00ff')
-                .setTitle('<a:starpurplehover:905575054161641483> Giveaway Details <a:starpurplehover:905575054161641483>')
+                .setColor('#3437eb')
+                .setTitle('<a:staryellowhover:905582557972807730> Giveaway Details <a:staryellowhover:905582557972807730>')
                 .setDescription(`Please review your giveaway:
-<:starblue:902735005896306709> **Prize:** `+ mRequest[0] + `
-<:starblue:902735005896306709> **Winners:** ${String(mRequest[2])}
-<:starblue:902735005896306709> **Time:** ${String(mRequest[3])}
-<:starblue:902735005896306709> **Extra entries:** ${String(mRequest[4])}
+<:starpurple:905582557989584926> **Prize:** `+ mRequest[0] + `
+<:starpurple:905582557989584926> **Winners:** ${String(mRequest[2])}
+<:starpurple:905582557989584926> **Time:** ${String(mRequest[3])}
+<:starpurple:905582557989584926> **Extra entries:** ${String(mRequest[4])}
 
-<:starblue:902735005896306709> **Requirement:** ${String(mRequest[1])}
-<:starblue:902735005896306709> **Message:** ${String(mRequest[5])}
-<:starblue:902735005896306709> **Sponsor:** <@`+ donorID + `>`)
+<:starpurple:905582557989584926> **Requirement:** ${String(mRequest[1])}
+<:starpurple:905582557989584926> **Message:** ${String(mRequest[5])}
+<:starpurple:905582557989584926> **Sponsor:** <@`+ donorID + `>`)
                 .setFooter(`pst! ${footerTT}Giveaway`)
                 .setTimestamp();
 
