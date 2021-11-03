@@ -123,8 +123,10 @@ module.exports = {
                                 interaction.editReply({
                                     content: ' ',
                                     components: [],
-                                    embeds: [reqCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle('<a:starpurplehover:902736901537144883> Denied Giveaway').setDescription(`This giveaway has been rejected`).setTimestamp()]
+                                    embeds: [reqCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle('<a:starpurplehover:902736901537144883> Denied Giveaway').setDescription(`This giveaway has been denied`).setTimestamp()]
                                 });
+
+                                interaction.message.reply(`<@${requestData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
                             }, 500);
                         }
                         interaction.deferUpdate();
