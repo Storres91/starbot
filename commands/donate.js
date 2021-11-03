@@ -46,15 +46,13 @@ module.exports = {
 
 
 
-            for (let k = 0; k <= 3; k++) {
+            for (let k = 0; k <= 4; k++) {
                 if (!mRequest[k]) return message.channel.send("<@" + donorID + "> Use the command properly!!"
-                    + "\nCorrect Usage: ``pb request prize, winners, time, extra entries, requirement, message`` "
+                    + "\nCorrect Usage: ``pb request prize, requirement, winners, time, extra entries, message`` "
                     + "\nExample: ``pb request 5B, tt2-19, 2, 5 hour, no, Hello Everyone`` "
                     + "\n(don't forget to use commas , and command in <#"+gaDonationChannelID+">)");
             }
-            if (!mRequest[4]){
-                mRequest[4]=' ';
-            }
+            
 
             const confirmationRow = new MessageActionRow().addComponents(
                 new MessageButton()
@@ -75,11 +73,11 @@ module.exports = {
                 .setTitle('<a:starpurplehover:902736901537144883> Giveaway Details <a:starpurplehover:902736901537144883>')
                 .setDescription(`Please review your giveaway:
         <:starblue:902735005896306709> **Prize:** `+ mRequest[0] + `
-        <:starblue:902735005896306709> **Winners:** ${String(mRequest[1])}
-        <:starblue:902735005896306709> **Time:** ${String(mRequest[2])}
-        <:starblue:902735005896306709> **Extra entries:** ${String(mRequest[3])}
+        <:starblue:902735005896306709> **Winners:** ${String(mRequest[2])}
+        <:starblue:902735005896306709> **Time:** ${String(mRequest[3])}
+        <:starblue:902735005896306709> **Extra entries:** ${String(mRequest[4])}
 
-        <:starblue:902735005896306709> **Requirement:** ${String(mRequest[4])}
+        <:starblue:902735005896306709> **Requirement:** ${String(mRequest[1])}
         <:starblue:902735005896306709> **Message:** ${String(mRequest[5])}
         <:starblue:902735005896306709> **Sponsor:** <@`+ donorID + `>`)
                 .setFooter(`pst! ${footerTT}Giveaway`)
@@ -92,11 +90,11 @@ module.exports = {
             let reqMod = await requestModel.create({
                 requestID: String(reqMsgID),
                 prize: String(mRequest[0]),
-                winners: String(mRequest[1]),
-                duration: String(mRequest[2]),
-                extraEntry: String(mRequest[3]),
+                winners: String(mRequest[2]),
+                duration: String(mRequest[3]),
+                extraEntry: String(mRequest[4]),
 
-                requirement: String(mRequest[4]),
+                requirement: String(mRequest[1]),
                 message: String(mRequest[5]),
                 host: String(donorID),
 
