@@ -101,12 +101,15 @@ module.exports = {
 
                             //Send command and details to the managers channel
                             client.channels.cache.get(gaManagerChannelID).send(
-                                `<@${interaction.member.user.id}> has accepted giveaway from <@${requestData.host}>, here's the command to start it`
-                                +"\n``"+`g.gc using template ${requestData.template} -n ${requestData.prize} -d ${requestData.duration} -w ${requestData.winners} -h ${requestData.host}`+"``\n"
-                                +"\nDon't forget to post this message as well!!"
-                                +"\n```"+`<@&${ttid}>\n`+`**Req:** ${requestData.requirement} \n**Message:** ${requestData.message} \n**Sponsored by:** <@${requestData.host}>`+"```"
+                                `<@${interaction.member.user.id}> has accepted giveaway from <@${requestData.host}>, here's the command to start it`);
+
+                                client.channels.cache.get(gaManagerChannelID).send(
+                                "\n``"+`g.gc using template ${requestData.template} -n ${requestData.prize} -d ${requestData.duration} -w ${requestData.winners} -h ${requestData.host}`+"``\n");
+
+                                client.channels.cache.get(gaManagerChannelID).send(
+                                "\n```"+`<@&${ttid}>\n`+`**Req:** ${requestData.requirement} \n**Message:** ${requestData.message} \n**Sponsored by:** <@${requestData.host}>`+"```");
                                 
-                                );
+                                
                             
                             
                         }
