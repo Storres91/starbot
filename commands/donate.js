@@ -21,13 +21,14 @@ module.exports = {
         var footerTT = ' ';
 
         const gaDonationChannelID='869271499800985640';
+        const gaManagerChannelID='869298472648597524';
         const tt0_1ID = '852314328405377074';
         const tt2_19ID = '852314511432220702';
         const tt20ID = '852314705196613653';
 
 
 
-        if (message.channel.id === gaDonationChannelID) {
+        if (message.channel.id === gaDonationChannelID || message.channel.id === gaManagerChannelID) {
             if (message.member.roles.cache.some(role => role.id == tt0_1ID)) {
                 timetravel = tt0_1ID;
                 gaTemp = 'c1';
