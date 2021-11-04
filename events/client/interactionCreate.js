@@ -68,7 +68,7 @@ module.exports = {
                                 });
 
                                 interaction.message.reply('Giveaway confirmed please wait for <@&'+gaManagerRoleID+'> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
-                            }, 500);
+                            }, 1000);
 
                         }
                         interaction.deferUpdate();
@@ -84,7 +84,7 @@ module.exports = {
                                     components: [],
                                     embeds: [reqCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                                 });
-                            }, 500);
+                            }, 1000);
 
                         }
                         interaction.deferUpdate();
@@ -103,7 +103,7 @@ module.exports = {
                                 });
 
                                 interaction.message.reply(`<@${requestData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
-                            }, 500);
+                            }, 1000);
 
                             //Send command and details to the managers channel
                             client.channels.cache.get(gaManagerChannelID).send(
@@ -133,7 +133,7 @@ module.exports = {
                                 });
 
                                 interaction.message.reply(`<@${requestData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
-                            }, 500);
+                            }, 1000);
                         }
                         interaction.deferUpdate();
 
@@ -147,7 +147,7 @@ module.exports = {
                                     components: [],
                                     embeds: [reqCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                                 });
-                            }, 500);
+                            }, 1000);
                         }
                         interaction.deferUpdate();
 
