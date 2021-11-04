@@ -3,7 +3,6 @@
 module.exports = {
     execute(message, client, Discord) {
         const prefix = 'sb ';
-        if (message.content.toLowerCase().startsWith(prefix)) {
             if (!message.content.startsWith(prefix) || message.author.bot) return;
             if (message.channel.type == 'dm') return;
 
@@ -11,6 +10,7 @@ module.exports = {
             const cmd = args.shift().toLowerCase();
 
             const command = client.commands.get(cmd);
+            if (message.content.toLowerCase().startsWith(prefix)) {
             try {
                 if (command) command.execute(client, message, args, Discord);
             } catch (err) {
