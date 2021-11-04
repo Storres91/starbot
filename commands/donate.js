@@ -84,7 +84,7 @@ module.exports = {
                 .setFooter(`pst! ${footerTT}Giveaway`)
                 .setTimestamp();
 
-            await message.channel.send({ content: '<@' + donorID + '> If this is correct please press Confirm', embeds: [reqEmbed], components: [confirmationRow] }).then(sent => {
+            await message.channel.send({ content: '<@' + donorID + '> If this is correct, please **press Confirm** to notify Giveaway Managers ', embeds: [reqEmbed], components: [confirmationRow] }).then(sent => {
                 reqMsgID = sent.id;
             })
 

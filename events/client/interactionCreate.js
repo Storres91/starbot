@@ -16,7 +16,12 @@ module.exports = {
             new MessageButton()
                 .setCustomId("reqDeny")
                 .setLabel("Deny")
-                .setStyle("DANGER")
+                .setStyle("DANGER"),
+
+            new MessageButton()
+                .setCustomId("finalCancel")
+                .setLabel("Cancel my GA")
+                .setStyle("SECONDARY")
         );
         //Cancelled GA embed
         const reqCancelEmbed = new MessageEmbed()
@@ -58,6 +63,7 @@ module.exports = {
                             setTimeout(function () {
 
                                 interaction.editReply({
+                                    content: `Request from <@${requestData.host}>`,
                                     components: [approvalRow]
                                 });
 
@@ -127,6 +133,20 @@ module.exports = {
                                 });
 
                                 interaction.message.reply(`<@${requestData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
+                            }, 500);
+                        }
+                        interaction.deferUpdate();
+
+                    }
+
+                    if (interaction.customId == 'finalCancel') {
+                        if (interaction.member.user.id == requestData.host) {
+                            setTimeout(function () {
+                                interaction.editReply({
+                                    content: ' ',
+                                    components: [],
+                                    embeds: [reqCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
+                                });
                             }, 500);
                         }
                         interaction.deferUpdate();

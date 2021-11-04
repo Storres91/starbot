@@ -10,12 +10,12 @@ module.exports = {
             const cmd = args.shift().toLowerCase();
 
             const command = client.commands.get(cmd);
-            if (message.content.toLowerCase().startsWith(prefix)) {
+
             try {
                 if (command) command.execute(client, message, args, Discord);
             } catch (err) {
                 console.log(err);
             }
-        }
+        
     }
 }
