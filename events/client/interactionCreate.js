@@ -67,7 +67,7 @@ module.exports = {
                                     components: [approvalRow]
                                 });
 
-                                interaction.message.reply('Giveaway confirmed please wait for <@&'+gaManagerRoleID+'> to accept your request');
+                                interaction.message.reply('Giveaway confirmed please wait for <@&'+gaManagerRoleID+'> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
                             }, 500);
 
                         }
