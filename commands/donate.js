@@ -66,14 +66,14 @@ module.exports = {
                     .setStyle("DANGER")
             );
 
-            var winFix = String(mRequest[2]).replace(/\D/g,'');
+
 
             const reqEmbed = new Discord.MessageEmbed()
                 .setColor('#3437eb')
                 .setTitle('<a:staryellowhover:905582557972807730> Giveaway Details <a:staryellowhover:905582557972807730>')
                 .setDescription(`Please review your giveaway:
 <:starpurple:905582557989584926> **Prize:** `+ mRequest[0] + `
-<:starpurple:905582557989584926> **Winners:** ${winFix}
+<:starpurple:905582557989584926> **Winners:** ${String(mRequest[2])}
 <:starpurple:905582557989584926> **Time:** ${String(mRequest[3])}
 <:starpurple:905582557989584926> **Extra entries:** ${String(mRequest[4])}
 
@@ -90,7 +90,7 @@ module.exports = {
             let reqMod = await requestModel.create({
                 requestID: String(reqMsgID),
                 prize: String(mRequest[0]),
-                winners: String(mRequest[2]),
+                winners: String(mRequest[2]).replace(/\D/g,''),
                 duration: String(mRequest[3]),
                 extraEntry: String(mRequest[4]),
 
