@@ -107,7 +107,10 @@ module.exports = {
                                 "\n``"+`g.gc using template ${requestData.template} -n ${requestData.prize} -d ${requestData.duration} -w ${requestData.winners} -h ${requestData.host}`+"``\n");
 
                                 client.channels.cache.get(gaManagerChannelID).send(
-                                "\n```"+`<@&${ttid}>\n`+`**Req:** ${requestData.requirement} \n**Message:** ${requestData.message} \n**Sponsored by:** <@${requestData.host}>`+"```");
+                                "\n`<@&"+ttid+">`"
+                                +"\n`**Req:**` "+requestData.requirement
+                                +"`\n**Message:**` "+requestData.message
+                                +"`\n**Sponsored by:**` "+`<@${requestData.host}>`);
                                 
                                 
                             
