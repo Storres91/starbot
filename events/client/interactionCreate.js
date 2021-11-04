@@ -106,6 +106,7 @@ module.exports = {
                             }, 1000);
 
                             //Send command and details to the managers channel
+                            setTimeout(function () {
                             client.channels.cache.get(gaManagerChannelID).send(
                                 `<@${interaction.member.user.id}> has accepted giveaway from <@${requestData.host}>, here's the command to start it`);
 
@@ -114,7 +115,7 @@ module.exports = {
 
                                 client.channels.cache.get(gaManagerChannelID).send(
                                 "\n```"+`<@&${ttid}>\n`+`**Req:** ${requestData.requirement} \n**Message:** ${requestData.message} \n**Sponsored by:** <@${requestData.host}>`+"```");
-                                
+                            }, 1000); 
                                 
                             
                             
