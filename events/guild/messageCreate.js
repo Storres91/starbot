@@ -6,8 +6,8 @@ module.exports = {
         
             if (!message.content.startsWith(prefix) || message.author.bot) return;
             if (message.channel.type == 'dm') return;
-            
-            message.content.shift().toLowerCase();
+
+            message.content.toLowerCase();
 
             const args = message.content.slice(prefix.length).split(/ +/);
             const cmd = args.shift().toLowerCase();
