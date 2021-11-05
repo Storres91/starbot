@@ -6,8 +6,10 @@ module.exports = {
         
             if (!message.content.startsWith(prefix) || message.author.bot) return;
             if (message.channel.type == 'dm') return;
-           
-            const args = message.content.slice(prefix.length).split(/ +/).toLowerCase();
+            
+            message.content.shift().toLowerCase();
+
+            const args = message.content.slice(prefix.length).split(/ +/);
             const cmd = args.shift().toLowerCase();
 
             const command = client.commands.get(cmd);
