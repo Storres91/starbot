@@ -2,9 +2,9 @@
 
 module.exports = {
     execute(message, client, Discord) {
-        
+        message.content.toLowerCase();
         const prefix = 'sb ';
-        if (message.content.toLowerCase().startsWith(prefix)) {
+        
             if (!message.content.startsWith(prefix) || message.author.bot) return;
             if (message.channel.type == 'dm') return;
 
@@ -18,6 +18,6 @@ module.exports = {
             } catch (err) {
                 console.log(err);
             }
-        }
+        
     }
 }
