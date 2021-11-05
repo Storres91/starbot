@@ -28,7 +28,7 @@ module.exports = {
 
 
 
-        if (message.channel.id === gaDonationChannelID || message.channel.id === gaManagerChannelID) {
+        if (message.channel.id === gaDonationChannelID || message.channel.id === gaManagerChannelID || message.member.roles.cache.some(role => role.id == '857060867676831805')) {
             if (message.member.roles.cache.some(role => role.id == tt0_1ID)) {
                 timetravel = tt0_1ID;
                 gaTemp = 'c1';
