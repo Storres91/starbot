@@ -2,12 +2,10 @@
 
 module.exports = {
     execute(message, client, Discord) {
-            const prefix = 'sb ';
-        
+        const prefix = 'sb ';
+        if (message.content.toLowerCase().startsWith(prefix)) {
             if (!message.content.startsWith(prefix) || message.author.bot) return;
             if (message.channel.type == 'dm') return;
-
-            message.content.toLowerCase();
 
             const args = message.content.slice(prefix.length).split(/ +/);
             const cmd = args.shift().toLowerCase();
@@ -19,6 +17,6 @@ module.exports = {
             } catch (err) {
                 console.log(err);
             }
-        
+        }
     }
 }
