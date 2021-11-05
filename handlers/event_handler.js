@@ -1,7 +1,6 @@
 const fs = require('fs');
 
 module.exports = (client, Discord, message) => {
-    message.content.toLowerCase();
     const load_dir = (dir) => {
         const event_files = fs.readdirSync(`./events/${dir}/`).filter(file => file.endsWith('.js'));
 
