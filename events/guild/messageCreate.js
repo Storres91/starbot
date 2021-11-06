@@ -1,5 +1,3 @@
-
-
 module.exports = {
     execute(message, client, Discord) {
         const prefix = 'sb ';
@@ -11,6 +9,7 @@ module.exports = {
             const cmd = args.shift().toLowerCase();
 
             const command = client.commands.get(cmd);
+            if(!command) return;
 
             try {
                 if (command) command.execute(client, message, args, Discord);
