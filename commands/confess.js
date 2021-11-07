@@ -4,6 +4,7 @@ const confessionModel = require('../models/confessionSchema.js')
 module.exports = {
     name: 'confess',
     description: 'make an annonymously confession',
+    aliases: ['confession'],
     async execute(client, message, args, Discord) {
         const confessionStaffChannelID = '907010075804196974';
         const confessionTxt = args.join(" ");
