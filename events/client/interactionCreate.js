@@ -82,7 +82,6 @@ module.exports = {
                 } catch (err) {
                     console.log(`Error getting countersData ${err}`)
                 }
-                console.log(countersData.confessionSeq);
 
 
                 //Confirm/Cancel buttons           
