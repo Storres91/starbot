@@ -5,7 +5,7 @@ module.exports = {
     name: 'confess',
     description: 'make an annonymously confession',
     async execute(client, message, args, Discord) {
-        if (message.member.user.id == '313351494361677845') {
+        
             var confessionMsgID = 0;
             const confessionStaffChannelID = '851078982945210409';
             const confessionTxt = args.join(" ");
@@ -50,4 +50,3 @@ module.exports = {
 
 
     }
-}
