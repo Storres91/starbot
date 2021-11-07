@@ -13,7 +13,7 @@ module.exports = {
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
         const gaManagerChannelID = '869298472648597524';
-        const confessionPublicChannelID = '859527785738141716';
+        const confessionPublicChannelID = '867539163883634719';
 
         var randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
