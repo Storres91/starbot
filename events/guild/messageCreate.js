@@ -10,12 +10,12 @@ module.exports = {
             console.log(`Error getting blacklistedData ${err}`)
         }
 
-        if (blacklistedData) {
-            if (blacklistedData.blStatus) return message.channel.send('You are blacklisted from the bot');
-        }
+        
         if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot) return;
         if (message.channel.type == 'dm') return;
-
+        if (blacklistedData) {
+            if (blacklistedData.blStatus && !message.content.toLowerCase().startsWith(prefix)) return message.channel.send('You are blacklisted from the bot');
+        }
         const args = message.content.slice(prefix.length).split(/ +/);
         const cmd = args.shift().toLowerCase();
 
