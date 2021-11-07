@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const requestSchema = new mongoose.Schema({
-    requestID: { type: String, require: true, unique: true },
+const donationSchema = new mongoose.Schema({
+    donationID: { type: String, require: true, unique: true },
     prize: { type: String, require: true },
     winners: { type: String, require: true },
     duration: { type: String, require: true },
@@ -16,6 +16,6 @@ const requestSchema = new mongoose.Schema({
 
 })
 
-const model = mongoose.model("requestModel", requestSchema);
+const model = mongoose.model("donationModel", donationSchema);
 
 module.exports = model;

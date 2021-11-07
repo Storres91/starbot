@@ -1,20 +1,27 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
-const requestModel = require('../../models/requestSchema.js')
+const donationModel = require('../../models/donationSchema.js')
+const confessionModel = require('../../models/confessionSchema.js')
 
 module.exports = {
     name: 'interactionCreate',
     description: "Creates interactions",
 
     async execute(interaction, client) {
+        var ttid;
+        const staffRoleID = '857060867676831805';
+        const gaManagerRoleID = '869250517791019088';
+        const gaManagerChannelID = '869298472648597524';
+        const confessionPublicChannelID = '859527785738141716';
+
         //Accept/Deny button row
         const approvalRow = new MessageActionRow().addComponents(
             new MessageButton()
-                .setCustomId("reqAccept")
+                .setCustomId("donationAccept")
                 .setLabel("Accept")
                 .setStyle("SUCCESS"),
 
             new MessageButton()
-                .setCustomId("reqDeny")
+                .setCustomId("donationDeny")
                 .setLabel("Deny")
                 .setStyle("DANGER"),
 
@@ -24,138 +31,162 @@ module.exports = {
                 .setStyle("SECONDARY")
         );
         //Cancelled GA embed
-        const reqCancelEmbed = new MessageEmbed()
+        const donationCancelEmbed = new MessageEmbed()
             .setColor('#e01818')
             .setTitle(':x: Cancelled Giveaway :x:')
             .setDescription(`This giveaway has been cancelled`)
             .setTimestamp();
 
-        var ttid;
-        const staffRoleID='857060867676831805';
-        const gaManagerRoleID='869250517791019088';
-        const gaManagerChannelID='869298472648597524';
+        //Cancelled GA embed
+        const publicConfessionEmbed = new MessageEmbed()
+            .setColor('#e01818')
+            .setTitle('Confession')
+            .setTimestamp();
+
 
         //Buttons interaction    
         try {
             if (interaction.isButton()) {
 
-                //Retrieve db data
-                let requestData;
+                //Retrieve confession db data
+                let confessionData;
                 try {
-                    requestData = await requestModel.findOne({ requestID: interaction.message.id });
+                    confessionData = await confessionModel.findOne({ confessionID: interaction.message.id });
                 } catch (err) {
-                    console.log(`Error getting requestData ${err}`)
+                    console.log(`Error getting donationData ${err}`)
                 }
 
-                //Check giveaway tt
-                ttid=requestData.tt;
-
-                if (requestData.tt=='0' || ttid=='0'){
-                    ttid='TT';
+                //Retrieve donation db data
+                let donationData;
+                try {
+                    donationData = await donationModel.findOne({ donationID: interaction.message.id });
+                    
+                } catch (err) {
+                    console.log(`Error getting donationData ${err}`)
                 }
-                
+
                 //Confirm/Cancel buttons           
-                try {
+                if (interaction.customId == 'donationConfirm') {
 
-                    if (interaction.customId == 'reqConfirm') {
-                        //Only allow host/GA manager+ to confirm/cancel giveaway requests
-                        if (interaction.member.user.id == requestData.host|| interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
-                            setTimeout(function () {
+                    //Check giveaway tt
+                    ttid = donationData.tt;
 
-                                interaction.editReply({
-                                    content: `Request from <@${requestData.host}>`,
-                                    components: [approvalRow]
-                                });
-
-                                interaction.message.reply('Giveaway confirmed please wait for <@&'+gaManagerRoleID+'> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
-                            }, 1000);
-
-                        }
-                        interaction.deferUpdate();
+                    if (donationData.tt == '0' || ttid == '0') {
+                        ttid = 'TT';
                     }
 
+                    //Only allow host/GA manager+ to confirm/cancel giveaway requests
+                    if (interaction.member.user.id == donationData.host || interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                        setTimeout(function () {
 
-                    if (interaction.customId === 'reqCancel') {
-                        //Only allow host/GA manager+ to confirm/cancel giveaway requests
-                        if (interaction.member.user.id == requestData.host || interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
-                            setTimeout(function () {
-                                interaction.editReply({
-                                    content: ' ',
-                                    components: [],
-                                    embeds: [reqCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
-                                });
-                            }, 1000);
+                            interaction.editReply({
+                                content: `Request from <@${donationData.host}>`,
+                                components: [approvalRow]
+                            });
 
-                        }
-                        interaction.deferUpdate();
-                    }
+                            interaction.message.reply('Giveaway confirmed please wait for <@&' + gaManagerRoleID + '> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
 
-
-                    //Accept/Deny buttons
-                    if (interaction.customId == 'reqAccept') {
-                        //Only allow GA manager+ to Accept/Deny giveaway requests
-                        if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
-                            setTimeout(function () {
-
-                                interaction.editReply({
-                                    content: `Request from <@${requestData.host}>`,
-                                    components: []
-                                });
-
-                                interaction.message.reply(`<@${requestData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
-                            }, 1000);
-
-                            //Send command and details to the managers channel
-                            setTimeout(function () {
-                            client.channels.cache.get(gaManagerChannelID).send(
-                                `<@${interaction.member.user.id}> has accepted giveaway from <@${requestData.host}>, here's the command to start it`);
-
-                                client.channels.cache.get(gaManagerChannelID).send(
-                                "\n`"+`g.gc using template ${requestData.template} -n ${requestData.prize} -d ${requestData.duration} -w ${requestData.winners} -h ${requestData.host}`+"`\n");
-
-                                client.channels.cache.get(gaManagerChannelID).send(
-                                "\n```"+`<@&${ttid}>\n`+`**Req:** ${requestData.requirement} \n**Message:** ${requestData.message} \n**Sponsored by:** <@${requestData.host}>`+"```");
-                            }, 1000); 
-                                
-                            
-                            
-                        }
-                        interaction.deferUpdate();
+                        }, 1000);
 
                     }
-                    //Only allow GA manager+ to Accept/Deny giveaway requests
-                    if (interaction.customId == 'reqDeny') {
-                        if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
-                            setTimeout(function () {
-                                interaction.editReply({
-                                    content: ' ',
-                                    components: [],
-                                    embeds: [reqCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle(':no_entry_sign: Denied Giveaway :no_entry_sign:').setDescription(`This giveaway has been denied`).setTimestamp()]
-                                });
-
-                                interaction.message.reply(`<@${requestData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
-                            }, 1000);
-                        }
-                        interaction.deferUpdate();
-
-                    }
-
-                    if (interaction.customId == 'finalCancel') {
-                        if (interaction.member.user.id == requestData.host) {
-                            setTimeout(function () {
-                                interaction.editReply({
-                                    content: ' ',
-                                    components: [],
-                                    embeds: [reqCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
-                                });
-                            }, 1000);
-                        }
-                        interaction.deferUpdate();
-
-                    }
-                } catch (err) {
-                    console.log(`There was an error with the giveaway ${requestData.requestID} buttons ${err}`)
+                    interaction.deferUpdate();
                 }
+
+
+                if (interaction.customId === 'donationCancel') {
+                    //Only allow host/GA manager+ to confirm/cancel giveaway requests
+                    if (interaction.member.user.id == donationData.host || interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                        setTimeout(function () {
+                            interaction.editReply({
+                                content: ' ',
+                                components: [],
+                                embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
+                            });
+                        }, 1000);
+
+                    }
+                    interaction.deferUpdate();
+                }
+
+
+                //Accept/Deny buttons
+                if (interaction.customId == 'donationAccept') {
+                    //Only allow GA manager+ to Accept/Deny giveaway requests
+                    if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                        setTimeout(function () {
+
+                            interaction.editReply({
+                                content: `Donation from <@${donationData.host}>`,
+                                components: []
+                            });
+
+                            interaction.message.reply(`<@${donationData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
+                        }, 1000);
+
+                        //Send command and details to the managers channel
+                        setTimeout(function () {
+                            client.channels.cache.get(gaManagerChannelID).send(
+                                `<@${interaction.member.user.id}> has accepted giveaway from <@${donationData.host}>, here's the command to start it`);
+
+                            client.channels.cache.get(gaManagerChannelID).send(
+                                "\n`" + `g.gc using template ${donationData.template} -n ${donationData.prize} -d ${donationData.duration} -w ${donationData.winners} -h ${donationData.host}` + "`\n");
+
+                            client.channels.cache.get(gaManagerChannelID).send(
+                                "\n```" + `<@&${ttid}>\n` + `**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
+                        }, 1000);
+
+
+
+                    }
+                    interaction.deferUpdate();
+
+                }
+                //Only allow GA manager+ to Accept/Deny giveaway requests
+                if (interaction.customId == 'donationDeny') {
+                    if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                        setTimeout(function () {
+                            interaction.editReply({
+                                content: ' ',
+                                components: [],
+                                embeds: [donationCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle(':no_entry_sign: Denied Giveaway :no_entry_sign:').setDescription(`This giveaway has been denied`).setTimestamp()]
+                            });
+
+                            interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
+                        }, 1000);
+                    }
+                    interaction.deferUpdate();
+
+                }
+
+                if (interaction.customId == 'finalCancel') {
+                    if (interaction.member.user.id == donationData.host) {
+                        setTimeout(function () {
+                            interaction.editReply({
+                                content: ' ',
+                                components: [],
+                                embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
+                            });
+                        }, 1000);
+                    }
+                    interaction.deferUpdate();
+
+                }
+
+                if (interaction.customId == 'confessionPost') {
+                    
+                    setTimeout(function () {
+                        interaction.editReply({
+                            content: 'Confession sent',
+                            components: []
+
+                        });
+                        client.channels.cache.get(confessionPublicChannelID).send({embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg)]});
+                    }, 600);
+
+                    interaction.deferUpdate();
+
+                }
+
             }
 
         } catch (err) {
