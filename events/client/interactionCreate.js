@@ -61,6 +61,13 @@ module.exports = {
                 try {
                     donationData = await donationModel.findOne({ donationID: interaction.message.id });
                     
+                    //Check giveaway tt
+                    ttid = donationData.tt;
+
+                    if (donationData.tt == '0' || ttid == '0') {
+                        ttid = 'TT';
+                    }
+                    
                 } catch (err) {
                     console.log(`Error getting donationData ${err}`)
                 }
@@ -68,12 +75,7 @@ module.exports = {
                 //Confirm/Cancel buttons           
                 if (interaction.customId == 'donationConfirm') {
 
-                    //Check giveaway tt
-                    ttid = donationData.tt;
-
-                    if (donationData.tt == '0' || ttid == '0') {
-                        ttid = 'TT';
-                    }
+                    
 
                     //Only allow host/GA manager+ to confirm/cancel giveaway requests
                     if (interaction.member.user.id == donationData.host || interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
