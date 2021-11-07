@@ -5,9 +5,8 @@ module.exports = {
     name: 'confess',
     description: 'make an annonymously confession',
     async execute(client, message, args, Discord) {
-        const confessionStaffChannelID = '906645281662201876';
+        const confessionStaffChannelID = '851078982945210409';
         const confessionTxt = args.join(" ");
-        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
 
         //Post button
         const confessionRow = new MessageActionRow().addComponents(

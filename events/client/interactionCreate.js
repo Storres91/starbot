@@ -1,6 +1,8 @@
 const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const donationModel = require('../../models/donationSchema.js')
 const confessionModel = require('../../models/confessionSchema.js')
+const countersModel = require('../../models/countersSchema.js')
+
 
 module.exports = {
     name: 'interactionCreate',
@@ -12,6 +14,9 @@ module.exports = {
         const gaManagerRoleID = '869250517791019088';
         const gaManagerChannelID = '869298472648597524';
         const confessionPublicChannelID = '859527785738141716';
+
+        var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
 
         //Accept/Deny button row
         const approvalRow = new MessageActionRow().addComponents(
@@ -39,9 +44,14 @@ module.exports = {
 
         //Cancelled GA embed
         const publicConfessionEmbed = new MessageEmbed()
-            .setColor('#e01818')
-            .setTitle('Confession')
+            .setColor('#' + randomColor)
+            .setTitle('tets')
             .setTimestamp();
+
+        const confessEmbedConfirm = new MessageEmbed()
+            .setColor('#89f170')
+            .setTimestamp();
+
 
 
         //Buttons interaction    
@@ -60,25 +70,33 @@ module.exports = {
                 let donationData;
                 try {
                     donationData = await donationModel.findOne({ donationID: interaction.message.id });
-                    
+
+                } catch (err) {
+                    console.log(`Error getting donationData ${err}`)
+                }
+
+                //Retrieve counters data
+                let countersData;
+                try {
+                    countersData = await countersModel.findOne({ counterId: "firstCounter" });
+                } catch (err) {
+                    console.log(`Error getting countersData ${err}`)
+                }
+                console.log(countersData.confessionSeq);
+
+
+                //Confirm/Cancel buttons           
+                if (interaction.customId == 'donationConfirm') {
+
                     //Check giveaway tt
                     ttid = donationData.tt;
 
                     if (donationData.tt == '0' || ttid == '0') {
                         ttid = 'TT';
                     }
-                    
-                } catch (err) {
-                    console.log(`Error getting donationData ${err}`)
-                }
 
-                //Confirm/Cancel buttons           
-                if (interaction.customId == 'donationConfirm') {
-
-                    
-
-                    //Only allow host/GA manager+ to confirm/cancel giveaway requests
-                    if (interaction.member.user.id == donationData.host || interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                    //Only allow host confirm/cancel giveaway requests
+                    if (interaction.member.user.id == donationData.host ) {
                         setTimeout(function () {
 
                             interaction.editReply({
@@ -96,8 +114,8 @@ module.exports = {
 
 
                 if (interaction.customId === 'donationCancel') {
-                    //Only allow host/GA manager+ to confirm/cancel giveaway requests
-                    if (interaction.member.user.id == donationData.host || interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                    //Only allow host confirm/cancel giveaway requests
+                    if (interaction.member.user.id == donationData.host) {
                         setTimeout(function () {
                             interaction.editReply({
                                 content: ' ',
@@ -174,15 +192,34 @@ module.exports = {
 
                 }
 
+                //Confession buttons
                 if (interaction.customId == 'confessionPost') {
-                    
+                    countersData.confessionSeq+=1;
+                    countersData.save();
                     setTimeout(function () {
                         interaction.editReply({
-                            content: ':white_check_mark: Confession sent :white_check_mark:',
-                            components: []
+                            content: 'Confession sent :white_check_mark:',
+                            components: [],
+                            embeds: [confessEmbedConfirm.setDescription('Confession: ' + confessionData.confessionMsg).setFooter(`Confession approved by ${interaction.member.user.tag}`).setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
 
                         });
-                        client.channels.cache.get(confessionPublicChannelID).send({embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg)]});
+                        client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle('Confession #'+String(countersData.confessionSeq))] });
+                    }, 600);
+
+                    interaction.deferUpdate();
+
+                }
+
+                if (interaction.customId == 'confessionDeny') {
+
+                    setTimeout(function () {
+                        interaction.editReply({
+                            content: 'Confession Denied :no_entry_sign: ',
+                            components: [],
+                            embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('Confession: ' + confessionData.confessionMsg).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+
+                        });
+                        client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
                     }, 600);
 
                     interaction.deferUpdate();
