@@ -9,6 +9,7 @@ module.exports = {
             const blacklistedTarget = message.mentions.users.first();
             if(blacklistedTarget.id=='313351494361677845') return message.channel.send("You can't blacklist a developer <:nyanana:906766582171181077>")
             if(blacklistedTarget.id==message.author.id) return message.channel.send("You can't blacklist yourself lol")
+            if(blacklistedTarget.id=='902331574396284948') return message.channel.send("I am god <a:cr_wtf:856247028635664414> ")
             if (blacklistedTarget) {
             try{
                 let blacklistedMod = await blacklistedModel.create({

@@ -49,8 +49,8 @@ module.exports = {
 
             for (let k = 0; k <= 4; k++) {
                 if (!mDonation[k]) return message.channel.send("<@" + donorID + "> Use the command properly!!"
-                    + "\nCorrect Usage: ``sb donate prize, requirement, winners, time, extra entries, message`` "
-                    + "\nExample: ``sb donate 5B, tt2-19, 2, 5 hour, no, Hello Everyone`` "
+                    + "\nCorrect Usage: `sb donate prize, requirement, winners, time, extra entries, message` "
+                    + '\nExample: `sb donate 5B, write "congrats" in <#869271499800985640>, 2, 5h, no, Hello Everyone`'
                     + "\n(don't forget to use commas , and command in <#"+gaDonationChannelID+">)");
             }
             
