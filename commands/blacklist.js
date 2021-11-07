@@ -4,9 +4,10 @@ module.exports = {
     name: 'blacklist',
     description: 'Blacklists someone from using the bot',
     async execute(client, message, args, Discord) {
-        if (message.member.user.id == '313351494361677845') {
+        const staffRole ='857060867676831805';
+        if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRole)) {
             const blacklistedTarget = message.mentions.users.first();
-
+            if(blacklistedTarget.id=='313351494361677845') return message.channel.send("You can't blacklist a developer <:nyanana:906766582171181077>")
             if (blacklistedTarget) {
             try{
                 let blacklistedMod = await blacklistedModel.create({

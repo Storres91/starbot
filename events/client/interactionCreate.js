@@ -176,7 +176,7 @@ module.exports = {
                     
                     setTimeout(function () {
                         interaction.editReply({
-                            content: 'Confession sent',
+                            content: ':white_check_mark: Confession sent :white_check_mark:',
                             components: []
 
                         });
