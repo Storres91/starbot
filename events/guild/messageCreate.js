@@ -1,7 +1,7 @@
 const blacklistedModel = require('../../models/blacklistedSchema.js')
 module.exports = {
     async execute(message, client, Discord) {
-        const prefix = 'bsb ';
+        const prefix = 'sb ';
 
         let blacklistedData;
         try {
