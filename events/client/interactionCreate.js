@@ -202,7 +202,7 @@ module.exports = {
                             embeds: [confessEmbedConfirm.setDescription('Confession: ' + confessionData.confessionMsg).setFooter(`Confession approved by ${interaction.member.user.tag}`).setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
 
                         });
-                        client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle('Confession #'+String(countersData.confessionSeq))] });
+                        client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle(':pencil: Confession #'+String(countersData.confessionSeq))] });
                     }, 600);
 
                     interaction.deferUpdate();
