@@ -207,7 +207,7 @@ module.exports = {
 
                         });
                         client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle(':pencil: Confession #'+String(countersData.confessionSeq))] });
-                    }, 300);
+                    }, 400);
 
                     interaction.deferUpdate();
 
@@ -223,7 +223,7 @@ module.exports = {
 
                         });
                         client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
-                    }, 300);
+                    }, 400);
 
                     interaction.deferUpdate();
 
