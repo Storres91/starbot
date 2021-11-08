@@ -9,7 +9,7 @@ module.exports = {
     description: "Creates interactions",
 
     async execute(interaction, client) {
-        var ttid='0';
+        var ttid = '0';
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
         const gaManagerChannelID = '869298472648597524';
@@ -83,7 +83,7 @@ module.exports = {
                     console.log(`Error getting countersData ${err}`)
                 }
 
-                if(donationData){
+                if (donationData) {
                     //Check giveaway tt
                     ttid = donationData.tt;
 
@@ -96,10 +96,10 @@ module.exports = {
                 //Confirm/Cancel buttons           
                 if (interaction.customId == 'donationConfirm') {
 
-                    
+
 
                     //Only allow host confirm/cancel giveaway requests
-                    if (interaction.member.user.id == donationData.host ) {
+                    if (interaction.member.user.id == donationData.host) {
                         setTimeout(function () {
 
                             interaction.editReply({
@@ -197,8 +197,7 @@ module.exports = {
 
                 //Confession buttons
                 if (interaction.customId == 'confessionPost') {
-                    countersData.confessionSeq+=1;
-                    countersData.save();
+
                     setTimeout(function () {
                         interaction.editReply({
                             content: 'Confession sent :white_check_mark:',
@@ -206,7 +205,10 @@ module.exports = {
                             embeds: [confessEmbedConfirm.setDescription('Confession: ' + confessionData.confessionMsg).setFooter(`Confession approved by ${interaction.member.user.tag}`).setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
 
                         });
-                        client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle(':pencil: Confession #'+String(countersData.confessionSeq))] });
+                        client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle(':pencil: Confession #' + String(countersData.confessionSeq))] });
+
+                        countersData.confessionSeq += 1;
+                        countersData.save();
                     }, 400);
 
                     interaction.deferUpdate();
