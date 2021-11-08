@@ -9,7 +9,7 @@ module.exports = {
     description: "Creates interactions",
 
     async execute(interaction, client) {
-        var ttid;
+        var ttid='0';
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
         const gaManagerChannelID = '869298472648597524';
@@ -83,16 +83,20 @@ module.exports = {
                     console.log(`Error getting countersData ${err}`)
                 }
 
-
-                //Confirm/Cancel buttons           
-                if (interaction.customId == 'donationConfirm') {
-
+                if(donationData){
                     //Check giveaway tt
                     ttid = donationData.tt;
 
                     if (donationData.tt == '0' || ttid == '0') {
                         ttid = 'TT';
                     }
+                }
+
+
+                //Confirm/Cancel buttons           
+                if (interaction.customId == 'donationConfirm') {
+
+                    
 
                     //Only allow host confirm/cancel giveaway requests
                     if (interaction.member.user.id == donationData.host ) {
