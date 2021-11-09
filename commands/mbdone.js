@@ -12,10 +12,11 @@ module.exports = {
                 Role.members.forEach((member, i) => { // Looping through the members of Role.
                     setTimeout(() => {
                         member.roles.remove(Role); // Removing the Role.
-                        removedcounter+=1;
-                    }, i*600);
+                        
+                    }, i,1000);
                     
                 });
+                removedcounter+=1;
                 await message.channel.send('Removing MB Winner role from ' + String(removedcounter) + ' users')
                 
             } catch (err) {
