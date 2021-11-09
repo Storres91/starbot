@@ -8,6 +8,7 @@ module.exports = {
     async execute(client, message, args, Discord) {
         const confessionStaffChannelID = '907010075804196974';
         const confessionTxt = args.join(" ");
+        var confessionMsgID=' ';
 
         //Post button
         const confessionRow = new MessageActionRow().addComponents(
@@ -40,6 +41,7 @@ module.exports = {
 
         } else {
             message.channel.send("You can't send an empty confession");
+            return;
         }
 
         let confessionMod = await confessionModel.create({
