@@ -2,7 +2,10 @@ module.exports = {
     name: 'mbwinner',
     description: 'Adds mb winner role to the mentioned user',
     execute(client, message){
-        const mbwinnerID='907480651333251073';
+        const mbwinnerID='885168106383745034';
+        const mbhostID = '809598126846902388';
+        const staffRoleID = '857060867676831805';
+
         if (message.member.roles.cache.some(role => role.id == mbhostID) || message.member.roles.cache.some(role => role.id == staffRoleID)){
         let mbwinnerRole = message.guild.roles.cache.get(mbwinnerID);
         let winner = message.mentions.members.first();
