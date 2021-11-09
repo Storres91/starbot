@@ -13,7 +13,7 @@ module.exports = {
                     setTimeout(() => {
                         member.roles.remove(Role); // Removing the Role.
                         
-                    }, i,1000);
+                    }, i);
                     
                 });
                 removedcounter+=1;
