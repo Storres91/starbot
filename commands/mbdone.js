@@ -9,15 +9,15 @@ module.exports = {
         if (message.member.roles.cache.some(role => role.id == mbhostID) || message.member.roles.cache.some(role => role.id == staffRoleID)) {
             const Role = message.guild.roles.cache.get(mbwinnerID);
             try {
-                Role.members.forEach((member) => { // Looping through the members of Role.
+                Role.members.forEach((member, i) => { // Looping through the members of Role.
                     setTimeout(() => {
                         member.roles.remove(Role); // Removing the Role.
 
-                    }, 1000);
+                    }, i*600);
                     removedcounter+=1;
                     message.channel.send('Succesfully removed Mb winner role from ' + String(removedcounter) + ' users')
                 });
-                message.channel.send('ETA: 10s')
+                message.channel.send('ETA: 5s')
                 
             } catch (err) {
                 message.channel.send('There was an error removing the Mb winner role, please try again')
