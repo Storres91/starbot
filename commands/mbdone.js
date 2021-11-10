@@ -7,7 +7,7 @@ module.exports = {
         const staffRoleID = '857060867676831805';
         var removedcounter = 0;
         if (message.member.roles.cache.some(role => role.id == mbhostID) || message.member.roles.cache.some(role => role.id == staffRoleID)) {
-            const Role = message.guild.roles.cache.get(mbwinnerID);
+            const Role =  message.guild.roles.cache.get(mbwinnerID);
             try {
                 Role.members.forEach((member, i) => { // Looping through the members of Role.
                     setTimeout(() => {
