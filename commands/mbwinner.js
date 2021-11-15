@@ -3,7 +3,7 @@ module.exports = {
     description: 'Adds mb winner role to the mentioned user',
     execute(client, message){
         const mbwinnerID='885168106383745034';
-        const mbhostID = '809598126846902388';
+        const mbhostID = '857285753213812766';
         const staffRoleID = '857060867676831805';
 
         if (message.member.roles.cache.some(role => role.id == mbhostID) || message.member.roles.cache.some(role => role.id == staffRoleID)){
