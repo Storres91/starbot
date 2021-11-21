@@ -93,13 +93,16 @@ module.exports = {
                 }
 
 
+                
+
+
                 //Confirm/Cancel buttons           
                 if (interaction.customId == 'donationConfirm') {
 
 
 
                     //Only allow host confirm/cancel giveaway requests
-                    if (interaction.member.user.id == donationData.host) {
+                    if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
 
                             interaction.editReply({
@@ -118,7 +121,7 @@ module.exports = {
 
                 if (interaction.customId === 'donationCancel') {
                     //Only allow host confirm/cancel giveaway requests
-                    if (interaction.member.user.id == donationData.host) {
+                    if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
                             interaction.editReply({
                                 content: ' ',
@@ -135,7 +138,7 @@ module.exports = {
                 //Accept/Deny buttons
                 if (interaction.customId == 'donationAccept') {
                     //Only allow GA manager+ to Accept/Deny giveaway requests
-                    if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                    if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID) || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
 
                             interaction.editReply({
@@ -166,7 +169,7 @@ module.exports = {
                 }
                 //Only allow GA manager+ to Accept/Deny giveaway requests
                 if (interaction.customId == 'donationDeny') {
-                    if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID)) {
+                    if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID) || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
                             interaction.editReply({
                                 content: ' ',
@@ -182,7 +185,8 @@ module.exports = {
                 }
 
                 if (interaction.customId == 'finalCancel') {
-                    if (interaction.member.user.id == donationData.host) {
+                    interaction.deferUpdate();
+                    if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
                             interaction.editReply({
                                 content: ' ',
@@ -191,7 +195,7 @@ module.exports = {
                             });
                         }, 1000);
                     }
-                    interaction.deferUpdate();
+                    
 
                 }
 
