@@ -103,6 +103,7 @@ module.exports = {
 
                     //Only allow host confirm/cancel giveaway requests
                     if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
+                        interaction.deferUpdate();
                         setTimeout(function () {
 
                             interaction.editReply({
@@ -115,11 +116,13 @@ module.exports = {
                         }, 1000);
 
                     }
-                    interaction.deferUpdate();
+                    
                 }
 
 
                 if (interaction.customId === 'donationCancel') {
+                    interaction.deferUpdate();
+
                     //Only allow host confirm/cancel giveaway requests
                     if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
@@ -131,12 +134,14 @@ module.exports = {
                         }, 1000);
 
                     }
-                    interaction.deferUpdate();
+                    
                 }
 
 
                 //Accept/Deny buttons
                 if (interaction.customId == 'donationAccept') {
+                    interaction.deferUpdate();
+
                     //Only allow GA manager+ to Accept/Deny giveaway requests
                     if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID) || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
@@ -164,11 +169,13 @@ module.exports = {
 
 
                     }
-                    interaction.deferUpdate();
+                    
 
                 }
                 //Only allow GA manager+ to Accept/Deny giveaway requests
                 if (interaction.customId == 'donationDeny') {
+                    interaction.deferUpdate();
+
                     if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID) || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
                             interaction.editReply({
@@ -180,12 +187,13 @@ module.exports = {
                             interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
                         }, 1000);
                     }
-                    interaction.deferUpdate();
+                    
 
                 }
 
                 if (interaction.customId == 'finalCancel') {
                     interaction.deferUpdate();
+
                     if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
                         setTimeout(function () {
                             interaction.editReply({
@@ -201,6 +209,7 @@ module.exports = {
 
                 //Confession buttons
                 if (interaction.customId == 'confessionPost') {
+                    interaction.deferUpdate();
 
                     setTimeout(function () {
                         interaction.editReply({
@@ -215,11 +224,11 @@ module.exports = {
                         countersData.save();
                     }, 400);
 
-                    interaction.deferUpdate();
 
                 }
 
                 if (interaction.customId == 'confessionDeny') {
+                    interaction.deferUpdate();
 
                     setTimeout(function () {
                         interaction.editReply({
@@ -230,8 +239,6 @@ module.exports = {
                         });
                         client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
                     }, 400);
-
-                    interaction.deferUpdate();
 
                 }
 
