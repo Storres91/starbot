@@ -113,7 +113,7 @@ module.exports = {
 
                             interaction.message.reply('Giveaway confirmed please wait for <@&' + gaManagerRoleID + '> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
 
-                        }, 1000);
+                        }, 500);
 
                     }
                     
@@ -131,7 +131,7 @@ module.exports = {
                                 components: [],
                                 embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                             });
-                        }, 1000);
+                        }, 500);
 
                     }
                     
@@ -152,7 +152,7 @@ module.exports = {
                             });
 
                             interaction.message.reply(`<@${donationData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
-                        }, 1000);
+                        }, 500);
 
                         //Send command and details to the managers channel
                         setTimeout(function () {
@@ -164,7 +164,7 @@ module.exports = {
 
                             client.channels.cache.get(gaManagerChannelID).send(
                                 "\n```" + `<@&${ttid}>\n` + `**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
-                        }, 1000);
+                        }, 500);
 
 
 
@@ -185,7 +185,7 @@ module.exports = {
                             });
 
                             interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
-                        }, 1000);
+                        }, 500);
                     }
                     
 
@@ -201,7 +201,7 @@ module.exports = {
                                 components: [],
                                 embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                             });
-                        }, 1000);
+                        }, 500);
                     }
                     
 
