@@ -131,6 +131,7 @@ module.exports = {
                                 components: [],
                                 embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                             });
+                            donationData.delete()
                         }, 500);
 
                     }
@@ -164,6 +165,7 @@ module.exports = {
 
                             client.channels.cache.get(gaManagerChannelID).send(
                                 "\n```" + `<@&${ttid}>\n` + `**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
+                                donationData.delete()
                         }, 500);
 
 
@@ -185,6 +187,7 @@ module.exports = {
                             });
 
                             interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
+                            donationData.delete()
                         }, 500);
                     }
                     
@@ -201,6 +204,7 @@ module.exports = {
                                 components: [],
                                 embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                             });
+                            donationData.delete()
                         }, 500);
                     }
                     
