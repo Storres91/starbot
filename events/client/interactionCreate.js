@@ -164,7 +164,7 @@ module.exports = {
                                 "\n`" + `g.gc using template ${donationData.template} -n ${donationData.prize} -d ${donationData.duration} -w ${donationData.winners} -h ${donationData.host}` + "`\n");
 
                             client.channels.cache.get(gaManagerChannelID).send(
-                                "\n```" + `<@&${ttid}>\n` + `\n**Prize:** ${donationData.prize} \n**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
+                                "\n```" + `<@&${ttid}>\n` + `**Prize:** ${donationData.prize} \n**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
 
                         }, 500);
                         interaction.deferUpdate();
