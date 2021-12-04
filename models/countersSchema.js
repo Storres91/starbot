@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 
 const countersSchema = new mongoose.Schema({
-    confessionSeq: { type: Number, default: 1 }
+    counterID:{type:Number, default:1},
+    confessionSeq: { type: Number, default: 1 },
+    bansSeq:{type:Number, default:1}
 });
 
 const model = mongoose.model('countersModel', countersSchema);

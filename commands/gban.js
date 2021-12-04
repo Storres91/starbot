@@ -1,0 +1,135 @@
+const ms = require('ms');
+const gbanModel = require('../models/gbanSchema.js')
+const countersModel = require('../models/countersSchema.js')
+module.exports = {
+    name: 'gban',
+    description: 'Bans someoneone from giveaways for a set amount of time',
+    async execute(client, message, args, Discord) {
+        const staffRoleID = '857060867676831805';
+        const gaManagerRoleID = '869250517791019088';
+        const gBannedRole = '869251117844934706';
+
+        if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID) || message.member.roles.cache.some(role => role.id == gaManagerRoleID)) {
+            var daysTime = "1m";
+            var permaban = false;
+            var messageConfirm = "has been banned from giveaways for " + daysTime + " this is their first offense";
+
+            const target = message.mentions.users.first();
+            if (!target) return message.channel.send("User not found/missing!");
+            if (target.id == '313351494361677845') return message.channel.send("You can't gban a developer <:nyanana:906766582171181077>")
+            if (target.id == message.author.id) return message.channel.send("You can't gban yourself lol")
+            if (target.id == '902331574396284948') return message.channel.send("I am god <a:cr_wtf:856247028635664414> ")
+            const reason = args.slice(1).join(" ");
+
+            let gbannedData;
+            try {
+                gbannedData = await gbanModel.findOne({ gbanUserID: target.id });
+
+            } catch (err) {
+                console.log(`Error getting gbannedData ${err}`)
+            }
+
+            try {
+                countersData = await countersModel.findOne({ counterID: 1 });
+            } catch (err) {
+                console.log(`Error getting countersData ${err}`)
+            }
+
+
+            if (gbannedData) {
+                if (gbannedData.gbannedCounter == 5) return message.channel.send("<@" + gbannedData.gbanUserID + "> is already permanently banned from giveaways");
+                switch (gbannedData.gbannedCounter) {
+                    case 2:
+                        daysTime = "1m"
+                        messageConfirm = "has been banned from giveaways for " + daysTime + " this is their second offense";
+                        break;
+
+                    case 3:
+                        daysTime = "24 days"
+                        messageConfirm = "has been banned from giveaways for " + daysTime + " this is their third offense";
+                        break;
+
+                    case 4:
+                        permaban = true;
+                        messageConfirm = "has been banned from giveaways **permanently**";
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+
+
+
+            var msDate = ms(daysTime);
+            var unbanDate = Date.now() + msDate;
+            unbanTimer = unbanDate - Date.now();
+
+            var mReason = "\n**Reason:** " + reason;
+            if (reason == "") {
+                mReason = "";
+            }
+
+
+
+            memberTarget = message.guild.members.cache.get(target.id);
+            memberTarget.roles.add(gBannedRole);
+
+            if (permaban) daysTime = "You've reached ur 4th ban from giveaways, this is a permanent ban";
+
+            const gbannedEmbed = new Discord.MessageEmbed()
+                .setColor('#FF0000')
+                .setTitle("<a:starpurplehover:905575054161641483> You have been banned from giveaways in Celestial Realm :no_entry_sign:")
+                .setDescription("**Duration:** " + daysTime + mReason)
+                .setFooter("Celestial Starbot")
+                .setTimestamp();
+
+
+
+
+
+            client.users.cache.get(memberTarget.user.id).send({ embeds: [gbannedEmbed] }).catch(() => message.channel.send(":warning: I was not able to inform this user via dm!"));
+            message.channel.send("<@" + memberTarget.user.id + "> " + messageConfirm)
+
+
+
+            if (!gbannedData) {
+                let gbanMod = await gbanModel.create({
+                    gbanUserID: target.id,
+                    gbanID: countersData.bansSeq,
+                    gunbanDate: unbanDate
+                });
+                gbanMod.save();
+            } else {
+                gbannedData.gunbanDate = unbanDate;
+                gbannedData.gbanID= countersData.bansSeq;
+                gbannedData.gbannedCounter += 1;
+                gbannedData.save();
+            }
+            countersData.bansSeq+=1;
+            countersData.save();
+
+            if (permaban) return;
+
+            setTimeout(function () { gabantimeout(target.id) }, unbanTimer);
+        } else {
+            message.channel.send(":warning: Missing permissions to run this command");
+        }
+        
+        function gabantimeout(userID) {            
+            let memberTargetFunction = message.guild.members.cache.get(userID);
+            const gunbannedEmbed = new Discord.MessageEmbed()
+                .setColor('#08FF00')
+                .setTitle(":white_check_mark: You are now unbanned from Celestial Realm giveaways")
+                .setDescription("Always remember to do the requirements and follow the rules.")
+                .setFooter("Celestial Starbot")
+                .setTimestamp();
+
+            memberTargetFunction.roles.remove(gBannedRole).catch(() => null);
+            client.users.cache.get(memberTargetFunction.user.id).send({ embeds: [gunbannedEmbed] }).catch(() => null);
+            console.log("Unbanned user: " + userID);
+
+        }
+    }
+}
