@@ -4,10 +4,28 @@ module.exports = {
     description: 'Unbans someone from giveaways',
     async execute(client, message, args, Discord) {
         const target = message.mentions.users.first();
+        const memberTarget = message.guild.members.cache.get(target.id);
+
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
         const gBannedRole = '869251117844934706';
-        const memberTarget = message.guild.members.cache.get(target.id);
+
+        var unbanMessage="";
+        
+
+        if(args[1]){
+            unbanMessage = "**Message**: "+args.slice(1).join(" ");
+        }else{
+            unbanMessage="";
+        }
+
+        const gunbannedEmbed = new Discord.MessageEmbed()
+			.setColor('#08FF00')
+			.setTitle(":white_check_mark: You are now unbanned from Celestial Realm giveaways <a:starpurplehover:905575054161641483>")
+			.setDescription("Always remember to do the requirements and follow the rules. \n"+unbanMessage)
+			.setFooter("Celestial Starbot")
+			.setTimestamp();
+
         if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID) || message.member.roles.cache.some(role => role.id == gaManagerRoleID)) {
             let gbannedData;
             try {
@@ -20,6 +38,8 @@ module.exports = {
             if (memberTarget.roles.cache.some(role => role.id == gBannedRole)){
                 memberTarget.roles.remove(gBannedRole)
                 message.channel.send("Removed giveaway ban from <@"+target.id+">")
+                client.users.cache.get(memberTarget.user.id).send({ embeds: [gunbannedEmbed] }).catch(() => null);
+
             }else{
                 if(gbannedData.gbannedCounter==1) return message.channel.send("This user is not banned and their ban count is already at 0 :warning:");
                 message.channel.send("This user is not currently banned from giveaways")

@@ -8,18 +8,26 @@ module.exports = {
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
         const gBannedRole = '869251117844934706';
+        var daysTime = "2 days";
+        var permaban = false;
+        var reason=""
+        var messageConfirm = "has been banned from giveaways for " + daysTime + " this is their first offense";
+        
+        if(args[1]){
+            reason = args.slice(1).join(" ");
+        }else{
+            reason="Not completing the requirement on a giveaway.";
+        }
+        
 
         if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID) || message.member.roles.cache.some(role => role.id == gaManagerRoleID)) {
-            var daysTime = "1m";
-            var permaban = false;
-            var messageConfirm = "has been banned from giveaways for " + daysTime + " this is their first offense";
-
+        
             const target = message.mentions.users.first();
             if (!target) return message.channel.send("User not found/missing!");
             if (target.id == '313351494361677845') return message.channel.send("You can't gban a developer <:nyanana:906766582171181077>")
             if (target.id == message.author.id) return message.channel.send("You can't gban yourself lol")
             if (target.id == '902331574396284948') return message.channel.send("I am god <a:cr_wtf:856247028635664414> ")
-            const reason = args.slice(1).join(" ");
+            
 
             let gbannedData;
             try {
@@ -40,7 +48,7 @@ module.exports = {
                 if (gbannedData.gbannedCounter == 5) return message.channel.send("<@" + gbannedData.gbanUserID + "> is already permanently banned from giveaways");
                 switch (gbannedData.gbannedCounter) {
                     case 2:
-                        daysTime = "1m"
+                        daysTime = "7 days"
                         messageConfirm = "has been banned from giveaways for " + daysTime + " this is their second offense";
                         break;
 
@@ -80,7 +88,7 @@ module.exports = {
 
             const gbannedEmbed = new Discord.MessageEmbed()
                 .setColor('#FF0000')
-                .setTitle("<a:starpurplehover:905575054161641483> You have been banned from giveaways in Celestial Realm :no_entry_sign:")
+                .setTitle(":no_entry_sign: You have been banned from giveaways in Celestial Realm <a:starpurplehover:905575054161641483>")
                 .setDescription("**Duration:** " + daysTime + mReason)
                 .setFooter("Celestial Starbot")
                 .setTimestamp();
@@ -121,7 +129,7 @@ module.exports = {
             let memberTargetFunction = message.guild.members.cache.get(userID);
             const gunbannedEmbed = new Discord.MessageEmbed()
                 .setColor('#08FF00')
-                .setTitle(":white_check_mark: You are now unbanned from Celestial Realm giveaways")
+                .setTitle("<a:starpurplehover:905575054161641483> You are now unbanned from Celestial Realm giveaways :white_check_mark:")
                 .setDescription("Always remember to do the requirements and follow the rules.")
                 .setFooter("Celestial Starbot")
                 .setTimestamp();
