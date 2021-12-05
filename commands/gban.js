@@ -109,14 +109,17 @@ module.exports = {
                     gunbanDate: unbanDate
                 });
                 gbanMod.save();
+                
+                countersData.bansSeq+=1;
+                countersData.save();
             } else {
                 gbannedData.gunbanDate = unbanDate;
                 gbannedData.gbanID= countersData.bansSeq;
                 gbannedData.gbannedCounter += 1;
                 gbannedData.save();
             }
-            countersData.bansSeq+=1;
-            countersData.save();
+            
+            
 
             if (permaban) return;
 
