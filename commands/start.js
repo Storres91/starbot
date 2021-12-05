@@ -18,14 +18,14 @@ module.exports = {
 			.setTimestamp();
 
 		if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID) || message.member.roles.cache.some(role => role.id == gaManagerRoleID)) {
-			let countersData;
+			let countersData2;
 			try {
-				countersData = await countersModel.findOne({ counterID: 1 });
+				countersData2 = await countersModel.findOne({ counterID: 2 });
 			} catch (err) {
-				console.log(`Error getting countersData ${err}`)
+				console.log(`Error getting countersData2 ${err}`)
 			}
 
-			for (let k = 1; k <= countersData.bansSeq; k++) {
+			for (let k = 1; k <= countersData2.bansSeq; k++) {
 				let gbannedData;
 				try {
 					gbannedData = await gbanModel.findOne({ gbanID: k });
@@ -50,8 +50,8 @@ module.exports = {
 					}
 				}
 			}
-			client.channels.fetch("887103191274106890").then(function(result1) {result1.send("**Command done, Successfully started all the proccesses**")});
-		client.channels.fetch("869298472648597524").then(function(result2) {result2.send("**Command done, Successfully started all the proccesses**")});
+		//client.channels.fetch("887103191274106890").then(function(result1) {result1.send("**Command done, Successfully started all the proccesses**")});
+		//client.channels.fetch("869298472648597524").then(function(result2) {result2.send("**Command done, Successfully started all the proccesses**")});
 		}else{
 			message.channel.send("You're not allowed to do that")
 		}

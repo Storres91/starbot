@@ -38,9 +38,9 @@ module.exports = {
             }
 
             try {
-                countersData = await countersModel.findOne({ counterID: 1 });
+                countersData2 = await countersModel.findOne({ counterID: 2 });
             } catch (err) {
-                console.log(`Error getting countersData ${err}`)
+                console.log(`Error getting countersData2 ${err}`)
             }
 
 
@@ -105,16 +105,15 @@ module.exports = {
             if (!gbannedData) {
                 let gbanMod = await gbanModel.create({
                     gbanUserID: target.id,
-                    gbanID: countersData.bansSeq,
+                    gbanID: countersData2.bansSeq,
                     gunbanDate: unbanDate
                 });
                 gbanMod.save();
                 
-                countersData.bansSeq+=1;
-                countersData.save();
+                countersData2.bansSeq+=1;
+                await countersData2.save();
             } else {
                 gbannedData.gunbanDate = unbanDate;
-                gbannedData.gbanID= countersData.bansSeq;
                 gbannedData.gbannedCounter += 1;
                 gbannedData.save();
             }
