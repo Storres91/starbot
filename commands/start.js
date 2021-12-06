@@ -50,8 +50,8 @@ module.exports = {
 					}
 				}
 			}
-		client.channels.fetch("887103191274106890").then(function(result1) {result1.send("**Command done, Successfully started all the proccesses**")});
-		client.channels.fetch("869298472648597524").then(function(result2) {result2.send("**Command done, Successfully started all the proccesses**")});
+		client.channels.fetch("887103191274106890").then(function(result1) {result1.send("**Command done, Successfully started all the processes**")});
+		client.channels.fetch("869298472648597524").then(function(result2) {result2.send("**Command done, Successfully started all the processes**")});
 		}else{
 			message.channel.send("You're not allowed to do that")
 		}
