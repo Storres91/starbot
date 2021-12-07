@@ -36,18 +36,25 @@ module.exports = {
 
 
 				if (gbannedData) {
-					var memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
-					if (gbannedData.gunbanDate > Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
-
-						unbanTimer = gbannedData.gunbanDate - Date.now();
-						setTimeout(function () { gabantimeout(gbannedData.gbanUserID) }, unbanTimer);
-						console.log("Started timeout for user " + gbannedData.gbanUserID);
-
-					} else if (gbannedData.gunbanDate < Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
-						memberTargetFunction.roles.remove(gBannedRole);
-						memberTargetFunction.send({ embeds: [gunbannedEmbed] }).catch(() => null);
-
+					try{
+						var memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
+					}catch{
+						message.channel.send(":warning: User: "+gbannedData.gbanUserID+" not found in the server, *skipping..*");
 					}
+					if(memberTargetFunction){
+						if (gbannedData.gunbanDate > Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
+
+							unbanTimer = gbannedData.gunbanDate - Date.now();
+							setTimeout(function () { gabantimeout(gbannedData.gbanUserID) }, unbanTimer);
+							console.log("Started timeout for user " + gbannedData.gbanUserID);
+	
+						} else if (gbannedData.gunbanDate < Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
+							memberTargetFunction.roles.remove(gBannedRole);
+							memberTargetFunction.send({ embeds: [gunbannedEmbed] }).catch(() => null);
+	
+						}
+					}
+					
 				}
 			}
 		client.channels.fetch("887103191274106890").then(function(result1) {result1.send("**Command done, Successfully started all the processes**")});
