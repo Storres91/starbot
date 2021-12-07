@@ -3,7 +3,16 @@ module.exports = {
     name: 'gunban',
     description: 'Unbans someone from giveaways',
     async execute(client, message, args, Discord) {
-        const target = message.mentions.users.first();
+        var target;
+
+        if(message.mentions.users.first()){
+            target = message.mentions.users.first();
+        }
+        else{
+            target = await message.guild.members.fetch(args[0]).catch(() => null);
+        }
+        if (!target) return message.channel.send("User not found/missing!");
+        
         const memberTarget = message.guild.members.cache.get(target.id);
 
         const staffRoleID = '857060867676831805';

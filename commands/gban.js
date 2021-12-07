@@ -12,6 +12,14 @@ module.exports = {
         var permaban = false;
         var reason=""
         var messageConfirm = "has been banned from giveaways for " + daysTime + " this is their first offense";
+        var target;
+
+        if(message.mentions.users.first()){
+            target = message.mentions.users.first();
+        }
+        else{
+            target = await message.guild.members.fetch(args[0]).catch(() => null);
+        }
         
         if(args[1]){
             reason = args.slice(1).join(" ");
@@ -21,12 +29,12 @@ module.exports = {
         
 
         if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID) || message.member.roles.cache.some(role => role.id == gaManagerRoleID)) {
-        
-            const target = message.mentions.users.first();
+            
+            
             if (!target) return message.channel.send("User not found/missing!");
-            if (target.id == '313351494361677845') return message.channel.send("You can't gban a developer <:nyanana:906766582171181077>")
-            if (target.id == message.author.id) return message.channel.send("You can't gban yourself lol")
-            if (target.id == '902331574396284948') return message.channel.send("I am god <a:cr_wtf:856247028635664414> ")
+            if (target.id == '313351494361677845') return message.channel.send("You can't gban a developer <:nyanana:906766582171181077>");
+            if (target.id == message.author.id) return message.channel.send("You can't gban yourself lol");
+            if (target.id == '902331574396284948') return message.channel.send("I am god <a:cr_wtf:856247028635664414> ");
             
 
             let gbannedData;

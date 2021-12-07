@@ -113,8 +113,8 @@ module.exports = {
 
                             interaction.message.reply('Giveaway confirmed please wait for <@&' + gaManagerRoleID + '> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
 
-                        }, 500);
-                        interaction.deferUpdate();
+                        }, 600);
+                        interaction.deferUpdate().catch(() => null);
                     }
                     
                 }
@@ -132,8 +132,8 @@ module.exports = {
                                 embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                             });
 
-                        }, 500);
-                        interaction.deferUpdate();
+                        }, 600);
+                        interaction.deferUpdate().catch(() => null);
                     }
                     
                 }
@@ -153,7 +153,7 @@ module.exports = {
                             });
 
                             interaction.message.reply(`<@${donationData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
-                        }, 500);
+                        }, 600);
 
                         //Send command and details to the managers channel
                         setTimeout(function () {
@@ -166,8 +166,8 @@ module.exports = {
                             client.channels.cache.get(gaManagerChannelID).send(
                                 "\n```" + `<@&${ttid}>\n` + `**Prize:** ${donationData.prize} \n**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
 
-                        }, 500);
-                        interaction.deferUpdate();
+                        }, 600);
+                        interaction.deferUpdate().catch(() => null);
 
 
                     }
@@ -188,8 +188,8 @@ module.exports = {
 
                             interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
 
-                        }, 500);
-                        interaction.deferUpdate();
+                        }, 600);
+                        interaction.deferUpdate().catch(() => null);
                     }
                     
 
@@ -206,8 +206,8 @@ module.exports = {
                                 embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
                             });
 
-                        }, 500);
-                        interaction.deferUpdate();
+                        }, 600);
+                        interaction.deferUpdate().catch(() => null);
                     }
                     
 
@@ -228,8 +228,8 @@ module.exports = {
 
                         countersData.confessionSeq += 1;
                         countersData.save();
-                    }, 400);
-                    interaction.deferUpdate();
+                    }, 600);
+                    interaction.deferUpdate().catch(() => null);
 
                 }
 
@@ -244,8 +244,8 @@ module.exports = {
 
                         });
                         client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
-                    }, 400);
-                    interaction.deferUpdate();
+                    }, 600);
+                    interaction.deferUpdate().catch(() => null);
                 }
 
             }
