@@ -39,7 +39,7 @@ module.exports = {
 					try{
 						var memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
 					}catch{
-						message.channel.send(":warning: User: "+gbannedData.gbanUserID+" not found in the server, *skipping..*");
+						
 					}
 					if(memberTargetFunction){
 						if (gbannedData.gunbanDate > Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
