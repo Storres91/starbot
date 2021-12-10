@@ -63,12 +63,12 @@ module.exports = {
 			message.channel.send("You're not allowed to do that")
 		}
 
-		function gabantimeout(userID) {
-			memberTargetFunction.then(function (user2) {
-				user2.roles.remove(gBannedRole).catch(() => null);
-				user2.send({ embeds: [gunbannedEmbed] }).catch(() => null);
+		async function gabantimeout(userID) {
+			let memberTargetFunctionT = await message.guild.members.cache.get(userID);
+			memberTargetFunctionT.roles.remove(gBannedRole).catch(() => null);
+			memberTargetFunctionT.send({ embeds: [gunbannedEmbed] }).catch(() => null);
 
-			});
+
 			console.log("Unbanned user: " + userID);
 
 		}
