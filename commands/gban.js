@@ -33,7 +33,6 @@ module.exports = {
             
             if (!target) return message.channel.send("User not found/missing!");
             if (target.id == '313351494361677845') return message.channel.send("You can't gban a developer <:nyanana:906766582171181077>");
-            if (target.id == message.author.id) return message.channel.send("You can't gban yourself lol");
             if (target.id == '902331574396284948') return message.channel.send("I am god <a:cr_wtf:856247028635664414> ");
             
 
