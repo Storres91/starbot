@@ -135,6 +135,8 @@ module.exports = {
                             components: []
                         });
 
+                        interaction.message.reply(`<@${donationData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
+
                         //Send command and details to the managers channel
                             client.channels.cache.get(gaManagerChannelID).send(
                                 `<@${interaction.member.user.id}> has accepted giveaway from <@${donationData.host}>, here's the command to start it`);
