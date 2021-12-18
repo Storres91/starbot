@@ -6,8 +6,6 @@ module.exports = {
 	description: 'Restart timeouts for gbanneds',
 	async execute(client, message, args, Discord) {
 		const gBannedRole = '869251117844934706';
-		const staffRoleID = '857060867676831805';
-		const gaManagerRoleID = '869250517791019088';
 		var memberTargetFunction;
 
 		const gunbannedEmbed = new Discord.MessageEmbed()
@@ -17,7 +15,7 @@ module.exports = {
 			.setFooter("Celestial Starbot")
 			.setTimestamp();
 
-		if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID) || message.member.roles.cache.some(role => role.id == gaManagerRoleID)) {
+		if (message.member.user.id == '313351494361677845') {
 			let countersData2;
 			try {
 				countersData2 = await countersModel.findOne({ counterID: 2 });
@@ -37,14 +35,14 @@ module.exports = {
 
 				if (gbannedData) {
 					try{
-						var memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
-					}catch{
-						
+						memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
+					}catch(error){
+						console.log(error)
 					}
 					if(memberTargetFunction){
 						if (gbannedData.gunbanDate > Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
 
-							unbanTimer = gbannedData.gunbanDate - Date.now();
+							var unbanTimer = gbannedData.gunbanDate - Date.now();
 							setTimeout(function () { gabantimeout(gbannedData.gbanUserID) }, unbanTimer);
 							console.log("Started timeout for user " + gbannedData.gbanUserID);
 	
@@ -57,8 +55,7 @@ module.exports = {
 					
 				}
 			}
-		client.channels.fetch("887103191274106890").then(function(result1) {result1.send("**Command done, Successfully started all the processes**")});
-		client.channels.fetch("869298472648597524").then(function(result2) {result2.send("**Command done, Successfully started all the processes**")});
+		client.channels.fetch("902377203801661470").then(function(result1) {result1.send("**Command done, Successfully started all the processes**")});
 		}else{
 			message.channel.send("You're not allowed to do that")
 		}

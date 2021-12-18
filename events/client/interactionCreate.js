@@ -93,70 +93,49 @@ module.exports = {
                 }
 
 
-                
+
 
 
                 //Confirm/Cancel buttons           
                 if (interaction.customId == 'donationConfirm') {
-
-
-
                     //Only allow host confirm/cancel giveaway requests
                     if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
-                        
-                        setTimeout(function () {
+                        await interaction.deferUpdate();
+                        interaction.editReply({
+                            content: `Request from <@${donationData.host}>`,
+                            components: [approvalRow]
+                        });
 
-                            interaction.editReply({
-                                content: `Request from <@${donationData.host}>`,
-                                components: [approvalRow]
-                            });
-
-                            interaction.message.reply('Giveaway confirmed please wait for <@&' + gaManagerRoleID + '> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
-
-                        }, 600);
-                        interaction.deferUpdate().catch(() => null);
+                        interaction.message.reply('Giveaway confirmed please wait for <@&' + gaManagerRoleID + '> to accept your request, you can still decide to cancel this giveaway by pressing “Cancel my GA” ');
                     }
-                    
                 }
 
 
                 if (interaction.customId === 'donationCancel') {
-
-
                     //Only allow host confirm/cancel giveaway requests
                     if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
-                        setTimeout(function () {
-                            interaction.editReply({
-                                content: ' ',
-                                components: [],
-                                embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
-                            });
-
-                        }, 600);
-                        interaction.deferUpdate().catch(() => null);
+                        await interaction.deferUpdate();
+                        interaction.editReply({
+                            content: ' ',
+                            components: [],
+                            embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
+                        });
                     }
-                    
+
                 }
 
 
                 //Accept/Deny buttons
                 if (interaction.customId == 'donationAccept') {
-
-
                     //Only allow GA manager+ to Accept/Deny giveaway requests
                     if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID) || interaction.member.user.id == '313351494361677845') {
-                        setTimeout(function () {
-
-                            interaction.editReply({
-                                content: `Donation from <@${donationData.host}>`,
-                                components: []
-                            });
-
-                            interaction.message.reply(`<@${donationData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
-                        }, 600);
+                        await interaction.deferUpdate();
+                        interaction.editReply({
+                            content: `Donation from <@${donationData.host}>`,
+                            components: []
+                        });
 
                         //Send command and details to the managers channel
-                        setTimeout(function () {
                             client.channels.cache.get(gaManagerChannelID).send(
                                 `<@${interaction.member.user.id}> has accepted giveaway from <@${donationData.host}>, here's the command to start it`);
 
@@ -165,87 +144,68 @@ module.exports = {
 
                             client.channels.cache.get(gaManagerChannelID).send(
                                 "\n```" + `<@&${ttid}>\n` + `**Prize:** ${donationData.prize} \n**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
-
-                        }, 600);
-                        interaction.deferUpdate().catch(() => null);
-
-
                     }
-                    
-
                 }
                 //Only allow GA manager+ to Accept/Deny giveaway requests
                 if (interaction.customId == 'donationDeny') {
-
-
                     if (interaction.member.roles.cache.some(role => role.id == gaManagerRoleID) || interaction.member.roles.cache.some(role => role.id == staffRoleID) || interaction.member.user.id == '313351494361677845') {
-                        setTimeout(function () {
-                            interaction.editReply({
-                                content: ' ',
-                                components: [],
-                                embeds: [donationCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle(':no_entry_sign: Denied Giveaway :no_entry_sign:').setDescription(`This giveaway has been denied`).setTimestamp()]
-                            });
+                        await interaction.deferUpdate();
+                        interaction.editReply({
+                            content: ' ',
+                            components: [],
+                            embeds: [donationCancelEmbed.setFooter(`Giveaway denied by ${interaction.member.user.tag}`).setTitle(':no_entry_sign: Denied Giveaway :no_entry_sign:').setDescription(`This giveaway has been denied`).setTimestamp()]
+                        });
 
-                            interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
-
-                        }, 600);
-                        interaction.deferUpdate().catch(() => null);
+                        interaction.message.reply(`<@${donationData.host}> your giveaway was rejected by <@${interaction.member.user.id}> please check that your giveaway follows the pinned guidelines`);
                     }
-                    
+
 
                 }
 
                 if (interaction.customId == 'finalCancel') {
-
-
                     if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
-                        setTimeout(function () {
-                            interaction.editReply({
-                                content: ' ',
-                                components: [],
-                                embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
-                            });
+                        await interaction.deferUpdate();
+                        interaction.editReply({
+                            content: ' ',
+                            components: [],
+                            embeds: [donationCancelEmbed.setFooter(`Giveaway cancelled by ${interaction.member.user.tag}`)]
+                        });
 
-                        }, 600);
-                        interaction.deferUpdate().catch(() => null);
+
                     }
-                    
+
 
                 }
 
                 //Confession buttons
                 if (interaction.customId == 'confessionPost') {
+                    await interaction.deferUpdate();
+                    interaction.editReply({
+                        content: 'Confession sent :white_check_mark:',
+                        components: [],
+                        embeds: [confessEmbedConfirm.setDescription('Confession: ' + confessionData.confessionMsg).setFooter(`Confession approved by ${interaction.member.user.tag}`).setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+                    });
 
 
-                    setTimeout(function () {
-                        interaction.editReply({
-                            content: 'Confession sent :white_check_mark:',
-                            components: [],
-                            embeds: [confessEmbedConfirm.setDescription('Confession: ' + confessionData.confessionMsg).setFooter(`Confession approved by ${interaction.member.user.tag}`).setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+                    client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle(':pencil: Confession #' + String(countersData.confessionSeq))] });
 
-                        });
-                        client.channels.cache.get(confessionPublicChannelID).send({ embeds: [publicConfessionEmbed.setDescription(confessionData.confessionMsg).setTitle(':pencil: Confession #' + String(countersData.confessionSeq))] });
+                    countersData.confessionSeq += 1;
+                    countersData.save();
 
-                        countersData.confessionSeq += 1;
-                        countersData.save();
-                    }, 600);
-                    interaction.deferUpdate().catch(() => null);
 
                 }
 
                 if (interaction.customId == 'confessionDeny') {
 
+                    await interaction.deferUpdate();
+                    interaction.editReply({
+                        content: 'Confession Denied :no_entry_sign: ',
+                        components: [],
+                        embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('Confession: ' + confessionData.confessionMsg).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
 
-                    setTimeout(function () {
-                        interaction.editReply({
-                            content: 'Confession Denied :no_entry_sign: ',
-                            components: [],
-                            embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('Confession: ' + confessionData.confessionMsg).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+                    });
+                    client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
 
-                        });
-                        client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
-                    }, 600);
-                    interaction.deferUpdate().catch(() => null);
                 }
 
             }
