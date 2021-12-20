@@ -48,6 +48,7 @@ module.exports = {
             .setTitle('tets')
             .setTimestamp();
 
+        //Confession confirmed embed
         const confessEmbedConfirm = new MessageEmbed()
             .setColor('#89f170')
             .setTimestamp();
@@ -206,7 +207,7 @@ module.exports = {
                         embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('Confession: ' + confessionData.confessionMsg).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
 
                     });
-                    client.users.cache.get(confessionData.confessionUserID).send("**Your confession: \n**" + confessionData.confessionMsg + "\n**Was denied**");
+                    client.users.cache.get(confessionData.confessionUserID).send({embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription(confessionData.confessionMsg).setTimestamp().setTitle("Denied confession")]});
 
                 }
 

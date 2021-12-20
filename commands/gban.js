@@ -45,7 +45,7 @@ module.exports = {
             }
 
             try {
-                countersData2 = await countersModel.findOne({ counterID: 2 });
+                var countersData2 = await countersModel.findOne({ counterID: 2 });
             } catch (err) {
                 console.log(`Error getting countersData2 ${err}`)
             }
@@ -79,7 +79,7 @@ module.exports = {
 
             var msDate = ms(daysTime);
             var unbanDate = Date.now() + msDate;
-            unbanTimer = unbanDate - Date.now();
+            var unbanTimer = unbanDate - Date.now();
 
             var mReason = "\n**Reason:** " + reason;
             if (reason == "") {
@@ -88,7 +88,7 @@ module.exports = {
 
 
 
-            memberTarget = message.guild.members.cache.get(target.id);
+            var memberTarget = message.guild.members.cache.get(target.id);
             memberTarget.roles.add(gBannedRole);
 
             if (permaban) daysTime = "You've reached ur 4th ban from giveaways, this is a permanent ban";
@@ -136,6 +136,7 @@ module.exports = {
         
         function gabantimeout(userID) {            
             let memberTargetFunction = message.guild.members.cache.get(userID);
+			if(!memberTargetFunction) return console.log("Was not able to remove the role from "+userID);
             const gunbannedEmbed = new Discord.MessageEmbed()
                 .setColor('#08FF00')
                 .setTitle("<a:starpurplehover:905575054161641483> You are now unbanned from Celestial Realm giveaways :white_check_mark:")

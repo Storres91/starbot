@@ -13,7 +13,7 @@ module.exports = {
         }
         if (!target) return message.channel.send("User not found/missing!");
         
-        const memberTarget = message.guild.members.cache.get(target.id);
+        const memberTarget = await message.guild.members.cache.get(target.id);
 
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
@@ -60,7 +60,7 @@ module.exports = {
             
             gbannedData.gbannedCounter -= 1;
             gbannedData.save();
-            mbanCount=gbannedData.gbannedCounter-1;
+            var mbanCount=gbannedData.gbannedCounter-1;
             message.channel.send("User's ban count set to: "+mbanCount+" times");
         } else {
             message.channel.send(":no_entry_sign: Missing permissions to run this command");

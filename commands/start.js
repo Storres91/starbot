@@ -37,7 +37,6 @@ module.exports = {
 					try{
 						memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
 					}catch(error){
-						console.log(error)
 					}
 					if(memberTargetFunction){
 						if (gbannedData.gunbanDate > Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
@@ -62,6 +61,7 @@ module.exports = {
 
 		async function gabantimeout(userID) {
 			let memberTargetFunctionT = await message.guild.members.cache.get(userID);
+			if(!memberTargetFunctionT) return console.log("Was not able to remove the role from "+userID);
 			memberTargetFunctionT.roles.remove(gBannedRole).catch(() => null);
 			memberTargetFunctionT.send({ embeds: [gunbannedEmbed] }).catch(() => null);
 

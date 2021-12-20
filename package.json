@@ -1,7 +1,6 @@
 {
   "name": "discordbot",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +8,7 @@
   "author": "Noxet",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^13.1.0",
+    "discord.js": "^13.3.1",
     "dotenv": "^10.0.0",
     "mongoose": "^6.0.12",
     "node": "16.6.1"
@@ -19,5 +18,14 @@
   },
   "engines": {
     "node": "16.x"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Noxet01/starbot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Noxet01/starbot/issues"
+  },
+  "homepage": "https://github.com/Noxet01/starbot#readme",
+  "description": ""
 }
