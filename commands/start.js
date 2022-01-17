@@ -36,8 +36,7 @@ module.exports = {
 				if (gbannedData) {
 					try{
 						memberTargetFunction = await message.guild.members.fetch(gbannedData.gbanUserID);
-					}catch(error){
-					}
+					}catch(error){}
 					if(memberTargetFunction){
 						if (gbannedData.gunbanDate > Date.now() && memberTargetFunction.roles.cache.some(role => role.id == gBannedRole)) {
 

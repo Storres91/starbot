@@ -151,7 +151,7 @@ module.exports = {
                     '**What should the duration be?**\n (Minimum 10 mins and maximum 24h)',
                     '**Do you want to add extra entries?** \n(If so, write the role and the amount of extra 2-3)',
 
-                    '**Is there a requirement to join this giveaway?**',
+                    '**What is the requirement to join this giveaway?**',
                     '**Finally, any message you want to include?**'
                 ];
                 
@@ -172,7 +172,7 @@ module.exports = {
                     }
                     setTimeout(() => {
                         m.delete();
-                    }, 150);
+                    }, 700);
 
                     if (counter < parameters.length) {
                         paramMsg.edit({embeds: [donationInteractiveEmbed.setDescription(parameters[counter++]+"\n\n Type `cancel` to stop this process")]});

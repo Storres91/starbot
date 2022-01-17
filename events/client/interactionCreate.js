@@ -8,7 +8,7 @@ module.exports = {
     name: 'interactionCreate',
     description: "Creates interactions",
 
-    async execute(interaction, client) {
+    async execute(interaction, client, Discord) {
         var ttid = '0';
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
@@ -201,14 +201,40 @@ module.exports = {
                 if (interaction.customId == 'confessionDeny') {
 
                     await interaction.deferUpdate();
-                    interaction.editReply({
-                        content: 'Confession Denied :no_entry_sign: ',
-                        components: [],
-                        embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('Confession: ' + confessionData.confessionMsg).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+                    const filter = (i) => i.author.id === interaction.member.user.id;
+                    var confessionDenyReason = " ";
+                    var askReason;
+                    interaction.editReply({components: []});
+                    interaction.channel.send("Please write the reason below or `noreason`: ").then(sent => {askReason=sent});
+
+                    var confessionReasonCollector = new Discord.MessageCollector(interaction.channel, {
+                        filter,
+                        time: 1000 * 120,
+                        max: 1
+                    });
+
+                    confessionReasonCollector.on('collect', async (i)=>{
+                        setTimeout(()=>{
+                            i.delete();
+                        },1000);
+                        if (i.content.toLowerCase() == "noreason"){
+                            confessionReasonCollector.stop();
+                        }
+                        confessionDenyReason = "**Reason:** "+i.content;
 
                     });
-                    client.users.cache.get(confessionData.confessionUserID).send({embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription(confessionData.confessionMsg).setTimestamp().setTitle("Denied confession")]});
 
+                    confessionReasonCollector.on('end', () =>{
+                        askReason.delete();
+                        interaction.editReply({
+                            content: 'Confession Denied :no_entry_sign: ',
+                            components: [],
+                            embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('**Confession:** ' + confessionData.confessionMsg+"\n\n "+confessionDenyReason).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+    
+                        });
+
+                        client.users.cache.get(confessionData.confessionUserID).send({embeds: [donationCancelEmbed.setFooter(`Celestial realm`).setDescription('**Confession:** '+confessionData.confessionMsg+"\n\n "+confessionDenyReason).setTimestamp().setTitle("Denied confession")]});
+                    });
                 }
 
             }
