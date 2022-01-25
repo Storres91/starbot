@@ -125,6 +125,17 @@ module.exports = {
 
                 }
 
+                if (interaction.customId === 'donationEdit') {
+                    let extraEntries = getExtraEntries(interaction);
+
+                    if (interaction.member.user.id == donationData.host || interaction.member.user.id == '313351494361677845') {
+                        await interaction.deferUpdate();
+                        let { prize, requirement, winners, duration, message } = donationData;
+                        interaction.editReply({ components: [] });
+                        interaction.channel.send(`Replace what you want to edit and send the command:\n\`sb donate ${prize}, ${requirement}, ${winners}, ${duration}, ${extraEntries}, ${message}\``);
+                    }
+                }
+
 
                 //Accept/Deny buttons
                 if (interaction.customId == 'donationAccept') {
@@ -139,14 +150,14 @@ module.exports = {
                         interaction.message.reply(`<@${donationData.host}> your giveaway was accepted, please pass moni to <@${interaction.member.user.id}> and the giveaway will begin soon`);
 
                         //Send command and details to the managers channel
-                            client.channels.cache.get(gaManagerChannelID).send(
-                                `<@${interaction.member.user.id}> has accepted giveaway from <@${donationData.host}>, here's the command to start it`);
+                        client.channels.cache.get(gaManagerChannelID).send(
+                            `<@${interaction.member.user.id}> has accepted giveaway from <@${donationData.host}>, here's the command to start it`);
 
-                            client.channels.cache.get(gaManagerChannelID).send(
-                                "\n`" + `g.gc using template ${donationData.template} -n ${donationData.prize} -d ${donationData.duration} -w ${donationData.winners} -h ${donationData.host}` + "`\n");
+                        client.channels.cache.get(gaManagerChannelID).send(
+                            "\n`" + `g.gc using template ${donationData.template} -n ${donationData.prize} -d ${donationData.duration} -w ${donationData.winners} -h ${donationData.host}` + "`\n");
 
-                            client.channels.cache.get(gaManagerChannelID).send(
-                                "\n```" + `<@&${ttid}>\n` + `**Prize:** ${donationData.prize} \n**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
+                        client.channels.cache.get(gaManagerChannelID).send(
+                            "\n```" + `<@&${ttid}>\n` + `**Prize:** ${donationData.prize} \n**Req:** ${donationData.requirement} \n**Message:** ${donationData.message} \n**Sponsored by:** <@${donationData.host}>` + "```");
                     }
                 }
                 //Only allow GA manager+ to Accept/Deny giveaway requests
@@ -204,8 +215,8 @@ module.exports = {
                     const filter = (i) => i.author.id === interaction.member.user.id;
                     var confessionDenyReason = " ";
                     var askReason;
-                    interaction.editReply({components: []});
-                    interaction.channel.send("Please write the reason below or `noreason`: ").then(sent => {askReason=sent});
+                    interaction.editReply({ components: [] });
+                    interaction.channel.send("Please write the reason below or `noreason`: ").then(sent => { askReason = sent });
 
                     var confessionReasonCollector = new Discord.MessageCollector(interaction.channel, {
                         filter,
@@ -213,27 +224,27 @@ module.exports = {
                         max: 1
                     });
 
-                    confessionReasonCollector.on('collect', async (i)=>{
-                        setTimeout(()=>{
+                    confessionReasonCollector.on('collect', async (i) => {
+                        setTimeout(() => {
                             i.delete();
-                        },1000);
-                        if (i.content.toLowerCase() == "noreason"){
+                        }, 1000);
+                        if (i.content.toLowerCase() == "noreason") {
                             confessionReasonCollector.stop();
                         }
-                        confessionDenyReason = "**Reason:** "+i.content;
+                        confessionDenyReason = "**Reason:** " + i.content;
 
                     });
 
-                    confessionReasonCollector.on('end', () =>{
+                    confessionReasonCollector.on('end', () => {
                         askReason.delete();
                         interaction.editReply({
                             content: 'Confession Denied :no_entry_sign: ',
                             components: [],
-                            embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('**Confession:** ' + confessionData.confessionMsg+"\n\n "+confessionDenyReason).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
-    
+                            embeds: [donationCancelEmbed.setFooter(`Confession denied by ${interaction.member.user.tag}`).setDescription('**Confession:** ' + confessionData.confessionMsg + "\n\n " + confessionDenyReason).setTimestamp().setTitle(confessionData.confessionTag).setThumbnail(confessionData.confessionAvatar)]
+
                         });
 
-                        client.users.cache.get(confessionData.confessionUserID).send({embeds: [donationCancelEmbed.setFooter(`Celestial realm`).setDescription('**Confession:** '+confessionData.confessionMsg+"\n\n "+confessionDenyReason).setTimestamp().setTitle("Denied confession")]});
+                        client.users.cache.get(confessionData.confessionUserID).send({ embeds: [donationCancelEmbed.setFooter(`Celestial realm`).setDescription('**Confession:** ' + confessionData.confessionMsg + "\n\n " + confessionDenyReason).setTimestamp().setTitle("Denied confession")] });
                     });
                 }
 
@@ -241,6 +252,16 @@ module.exports = {
 
         } catch (err) {
             console.log(`Interaction error at interactionCreate.js ${err}`)
+        }
+        function getExtraEntries(interaction) {
+            interaction.message = interaction.message.embeds[0].description;
+            interaction.message = interaction.message.match(/entries:\*\*\D+\n/) + "";
+            interaction.message = interaction.message.match(/\*\D+\n/) + "";
+            interaction.message = interaction.message.replaceAll("*", "");
+            interaction.message = interaction.message.replaceAll("\n", "");
+            interaction.message = interaction.message.trim();
+
+            return interaction.message
         }
     }
 }

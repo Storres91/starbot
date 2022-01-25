@@ -14,31 +14,31 @@ module.exports = {
         var timetravel = '0';
         var gaTemp = 'c#';
         var footerTT = ' ';
-        var donationMinimum= "__**Minimum donations for normal giveaways**__\n"+
-        "<a:bg_starrollpink:922013790810284072> **TT0-1:**\n"+
-        "1 winner <:bg_arrow:922013968556515378> 50m\n"+
-        "2+ winners <:bg_arrow:922013968556515378> 25m each\n\n"+
-        
-        "<a:bg_starrollpink:922013790810284072> **TT2-19:**\n"+
-        "1 winner <:bg_arrow:922013968556515378> 200m\n"+
-        "2+ winners <:bg_arrow:922013968556515378> 100m each\n\n"+
-        
-        "<a:bg_starrollpink:922013790810284072> **TT20+:**\n"+
-        "1 winner <:bg_arrow:922013968556515378> 1b\n"+
-        "2+ winners <:bg_arrow:922013968556515378> 500m each\n\n"+
-        
-        "__**Minimum donations for epic item drop req**__\n"+
-        "<a:bg_starrollpink:922013790810284072> **TT0-1:**\n"+
-        "1 winner <:bg_arrow:922013968556515378> 500m \n"+
-        "2+ winners <:bg_arrow:922013968556515378> 250m each\n\n"+
-        
-        "<a:bg_starrollpink:922013790810284072> **TT2-19:**\n"+
-        "1 winner <:bg_arrow:922013968556515378> 2b\n"+
-        "2+ winners <:bg_arrow:922013968556515378> 1b each\n\n"+
-        
-        "<a:bg_starrollpink:922013790810284072> **TT20+:**\n"+
-        "1 winner <:bg_arrow:922013968556515378> 10b\n"+
-        "2+ winners <:bg_arrow:922013968556515378> 5b each";
+        var donationMinimum = "__**Minimum donations for normal giveaways**__\n" +
+            "<a:bg_starrollpink:922013790810284072> **TT0-1:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 50m\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 25m each\n\n" +
+
+            "<a:bg_starrollpink:922013790810284072> **TT2-19:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 200m\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 100m each\n\n" +
+
+            "<a:bg_starrollpink:922013790810284072> **TT20+:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 1b\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 500m each\n\n" +
+
+            "__**Minimum donations for epic item drop req**__\n" +
+            "<a:bg_starrollpink:922013790810284072> **TT0-1:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 500m \n" +
+            "2+ winners <:bg_arrow:922013968556515378> 250m each\n\n" +
+
+            "<a:bg_starrollpink:922013790810284072> **TT2-19:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 2b\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 1b each\n\n" +
+
+            "<a:bg_starrollpink:922013790810284072> **TT20+:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 10b\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 5b each";
 
         const gaDonationChannelID = '869271499800985640';
         const gaManagerChannelID = '869298472648597524';
@@ -52,22 +52,22 @@ module.exports = {
                 timetravel = tt0_1ID;
                 gaTemp = 'c1';
                 footerTT = 'TT0-1 ';
-                donationMinimum="\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT0-1:**\n1 winner <:bg_arrow:922013968556515378> 50m\n2+ winners <:bg_arrow:922013968556515378> 25m each"+
-                "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT0-1:**\n1 winner <:bg_arrow:922013968556515378> 500m \n2+ winners <:bg_arrow:922013968556515378> 250m each";
+                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT0-1:**\n1 winner <:bg_arrow:922013968556515378> 50m\n2+ winners <:bg_arrow:922013968556515378> 25m each" +
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT0-1:**\n1 winner <:bg_arrow:922013968556515378> 500m \n2+ winners <:bg_arrow:922013968556515378> 250m each";
 
             } else if (message.member.roles.cache.some(role => role.id == tt2_19ID)) {
                 timetravel = tt2_19ID;
                 gaTemp = 'c2';
                 footerTT = 'TT2-19 ';
-                donationMinimum="\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 200m\n2+ winners <:bg_arrow:922013968556515378> 100m each"+
-                "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 2b \n2+ winners <:bg_arrow:922013968556515378> 1b each";
+                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 200m\n2+ winners <:bg_arrow:922013968556515378> 100m each" +
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 2b \n2+ winners <:bg_arrow:922013968556515378> 1b each";
 
             } else if (message.member.roles.cache.some(role => role.id == tt20ID)) {
                 timetravel = tt20ID;
                 gaTemp = 'c3';
                 footerTT = 'TT20+ '
-                donationMinimum="\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 1b\n2+ winners <:bg_arrow:922013968556515378> 500m each"+
-                "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 10b \n2+ winners <:bg_arrow:922013968556515378> 5b each";
+                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 1b\n2+ winners <:bg_arrow:922013968556515378> 500m each" +
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 10b \n2+ winners <:bg_arrow:922013968556515378> 5b each";
             }
 
             //Embeds and buttons
@@ -92,7 +92,13 @@ module.exports = {
                 new MessageButton()
                     .setCustomId("donationCancel")
                     .setLabel("Cancel")
-                    .setStyle("DANGER")
+                    .setStyle("DANGER"),
+
+                new MessageButton()
+                    .setCustomId("donationEdit")
+                    .setLabel("Edit")
+                    .setStyle("SECONDARY")
+
             );
 
             //If the command is done in one line (normal)
@@ -127,7 +133,7 @@ module.exports = {
                 let donationMod = await donationModel.create({
                     donationID: String(donationMsgID),
                     prize: String(mDonation[0]),
-                    winners: String(mDonation[2]).replace(/\D/g,''),
+                    winners: String(mDonation[2]).replace(/\D/g, ''),
                     duration: String(mDonation[3]),
                     extraEntry: String(mDonation[4]),
 
@@ -146,7 +152,7 @@ module.exports = {
             } else {
                 let paramMsg, cancelledGA;
                 const parameters = [
-                    "**How many ERPG coins would you like to donate?**"+donationMinimum,
+                    "**How many ERPG coins would you like to donate?**" + donationMinimum,
                     '**How many winners should we set for this GA?** \n25 winners maximum',
                     '**What should the duration be?**\n (Minimum 10 mins and maximum 24h)',
                     '**Do you want to add extra entries?** \n(If so, write the role and the amount of extra 2-3)',
@@ -154,8 +160,8 @@ module.exports = {
                     '**What is the requirement to join this giveaway?**',
                     '**Finally, any message you want to include?**'
                 ];
-                
-                var counter=0;
+
+                var counter = 0;
 
                 const filter = (m) => m.author.id === message.author.id;
 
@@ -163,10 +169,10 @@ module.exports = {
                     filter,
                     time: 1000 * 120
                 });
-                message.channel.send({embeds: [donationInteractiveEmbed.setDescription(parameters[counter++]+'\n\n Type `cancel` to stop this process')]}).then(sent => { paramMsg = sent });
+                message.channel.send({ embeds: [donationInteractiveEmbed.setDescription(parameters[counter++] + '\n\n Type `cancel` to stop this process')] }).then(sent => { paramMsg = sent });
                 donationsCollector.on('collect', (m) => {
-                    if(m.content.toLowerCase()=='cancel'){
-                        cancelledGA=true
+                    if (m.content.toLowerCase() == 'cancel') {
+                        cancelledGA = true
                         donationsCollector.stop()
                         return
                     }
@@ -175,18 +181,18 @@ module.exports = {
                     }, 700);
 
                     if (counter < parameters.length) {
-                        paramMsg.edit({embeds: [donationInteractiveEmbed.setDescription(parameters[counter++]+"\n\n Type `cancel` to stop this process")]});
+                        paramMsg.edit({ embeds: [donationInteractiveEmbed.setDescription(parameters[counter++] + "\n\n Type `cancel` to stop this process")] });
                     }
                     else {
-                        paramMsg.edit({embeds: [donationInteractiveEmbed.setDescription('<a:starpurplehover:905575054161641483> All set, please review it \nWrite `?howtodonate` for more info')]}); 
+                        paramMsg.edit({ embeds: [donationInteractiveEmbed.setDescription('<a:starpurplehover:905575054161641483> All set, please review it \nWrite `?howtodonate` for more info')] });
                         donationsCollector.stop();
                     }
                 });
 
                 donationsCollector.on('end', async collected => {
-                    if(cancelledGA) return paramMsg.edit({embeds: [donationInteractiveEmbed.setDescription(" Successfully cancelled this giveaway creation :white_check_mark:")]});
-                    if(collected.size<6) return paramMsg.edit({embeds: [donationInteractiveEmbed.setDescription("Time run out, you didn't answer the questions in time, try again later :x:")]});
-                    
+                    if (cancelledGA) return paramMsg.edit({ embeds: [donationInteractiveEmbed.setDescription(" Successfully cancelled this giveaway creation :white_check_mark:")] });
+                    if (collected.size < 6) return paramMsg.edit({ embeds: [donationInteractiveEmbed.setDescription("Time run out, you didn't answer the questions in time, try again later :x:")] });
+
                     counter = 0;
                     collected.forEach((answer) => {
                         mDonation[counter++] = answer.content;
@@ -209,7 +215,7 @@ module.exports = {
                     let donationMod = await donationModel.create({
                         donationID: String(donationMsgID),
                         prize: String(mDonation[0]),
-                        winners: String(mDonation[1]).replace(/\D/g,''),
+                        winners: String(mDonation[1]).replace(/\D/g, ''),
                         duration: String(mDonation[2]),
                         extraEntry: String(mDonation[3]),
 

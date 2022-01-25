@@ -5,6 +5,8 @@ module.exports = {
     async execute(client, message, args, Discord) {
         var userRole, userRoleId, iconUrl, emojiId, commandDone, aborted = false;
 
+        if(message.attachments.size == 0 && !args[0]) return message.channel.send("You have to either attach the image for your icon or add it in the command:\n<a:bg_starrollwhite:929572216578924615> Correct usage: `sb icon <emoji/url>`")
+
         if (message.attachments.size != 0) {
             iconUrl = message.attachments.first().url;
 
@@ -50,19 +52,28 @@ module.exports = {
                 }
                 collector.stop()
             }
-        });
+         });
 
-        collector.on('end', async collected => {
+        collector.on('end', async () => {
             if (aborted) return
             userRole = await message.guild.roles.fetch(userRoleId);
-            userRole.setIcon(iconUrl).catch(
-                err => {
-                console.log(`Couldn't change the role icon, error: ${err}`);
-                message.channel.send("Sorry, I was not able to change ur icon (maybe the image is too big? 256kb max), or ask staff for help.");
-                aborted = true
-            });
-            if(!aborted) message.channel.send("Successfully changed your role icon!")
-        })
+
+            try{
+                await userRole.setIcon(iconUrl);
+            }catch(err){
+                console.log(`Couldn't change the role icon for ${message.author.id}, error: ${err}`);
+
+                if(err.message.includes("ENOENT")) return message.channel.send(`Sorry, I was not able to change your icon, couldn't find \`"${args[0]}"\`\n<a:bg_starrollwhite:929572216578924615> Make sure the url is correct.`);
+                if(err.message.includes("Invalid Form Body")) return message.channel.send(`Sorry, I was not able to change your icon, that is not a valid image.\n<a:bg_starrollwhite:929572216578924615> File cannot be larger than 256kb`);
+
+                message.channel.send("Sorry, I was not able to change your icon (unknown error), please ask staff for help.");
+                aborted = true;
+            }
+
+            if(!aborted) {
+                message.channel.send("Successfully changed your role icon!")
+            }
+        });
         
 
 
