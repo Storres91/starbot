@@ -10,8 +10,13 @@ module.exports = {
             console.log(`Error getting blacklistedData ${err}`)
         }
 
+        if (message.author.bot) return;
+        
+        //Add triggers below this line
+        if (message.content.toLowerCase().startsWith("?ban") && message.channel.id == '851078982945210409') return message.channel.send("<a:bg_starrollwhite:929572216578924615> Remember to check for any alts.");
 
-        if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot) return;
+
+        if (!message.content.toLowerCase().startsWith(prefix)) return;
         if (message.channel.type == 'dm') return;
 
         const args = message.content.slice(prefix.length).split(/ +/);
