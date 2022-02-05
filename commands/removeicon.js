@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['deleteicon', 'icondelete'],
     async execute(client, message, args, Discord) {
         const staffRoleId = '857060867676831805';
-        var userRole, userRoleId;
+        var userRole, userRoleId, aborted, commandDone;
 
         if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleId)) {
             if(!args[0]) return message.channel.send("You have to specify the role Id, `sb removeicon <roleID>`.")

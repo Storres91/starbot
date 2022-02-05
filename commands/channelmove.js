@@ -126,7 +126,7 @@ module.exports = {
                 invalidCategory = true;
                 break;
         }
-        targetChannelParent = await message.guild.channels.fetch(targetChannel.parentId);
+        var targetChannelParent = await message.guild.channels.fetch(targetChannel.parentId);
         if (invalidCategory) return message.channel.send("This channel is not in a valid category.")
         //Get category and role id from the one to be moved
         message.channel.send({ content: "Moving <#" + targetChannel.id + ">, select where it's gonna be moved to.", components: [categoryMenu] }).then(sent => mSent = sent);

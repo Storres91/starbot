@@ -3,6 +3,7 @@ module.exports = {
     description: 'Pings the boosted arena role and deletes the message after 5 mins',
     aliases: ['arenaping', 'pingarena'],
     async execute(client, message, args, Discord) {
+        const STAFF_ROLE_ID = '857060867676831805';
         const ARENA_MANAGER_ID = '877920810315157514';
         const BOOSTED_ARENA_ID = '872161326355607593';
         var msg;

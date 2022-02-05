@@ -9,7 +9,7 @@ module.exports = {
         const channelOwnersList = args.slice(0, -1);
         const nitroCategoriesId = ['855889626573045810', '866359829966487563', '923082998545514496']
 
-        var archiveCategory, channelOwner, targetChannel, archivalReason, mSent, cancelledArchival = false, fetchedOwnerList = [], taggedOwnersMsg="", invalidOwner = false;
+        var archiveCategory, rSent, targetChannel, archivalReason, mSent, cancelledArchival = false, fetchedOwnerList = [], taggedOwnersMsg="", invalidOwner = false;
 
         const archivedEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d')
@@ -41,7 +41,7 @@ module.exports = {
                 .setStyle("DANGER")
         );
 
-        if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID)) { }
+        if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID)) {}
         else return message.channel.send("You can't use this ");
 
         //if (!args[1]) return message.channel.send("Missing arguments, correct usage `sb archive <ChannelOwner> <Channel>`")
@@ -55,8 +55,8 @@ module.exports = {
             let user = await message.guild.members.fetch(owner).catch(() => false);
             if (user) {
                 fetchedOwner = await message.guild.members.cache.get(owner);
-                if (fetchedOwner == undefined) { message.channel.send(""); invalidOwner = true };
-                if (!fetchedOwner.roles.cache.some(role => role.id == channelOwnerRoleID || role.id == archivedChannelRoleID)) { message.channel.send("<:starpurple:905582557989584926> <@" + fetchedOwner.id + "> (" + fetchedOwner.id + ") doesn't have the channel owner or archived channel role."); invalidOwner = true };
+                if (fetchedOwner == undefined) { message.channel.send(""); invalidOwner = true }
+                if (!fetchedOwner.roles.cache.some(role => role.id == channelOwnerRoleID || role.id == archivedChannelRoleID)) { message.channel.send("<:starpurple:905582557989584926> <@" + fetchedOwner.id + "> (" + fetchedOwner.id + ") doesn't have the channel owner or archived channel role."); invalidOwner = true }
                 fetchedOwnerList.push(fetchedOwner);
                 taggedOwnersMsg += "<@" + fetchedOwner.id + "> ";
             }else{
@@ -83,6 +83,7 @@ module.exports = {
         }
 
         archiveCategory = message.guild.channels.cache.get(archiveCategory);
+        if (archiveCategory.children.size == 50) return message.channel.send("Sorry, this archived channels category is full. Can't move the channel.")
 
         //Get reason for archiving
         message.channel.send({ content: `You are archiving channel <#${targetChannel.id}>, please select the reason for this.\n**Selected Owner(s)** → ${taggedOwnersMsg}`, components: [reasonsRow] }).then(sent => mSent = sent);
@@ -90,6 +91,8 @@ module.exports = {
             channel: message.channel,
             message: mSent
         });
+        const filter = (m) => m.author.id === message.author.id;
+        const otherCollector = new Discord.MessageCollector(message.channel, { filter, max: 1, time: 1000 * 120 })
         archivedReasonCollector.on('collect', async (i) => {
             i.deferUpdate();
             switch (i.customId) {
@@ -105,8 +108,7 @@ module.exports = {
 
                 case "reasonOther":
                     message.channel.send("Please specify the reason: ").then(sent => rSent = sent);
-                    const filter = (m) => m.author.id === message.author.id;
-                    const otherCollector = new Discord.MessageCollector(message.channel, { filter, max: 1, time: 1000 * 120 })
+                    
                     await otherCollector.on('collect', (m) => {
                         archivalReason = m.content;
                     });
@@ -138,7 +140,7 @@ module.exports = {
 
             //Move channel to archives
             targetChannel.setParent(archiveCategory);
-
+            
             //For each user change roles
             fetchedOwnerList.forEach(owner => {
                 let i = 1;
