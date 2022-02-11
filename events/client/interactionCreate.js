@@ -248,6 +248,17 @@ module.exports = {
                     });
                 }
 
+                if(interaction.customId == 'postApp'){
+                    await interaction.deferUpdate();
+                    let postChannel = await interaction.guild.channels.fetch('941144300308283442')
+    
+                    if (interaction.message.content == '') interaction.editReply({components:[], embeds: [interaction.message.embeds[0]]});
+                    else interaction.editReply({components:[], content: interaction.message.content});
+    
+                    if (interaction.message.content == '') postChannel.send({content: ' ', embeds: [interaction.message.embeds[0]]})
+                    else postChannel.send({content: interaction.message.content})
+                }
+
             }
 
         } catch (err) {
