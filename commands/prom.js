@@ -47,7 +47,7 @@ module.exports = {
                 collector.stop()
                 return
             }
-            if (counter != questions.length-1){
+            if (counter != questions.length){
                 setTimeout(() => {
                     m.delete();
                 }, 1000);
