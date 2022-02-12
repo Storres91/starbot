@@ -47,9 +47,12 @@ module.exports = {
                 collector.stop()
                 return
             }
-            setTimeout(() => {
-                m.delete();
-            }, 1000);
+            if (counter != questions.length-1){
+                setTimeout(() => {
+                    m.delete();
+                }, 1000);
+            }
+            
 
             if (counter < questions.length) {
                 promMsg.edit({ embeds: [promEmbed.setDescription(questions[counter++] + "\n\n Type `cancel` to stop this process")] });
