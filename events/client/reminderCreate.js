@@ -9,7 +9,7 @@ module.exports = {
         if (message.embeds.length == 0) return
         if(!message.embeds[0].footer) return
         if (!(message.embeds[0].footer.text.toLowerCase()).includes("ends at")) return
-
+        
         const giveawayUrl = message.url;
         const prize = message.embeds[0].title;
         const winners = parseInt((message.embeds[0].description.match(/Winners: \*\*\d+\*\*/) + "").match(/\d+/) + "")
@@ -22,7 +22,7 @@ module.exports = {
             .setTimestamp();
 
 
-        filter = (m)=>!m.author.bot && ((m.content).includes("<@&852314328405377074>") || (m.content).includes("<@&852314511432220702>") || (m.content).includes("<@&852314705196613653>") || (m.content).includes("@role"));
+        const filter = (m)=>!m.author.bot && ((m.content).includes("<@&852314328405377074>") || (m.content).includes("<@&852314511432220702>") || (m.content).includes("<@&852314705196613653>") || (m.content).includes("@role"));
         const collector = new Discord.MessageCollector(message.channel, {filter, time:1000*90})
 
         collector.on('collect', ()=>{
@@ -35,6 +35,8 @@ module.exports = {
             if (!message.pinnable) return
             if (collected.size == 0) return
             let userId = collected.first().author.id
+            let member = await message.guild.members.fetch(userId)
+            var username = member.nickname!=null?member.nickname:member.user.username;
 
             reminderEmbed.setDescription(`**Winners:** ${winners}\n**Prize:** ${prize}\n\n**Jump to the giveaway:** ${giveawayUrl}`);
 
@@ -45,6 +47,7 @@ module.exports = {
             });
             remindersMod.save()
 
+            client.channels.fetch('869298472648597524').then(ch => ch.send(`${username}, Successfully set the reminder for <t:${((Date.now()+ms(duration)+3000).toString()).slice(0,-3)}:T>.`))
             setTimeout(()=>{reminder(userId, remindersMod)}, ms(duration)+3000);
             
         })
