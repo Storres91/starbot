@@ -38,7 +38,7 @@ module.exports = {
             let member = await message.guild.members.fetch(userId)
             var username = member.nickname!=null?member.nickname:member.user.username;
 
-            reminderEmbed.setDescription(`**Winners:** ${winners}\n**Prize:** ${prize}\n\n**Jump to the giveaway:** ${giveawayUrl}`);
+            reminderEmbed.setDescription(`**Prize:** ${prize}\n**Winners:** ${winners}\n\n**Jump to the giveaway:** ${giveawayUrl}`);
 
             let remindersMod = await remindersModel.create({
                 userID: userId,

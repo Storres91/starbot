@@ -3,7 +3,7 @@ const remindersModel = require('../models/remindersSchema.js')
 module.exports = {
     name: 'checkreminders',
     description: 'Sample description',
-    aliases: [''],
+    aliases: ['checkreminder', 'reminders', 'cr', 'paytime', 'mydebt'],
     async execute(client, message, args, Discord) {
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
@@ -17,9 +17,11 @@ module.exports = {
         } catch (err) {
             console.log(`Error getting donationData ${err}`)
         }
+        if (remindersData.length == 0) return message.channel.send("Jei says you currently have no reminders. <a:cr_frogstick:887361981810626571>")
 
         for(let reminder of remindersData){
-            remindersMsg = remindersMsg + "\n\n<t:"+((reminder.date).toString()).slice(0,-3)+":f>\n```"+(reminder.description).replaceAll('*','')+"```"
+            let description = reminder.description.replaceAll('*','').split("\n\n")
+            remindersMsg = remindersMsg + "\n\n<t:"+((reminder.date).toString()).slice(0,-3)+":f>\n```"+(description[0])+"```\n"+description[1]
         }
 
         message.channel.send(remindersMsg)
