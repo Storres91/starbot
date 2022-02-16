@@ -23,7 +23,7 @@ module.exports = {
 
 
         const filter = (m)=>!m.author.bot && ((m.content).includes("<@&852314328405377074>") || (m.content).includes("<@&852314511432220702>") || (m.content).includes("<@&852314705196613653>") || (m.content).includes("@role"));
-        const collector = new Discord.MessageCollector(message.channel, {filter, time:1000*90})
+        const collector = new Discord.MessageCollector(message.channel, {filter, time:1000*60*60})
 
         collector.on('collect', ()=>{
             collector.stop()
