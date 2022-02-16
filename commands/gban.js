@@ -8,7 +8,8 @@ module.exports = {
         const staffRoleID = '857060867676831805';
         const gaManagerRoleID = '869250517791019088';
         const gBannedRole = '869251117844934706';
-        var daysTime = "2 days";
+        const times = ['1 day', '3 days', '7 days']
+        var daysTime = times[0]
         var permaban = false;
         var reason=""
         var messageConfirm = "has been banned from giveaways for " + daysTime + " this is their first offense";
@@ -55,12 +56,12 @@ module.exports = {
                 if (gbannedData.gbannedCounter == 5) return message.channel.send("<@" + gbannedData.gbanUserID + "> is already permanently banned from giveaways");
                 switch (gbannedData.gbannedCounter) {
                     case 2:
-                        daysTime = "7 days"
+                        daysTime = times[1]
                         messageConfirm = "has been banned from giveaways for " + daysTime + " this is their second offense";
                         break;
 
                     case 3:
-                        daysTime = "24 days"
+                        daysTime = times[2]
                         messageConfirm = "has been banned from giveaways for " + daysTime + " this is their third offense";
                         break;
 
