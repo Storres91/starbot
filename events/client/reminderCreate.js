@@ -34,6 +34,8 @@ module.exports = {
         collector.on('end', async collected =>{
             if (!message.pinnable) return
             if (collected.size == 0) return
+            if (!(message.embeds[0].footer.text.toLowerCase()).includes("ends at")) return
+
             let userId = collected.first().author.id
             let member = await message.guild.members.fetch(userId)
             var username = member.nickname!=null?member.nickname:member.user.username;
