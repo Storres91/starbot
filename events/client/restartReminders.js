@@ -36,8 +36,8 @@ module.exports = {
                     reminder.delete()
                 }, (reminder.date - Date.now())<1 ? 0:(reminder.date - Date.now()))
             }
-            client.channels.fetch("902377203801661470").then(ch=>ch.send("<a:bg_starrollpink:922013790810284072> Successfully restarted the reminders."))
         }
+        client.channels.fetch("902377203801661470").then(ch=>ch.send("<a:bg_starrollpink:922013790810284072> Successfully restarted the reminders."))
 
         
     }

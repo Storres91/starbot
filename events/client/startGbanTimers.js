@@ -53,7 +53,7 @@ module.exports = {
 					
 				}
 			}
-		client.channels.fetch("902377203801661470").then(function(result1) {result1.send("**Bot just restarted**\n<a:bg_starrollpink:922013790810284072> Successfully started gban timers.")});
+		client.channels.fetch("902377203801661470").then(function(result1) {result1.send("<a:bg_starrollpink:922013790810284072> Successfully started gban timers.")});
 
 		async function gabantimeout(userID) {
 			let memberTargetFunctionT = await guild.members.cache.get(userID).catch(()=>false);
