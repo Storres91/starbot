@@ -50,7 +50,7 @@ module.exports = {
             remindersMod.save()
 
             client.channels.fetch('869298472648597524').then(ch => ch.send(`${username}, Successfully set the reminder for <t:${((Date.now()+ms(duration)+3000).toString()).slice(0,-3)}:T>.`))
-            if (collected.first().author.id == '230120935804370944') client.channels.fetch('869298472648597524').then(ch => ch.send(`<a:bg_starrollpink:922013790810284072> Remember to write \`?howtodonate\` in <#869271499800985640>`))
+            if (collected.first().author.id == '230120935804370944') client.channels.fetch('869298472648597524').then(ch => ch.send(`<a:bg_starrollpink:922013790810284072> <@230120935804370944>, Remember to write \`?howtodonate\` in <#869271499800985640>`))
 
             setTimeout(()=>{reminder(userId, remindersMod)}, ms(duration)+3000);
             
