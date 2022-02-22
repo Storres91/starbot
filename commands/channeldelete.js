@@ -100,7 +100,7 @@ module.exports = {
                         if (collected.size <= 0) {
                             cancelledDelete = true;
                         }
-                        rSent.delete();
+                        rSent.delete().catch(() => null);
                         deletedReasonCollector.stop();
                     });
                     break;
@@ -116,7 +116,7 @@ module.exports = {
         })
 
         deletedReasonCollector.on('end', () => {
-            mSent.delete();
+            mSent.delete().catch(() => null);
             let responsible = message.author.id;
             if (cancelledDelete) return message.channel.send("Successfully cancelled.");
 

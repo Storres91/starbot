@@ -104,7 +104,7 @@ module.exports = {
             }
         });
         categoryCollector.on('end', () => {
-            mArchSent.delete();
+            mArchSent.delete().catch(() => null);
             if(archiveCategory=='0') return message.channel.send("Successfully cancelled.")
             archiveCategory = message.guild.channels.cache.get(archiveCategory);
 
@@ -138,7 +138,7 @@ module.exports = {
                             if (collected.size <= 0) {
                                 cancelledArchival = true;
                             }
-                            rSent.delete();
+                            rSent.delete().catch(() => null);
                             archivedReasonCollector.stop();
                         });
                         break;
@@ -154,7 +154,7 @@ module.exports = {
             })
 
             archivedReasonCollector.on('end', () => {
-                mSent.delete();
+                mSent.delete().catch(() => null);
                 if (cancelledArchival) return message.channel.send("Successfully cancelled.");
 
                 //Move to last position

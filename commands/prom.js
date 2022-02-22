@@ -49,7 +49,7 @@ module.exports = {
             }
             if (counter != questions.length){
                 setTimeout(() => {
-                    m.delete();
+                    m.delete().catch(() => null);
                 }, 1000);
             }
             

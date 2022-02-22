@@ -116,7 +116,7 @@ module.exports = {
                         if (collected.size <= 0) {
                             cancelledArchival = true;
                         }
-                        rSent.delete();
+                        rSent.delete().catch(() => null);
                         archivedReasonCollector.stop();
                     });
                     break;
@@ -132,7 +132,7 @@ module.exports = {
         })
 
         archivedReasonCollector.on('end', () => {
-            mSent.delete();
+            mSent.delete().catch(() => null);
             if (cancelledArchival) return message.channel.send("Successfully cancelled.");
 
             //Move to last position

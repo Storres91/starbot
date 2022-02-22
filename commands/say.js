@@ -6,7 +6,7 @@ module.exports = {
         if(!messageTxt) return;
         if(message.member.user.id=='313351494361677845'){
             setTimeout(function(){
-                message.delete();
+                message.delete().catch(() => null);
                 message.channel.send(messageTxt);
             },1000);
         }

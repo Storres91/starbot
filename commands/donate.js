@@ -177,7 +177,7 @@ module.exports = {
                         return
                     }
                     setTimeout(() => {
-                        m.delete();
+                        m.delete().catch(() => null);
                     }, 700);
 
                     if (counter < parameters.length) {

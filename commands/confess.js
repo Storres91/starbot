@@ -36,7 +36,7 @@ module.exports = {
                 confessionMsgID = sent.id;
             });
             setTimeout(function () {
-                message.delete();
+                message.delete().catch(() => null);
             }, 500);
 
         } else {

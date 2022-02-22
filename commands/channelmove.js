@@ -186,7 +186,7 @@ module.exports = {
         categoryMoveCollector.on('end', async () => {
 
             moveCategoryChannel = await message.guild.channels.fetch(moveCategoryID);
-            mSent.delete();
+            mSent.delete().catch(() => null);
             
             if (cancelledMove) return message.channel.send("Successfully cancelled.")
             if (moveCategoryChannel.children.size == 50) return message.channel.send("Sorry, I was not able to move the channel to "+moveCategoryChannel.name+" (Category full). \nCheck `sb channelcount` to know where we have any space.")
