@@ -11,7 +11,7 @@ module.exports = {
         const gaManagerRole = await guild.roles.cache.get("869250517791019088");
         const gaManagers = gaManagerRole.members.map(m=>m.user.id);
         const staffMembers = (await guild.roles.cache.get("857060867676831805")).members.map(m=>m.user.id);
-        const allMembers = Set(gaManagers.concat(staffMembers));
+        const allMembers = new Set(gaManagers.concat(staffMembers));
 
         for (let userId of allMembers){
             
