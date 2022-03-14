@@ -167,7 +167,7 @@ module.exports = {
 
                 const donationsCollector = new Discord.MessageCollector(message.channel, {
                     filter,
-                    time: 1000 * 120
+                    time: 1000 * 240
                 });
                 message.channel.send({ embeds: [donationInteractiveEmbed.setDescription(parameters[counter++] + '\n\n Type `cancel` to stop this process')] }).then(sent => { paramMsg = sent });
                 donationsCollector.on('collect', (m) => {
