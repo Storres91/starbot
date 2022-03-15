@@ -7,7 +7,7 @@ module.exports = {
         if(message.member.user.id=='313351494361677845' || message.member.roles.cache.some(role => role.id == STAFFROLE)){
 
             //SERVER
-            message.channel.send({files: ['../assets/img/1_SERVER.png']})
+            await message.channel.send({files: ['./assets/img/1_SERVER.png']})
             message.channel.send('<#851102112968212520> \n' +
             'Any updates to server or bots are announced here! \n' +
             '\n' +
@@ -39,7 +39,7 @@ module.exports = {
             'Help bump our server!',)
 
             //HELP
-            message.channel.send({files: ['../assets/img/2_HELP.png']})
+            await message.channel.send({files: ['./assets/img/2_HELP.png']})
             message.channel.send('<#953218095940501524> \n' +
             "Come here when you get lost and don't know which channel is for which purpose. \n" +
             '\n' +
@@ -56,7 +56,7 @@ module.exports = {
             'Request your own channel, add co-owners, delete/archive channels or channel upgrade can be requested here.',)
 
             //GENERAL
-            message.channel.send({files: ['../assets/img/3_GENERAL.png']})
+            await message.channel.send({files: ['./assets/img/3_GENERAL.png']})
             message.channel.send('<#852588316363980860> \n' +
             "General chat where you're able to have a conversation with anyone as long as it's SFW! \n" +
             '\n' +
@@ -79,7 +79,7 @@ module.exports = {
             'The place where anonymous people post their confessions!',)
 
             //GIVEAWAY
-            message.channel.send({files: ['../assets/img/4_GIVEAWAY.png']})
+            await message.channel.send({files: ['./assets/img/4_GIVEAWAY.png']})
             message.channel.send('<#869271499800985640> \n' +
             'Want to make an giveaway? Come here and read the pins! \n' +
             '\n' +
@@ -95,7 +95,7 @@ module.exports = {
             'All payments for winners of giveaways regardless of time travel',)
 
             //SUPER ZONE
-            message.channel.send({files: ['../assets/img/5_SUPER_ZONE.png']})
+            await message.channel.send({files: ['./assets/img/5_SUPER_ZONE.png']})
             message.channel.send('<#861324842561568768> \n' +
             'Do ``rpg p`` here to get assigned tt roles\n' +
             '\n' +
@@ -118,7 +118,7 @@ module.exports = {
             'Where boosted arena commands are completed',)
 
             //SPACE MARKET
-            message.channel.send({files: ['../assets/img/6_SPACE_MARKET.png']})
+            await message.channel.send({files: ['./assets/img/6_SPACE_MARKET.png']})
             message.channel.send('<#867534464263127060>\n' +
             'Wanting to sell something in ERPG bot? Guild? Duel? \n' +
             '**Warning, scammers will be punished**\n' +
@@ -130,7 +130,7 @@ module.exports = {
             'Commands relating to buying and selling is done here',)
 
             //PUBLIC GALAXY
-            message.channel.send({files: ['../assets/img/7_PULIC_GALAXY.png']})
+            await message.channel.send({files: ['./assets/img/7_PUBLIC_GALAXY.png']})
             message.channel.send('<#851086740310720512> <a:cr_pinkrollingstar:865266644346863636> \n' +
             '\n' +
             '<#851086812175794196> <a:cr_pinkrollingstar:865266644346863636> \n' +
@@ -173,7 +173,7 @@ module.exports = {
             'Come and drop your epic items. This channel can be used for epic item drop giveaways.',)
 
             //MISC BOTS
-            message.channel.send({files: ['../assets/img/8_MISC_BOTS.png']})
+            await message.channel.send({files: ['./assets/img/8_MISC_BOTS.png']})
             message.channel.send('<#851086740310720512> <a:cr_pinkrollingstar:865266644346863636> \n' +
             '\n' +
             '<#851086812175794196> <a:cr_pinkrollingstar:865266644346863636> \n' +
@@ -189,6 +189,7 @@ module.exports = {
             "These channels are public channels, anyone can use them but doesn't mean its free reign! **All rules** of the server still apply. No toxic, no snipe... <:cr_mmblush:874865113071513620> \n" +
             '\n' +
             '<#855094831306375180> <a:cr_pinkrollingstar:865266644346863636> \n' +
+            '\n'+
             '<#882326282304639006> <a:cr_pinkrollingstar:865266644346863636> \n' +
             '\n' +
             '<#953177351674556446> <a:cr_pinkrollingstar:865266644346863636> \n' +
@@ -215,13 +216,13 @@ module.exports = {
             'Come and drop your epic items. This channel can be used for epic item drop giveaways.',)
 
             //PRIVATE CHANNELS
-            message.channel.send({files: ['../assets/img/9_PRIVATE_CHANNELS.png']})
+            await message.channel.send({files: ['./assets/img/9_PRIVATE_CHANNELS.png']})
             message.channel.send('> Below the **Misc Bots Category** are private channels. \n' +
             '> Make sure you have the permission of the room owners before playing in a private room. \n' +
             '> Check how you can get a private channel in <#855897048565284894> mentions above.',)
 
             //VOICE CHAT
-            message.channel.send({files: ['../assets/img/10_VOICE_CHAT.png']})
+            await message.channel.send({files: ['./assets/img/10_VOICE_CHAT.png']})
             message.channel.send('Feel free to have some small talk with your friends in **General VC**, or enjoy music in **Music channels**, or go to **karaoke** to show your talents <a:cr_party:891186181222588426>',)
         }
     }
