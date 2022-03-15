@@ -9,7 +9,7 @@ module.exports = {
             setTimeout(function(){
                 message.delete().catch(() => null);
                 let messageSay = message;
-                messageSay.content.replaceAll("sb say ", "")
+                messageSay.content = messageSay.content.toLowerCase().replace("sb say ", "");
                 message.channel.send(messageSay);
             },1000);
         }
