@@ -106,7 +106,7 @@ module.exports = {
             'Where Godly Miniboss (lvl 4k+) are hosted (requires level 10+ in <@!339254240012664832> )\n' +
             '\n' +
             '<#852321070022787082> \n' +
-            'Where Miniboss 800+ are hosted but sometimes 4k+ hosts here <:cr_eeveehappy:879920895722942514> \n' +
+            'Where Miniboss 500+ are hosted but sometimes 4k+ hosts here <:cr_eeveehappy:879920895722942514> \n' +
             '\n' +
             '<#851108452268245022> \n' +
             'Boosted minibosses commands are completed here, so winners get ready <:cr_elmoburn:892754341453234217> \n' +
