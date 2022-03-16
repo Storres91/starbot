@@ -15,9 +15,9 @@ module.exports = {
         var gaTemp = 'c#';
         var footerTT = ' ';
         var donationMinimum = "__**Minimum donations for normal giveaways**__\n" +
-            "<a:bg_starrollpink:922013790810284072> **TT0-1:**\n" +
-            "1 winner <:bg_arrow:922013968556515378> 50m\n" +
-            "2+ winners <:bg_arrow:922013968556515378> 25m each\n\n" +
+            "<a:bg_starrollpink:922013790810284072> **TT1:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 30m\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 15m each\n\n" +
 
             "<a:bg_starrollpink:922013790810284072> **TT2-19:**\n" +
             "1 winner <:bg_arrow:922013968556515378> 200m\n" +
@@ -28,9 +28,9 @@ module.exports = {
             "2+ winners <:bg_arrow:922013968556515378> 500m each\n\n" +
 
             "__**Minimum donations for epic item drop req**__\n" +
-            "<a:bg_starrollpink:922013790810284072> **TT0-1:**\n" +
-            "1 winner <:bg_arrow:922013968556515378> 500m \n" +
-            "2+ winners <:bg_arrow:922013968556515378> 250m each\n\n" +
+            "<a:bg_starrollpink:922013790810284072> **TT1:**\n" +
+            "1 winner <:bg_arrow:922013968556515378> 200m \n" +
+            "2+ winners <:bg_arrow:922013968556515378> 100m each\n\n" +
 
             "<a:bg_starrollpink:922013790810284072> **TT2-19:**\n" +
             "1 winner <:bg_arrow:922013968556515378> 2b\n" +
@@ -51,9 +51,9 @@ module.exports = {
             if (message.member.roles.cache.some(role => role.id == tt0_1ID)) {
                 timetravel = tt0_1ID;
                 gaTemp = 'c1';
-                footerTT = 'TT0-1 ';
-                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT0-1:**\n1 winner <:bg_arrow:922013968556515378> 50m\n2+ winners <:bg_arrow:922013968556515378> 25m each" +
-                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT0-1:**\n1 winner <:bg_arrow:922013968556515378> 500m \n2+ winners <:bg_arrow:922013968556515378> 250m each";
+                footerTT = 'TT1 ';
+                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT1:**\n1 winner <:bg_arrow:922013968556515378> 30m\n2+ winners <:bg_arrow:922013968556515378> 15m each" +
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT1:**\n1 winner <:bg_arrow:922013968556515378> 200m \n2+ winners <:bg_arrow:922013968556515378> 100m each";
 
             } else if (message.member.roles.cache.some(role => role.id == tt2_19ID)) {
                 timetravel = tt2_19ID;
