@@ -67,7 +67,7 @@ module.exports = {
             '<a:cr_kekeke:895635825927274526> \n' +
             '\n' +
             '<#853286368335626250> \n' +
-            '<a:flexleft:945656176492806165> 😉 <a:flexright:945656287839010847> \n' +
+            '<a:flexleft:953431444888371280> 😉 <a:flexright:953431444959686746>\n' +
             '\n' +
             '<#873404771137097738> \n' +
             'Place for OC art \n' +
@@ -174,46 +174,29 @@ module.exports = {
 
             //MISC BOTS
             await message.channel.send({files: ['./assets/img/8_MISC_BOTS.png']})
-            message.channel.send('<#851086740310720512> <a:cr_pinkrollingstar:865266644346863636> \n' +
+            message.channel.send('<#877768456831913984> \n' +
+            '<#854083152069918741>  \n' +
+            "I don't know why but people love counting here.\n" +
             '\n' +
-            '<#851086812175794196> <a:cr_pinkrollingstar:865266644346863636> \n' +
+            '<#854491028090519572> \n' +
+            '<#854082652838821958> \n' +
+            '<#859588901899206686> \n' +
+            '<#856261753322340382>\n' +
+            '<#854931816535031828> \n' +
+            '<#907783666778914866> \n' +
+            '<#854942306121285642> \n' +
+            '<#894084138414526494> \n' +
+            '<#859592961742209034>  \n' +
+            '<#858542889495822366> \n' +
+            'Self explains. Come enjoy other bots besides erpg <a:cr_peachbored:864143615626444831> \n' +
             '\n' +
-            '<#851684888918491146> <a:cr_pinkrollingstar:865266644346863636> \n' +
+            '<#880308727503261697> \n' +
+            "Poketwo's spawn channel. You can catch **all** pokemons freely here.\n" +
+            '<#885619994283638864> \n' +
+            "Poketwo's shiny-hunt channel. **Always** check for shiny-hunters before catching. \n" +
             '\n' +
-            '<#854744139053006878> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#859846381812056094> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#859847400662368266> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            "These channels are public channels, anyone can use them but doesn't mean its free reign! **All rules** of the server still apply. No toxic, no snipe... <:cr_mmblush:874865113071513620> \n" +
-            '\n' +
-            '<#855094831306375180> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n'+
-            '<#882326282304639006> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#953177351674556446> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            'Need to find a partner or a guild? Come to our searching channels above <:cr_mmoke:907525454003585044> \n' +
-            '\n' +
-            '<#864271402488430623> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#876085020375252992> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#852215579242922057> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#861118078057578506> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            'Channels self explain. Come to ask for assistance from the bots for d10, d13 or enchantment. \n' +
-            '\n' +
-            '<#852587758761541733> \n' +
-            '<:cr_gamblebad:865983093114667078> or <:cr_gamblegood:865983093210087424> ?\n' +
-            '\n' +
-            '<#861646055312195618> \n' +
-            "Drop your arena or miniboss command here if you don't wanna join boosted arena or miniboss. \n" +
-            '\n' +
-            '<#855838409502228502> \n' +
-            'Come and drop your epic items. This channel can be used for epic item drop giveaways.',)
+            '<#860195707259453480> \n' +
+            'Use all commands you want with any bots.',)
 
             //PRIVATE CHANNELS
             await message.channel.send({files: ['./assets/img/9_PRIVATE_CHANNELS.png']})
@@ -224,6 +207,8 @@ module.exports = {
             //VOICE CHAT
             await message.channel.send({files: ['./assets/img/10_VOICE_CHAT.png']})
             message.channel.send('Feel free to have some small talk with your friends in **General VC**, or enjoy music in **Music channels**, or go to **karaoke** to show your talents <a:cr_party:891186181222588426>',)
+
+            message.delete().catch(()=>null)
         }
     }
 }
