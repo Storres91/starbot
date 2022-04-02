@@ -56,7 +56,13 @@ module.exports = {
 		client.channels.fetch("902377203801661470").then(function(result1) {result1.send("<a:bg_starrollpink:922013790810284072> Successfully started gban timers.")});
 
 		async function gabantimeout(userID) {
-			let memberTargetFunctionT = await guild.members.cache.get(userID).catch(()=>false);
+			let memberTargetFunctionT
+			try {
+				memberTargetFunctionT = await guild.members.cache.get(userID);
+				
+			} catch (error) {
+				memberTargetFunctionT = false;
+			}
 			if(!memberTargetFunctionT) return console.log("Was not able to remove the role from "+userID);
 			memberTargetFunctionT.roles.remove(gBannedRole).catch(() => null);
 			memberTargetFunctionT.send({ embeds: [gunbannedEmbed] }).catch(() => null);

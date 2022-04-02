@@ -32,7 +32,7 @@ module.exports = {
         try {
             channelDataPrev = await channelDataModel.findOne({ channelID: targetChannel.id });
         } catch (err) {
-            console.log(`Error getting donationData ${err}`)
+            console.log(`Error getting channelData ${err}`)
         }
 
         if(channelDataPrev) return message.channel.send(`This channel is already in the database with these owners: ${channelDataPrev.owners}`)
