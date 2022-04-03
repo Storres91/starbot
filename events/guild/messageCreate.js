@@ -17,8 +17,15 @@ module.exports = {
 
 
         if (message.author.bot) return;
-        //Add triggers below this line
+
+        //---------Normal triggers---------//
         if (message.content.toLowerCase().startsWith("?ban") && message.channel.id == '851078982945210409') return message.channel.send("<a:bg_starrollwhite:929572216578924615> Remember to check for any alts.");
+        
+        if ((message.content.toLowerCase().startsWith("?ml") || 
+            message.content.toLowerCase().startsWith("?modlog") || 
+            message.content.toLowerCase().startsWith("?info") || 
+            message.content.toLowerCase().startsWith("?ml")) && 
+            message.channel.id == '851078982945210409') return message.channel.send("<a:bg_starrollwhite:929572216578924615> Remember to check for `?notes`.")
 
 
         if (!message.content.toLowerCase().startsWith(prefix)) return;
