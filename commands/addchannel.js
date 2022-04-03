@@ -7,7 +7,7 @@ module.exports = {
     async execute(client, message, args, Discord) {
         const STAFF_ROLE_ID = '857060867676831805';
         let targetChannel;
-        const channelOwnersList = args.slice(0, -1);
+        const channelOwnersList = args.slice(0, -1).map(owner=>owner.replace(/[^0-9]/g,''));
 
         if (!message.member.roles.cache.some(role => role.id == STAFF_ROLE_ID)) return
         if (args.length < 2) return message.channel.send("Incorrect syntax, do sb addchannel <owner1_Id> <owner2_Id> <ownerX_Id> <channel_Id>")
