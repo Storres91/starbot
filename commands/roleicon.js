@@ -1,7 +1,7 @@
 module.exports = {
     name: 'roleicon',
     description: 'Changes the icon of the role from booster user',
-    aliases: ['icon', 'changeicon', 'iconchange'],
+    aliases: ['icon', 'iconchange'],
     async execute(client, message, args, Discord) {
         var userRole, userRoleId, iconUrl, emojiId, commandDone, aborted = false;
 

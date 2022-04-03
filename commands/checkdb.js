@@ -3,10 +3,10 @@ const channelDataModel = require('../models/channelDataSchema.js');
 module.exports = {
     name: 'checkdb',
     description: 'Checks the database for a certain channel or user',
-    aliases: ['check', 'chcheck'],
+    aliases: ['check', 'chcheck', 'search'],
     async execute(client, message, args, Discord) {
         const STAFF_ROLE_ID = '857060867676831805';
-        let targetChannel, targetUser;
+        let targetChannel, targetUser, fetchedOwners = [];
 
         var messageEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d')
@@ -50,8 +50,14 @@ module.exports = {
 
         }
 
+        for (let user of channelData.owners){
+            let owner = await message.guild.members.fetch(user);
+            fetchedOwners.push(owner)
+        }
         //Display data
-        messageEmbed.setTitle("Requested data").setDescription(`**Channel**\n<#${channelData.channelID}>\n\n**Owners**\n${channelData.owners.map(owner => `<@${owner}>`).join('\n')}`)
+        messageEmbed.setTitle("Requested data")
+        .setDescription(`**Channel**\n<#${channelData.channelID}>\n\n**Owners**\n${fetchedOwners.map(owner => `<@${owner.user.id}> (${owner.user.username}#${owner.user.discriminator}`).join('\n')})`);
+
         message.channel.send({embeds: [messageEmbed]})
         
 
