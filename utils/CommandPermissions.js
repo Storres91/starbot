@@ -1,3 +1,13 @@
+const ROLES = {
+    ADMIN: '850830076609429544',
+    MOD:'235046787122069504',
+    STAFF: '857060867676831805',
+    GA_MANAGER: '869250517791019088',
+    ARENA_MANAGER: '877920810315157514',
+    CHANNEL_OWNER: '872345853841514536',
+    ARCHIVED_CHANNEL: '925188313986506773',
+}
+
 module.exports = {
     name: 'CommandPermissions',
     description: 'Utility for checking permissions for a command',
@@ -5,15 +15,6 @@ module.exports = {
     isAllowed({message, roles=[], users=[]}={}){
         // if(message.author.id == '313351494361677845') return true
         if (roles.length == 0 && users.length == 0) return true
-
-        const ROLES = {
-            ADMIN: '850830076609429544',
-            MOD:'235046787122069504',
-            STAFF: '857060867676831805',
-            GA_MANAGER: '869250517791019088',
-            ARENA_MANAGER: '877920810315157514',
-            CHANNEL_OWNER: '872345853841514536',
-        }
 
         for (const roleToCheck of roles){
             if (message.member.roles.cache.some(role => role.id === ROLES[roleToCheck])) return true
@@ -27,7 +28,7 @@ module.exports = {
     hasRoles(message, roles = []) {
         if (roles.length == 0) return true
         for (const roleToCheck of roles) {
-            if (message.member.roles.cache.some(role => role.id === roleToCheck)) return true
+            if (message.member.roles.cache.some(role => role.id === ROLES[roleToCheck])) return true
         }    
         return false
 

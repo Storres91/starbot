@@ -1,4 +1,4 @@
-const {isAllowed} = require('../utils/CommandPermissions.js');
+const {isAllowed, hasRoles} = require('../utils/CommandPermissions.js');
 const channelDataModel = require('../models/channelDataSchema.js');
 
 module.exports = {
@@ -19,6 +19,7 @@ module.exports = {
                     ];
         const random = Math.floor(Math.random() * PHRASES.length);
 
+        if (hasRoles(message, ['ARCHIVED_CHANNEL'])) return message.channel.send("Your channel is currently archived. <:cr_ztshrug:854747210205364234>\nAsk a staff member to bring it back to life (?)")
         if (!isAllowed({message, roles: ['CHANNEL_OWNER']})) return message.channel.send("You don't have a channel here <:cr_pepesweetsadness:851548493264322580>")
 
         let channelData;
@@ -29,7 +30,7 @@ module.exports = {
             console.log(`Error getting channelData ${err}`)
         }
 
-        if(!channelData) return message.channel.send("Sorry, you channel hasn't been added to the database <:cr_pepesweetsadness:851548493264322580>\nPlease inform a staff member and we will happily add it *ASAP*.")
+        if(!channelData) return message.channel.send("Sorry, you channel hasn't been added to the database yet <:cr_pepesweetsadness:851548493264322580>\nPlease inform a staff member and we will happily add it *ASAP*.")
         message.channel.send(`${PHRASES[random]} <#${channelData.channelID}>`)
     }
 }
