@@ -24,7 +24,7 @@ module.exports = {
         if ((message.content.toLowerCase().startsWith("?ml") || 
             message.content.toLowerCase().startsWith("?modlog") || 
             message.content.toLowerCase().startsWith("?info") || 
-            message.content.toLowerCase().startsWith("?ml")) && 
+            message.content.toLowerCase().startsWith("?i")) && 
             message.channel.id == '851078982945210409') return message.channel.send("<a:bg_starrollwhite:929572216578924615> Remember to check for `?notes`.")
 
 
