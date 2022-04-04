@@ -12,6 +12,7 @@ module.exports = {
             STAFF: '857060867676831805',
             GA_MANAGER: '869250517791019088',
             ARENA_MANAGER: '877920810315157514',
+            CHANNEL_OWNER: '872345853841514536',
         }
 
         for (const roleToCheck of roles){
