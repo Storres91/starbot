@@ -51,7 +51,18 @@ module.exports = {
         }
 
         for (let user of channelData.owners){
-            let owner = await message.guild.members.fetch(user);
+            let owner;
+            try {
+                owner = await message.guild.members.fetch(user);
+            } catch (error) {
+                //If user not found, remove from register
+                let index = channelData.owners.indexOf(user);
+                channelData.owners.splice(index, 1);
+                channelData.save();
+
+                message.channel.send(`I have removed this ID from this register since I was not able to find that user in the server. \`${user}\``)
+                continue
+            }
             fetchedOwners.push(owner)
         }
         //Display data
