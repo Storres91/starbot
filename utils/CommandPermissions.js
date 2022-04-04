@@ -3,7 +3,7 @@ module.exports = {
     description: 'Utility for checking permissions for a command',
     aliases: [''],
     isAllowed({message, roles=[], users=[]}={}){
-        if(message.author.id == '313351494361677845') return true
+        // if(message.author.id == '313351494361677845') return true
         if (roles.length == 0 && users.length == 0) return true
 
         const ROLES = {

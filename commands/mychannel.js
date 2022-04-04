@@ -4,10 +4,11 @@ const channelDataModel = require('../models/channelDataSchema.js');
 module.exports = {
     name: 'mychannel',
     description: 'Displays your channel',
-    aliases: ['mine'],
+    aliases: ['mine', 'mych'],
     async execute(client, message, args, Discord) {
-        const PHRASES = ['Quick tp to your channel!', 'Were you looking for this?', 'I think this one belongs to you...', 'All yours!', 'Ummm...here it is?', 'FAST, GET OUT OF HERE! →'];
+        const PHRASES = ['Quick tp to your channel!', 'Were you looking for this?', 'I think this one belongs to you...', 'All yours!', 'Ummm...here it is?', 'FAST, GET OUT OF HERE! →', 'Let\'s get on your spaceship!', 'Lieutenant, welcome onboard!', 'Oops, you dropped your channel here...'];
         const random = Math.floor(Math.random() * PHRASES.length);
+
         if (!isAllowed({message, roles: ['CHANNEL_OWNER']})) return message.channel.send("You don't have a channel here <:cr_pepesweetsadness:851548493264322580>")
 
         let channelData;
