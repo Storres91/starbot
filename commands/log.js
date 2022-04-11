@@ -2,7 +2,7 @@ module.exports = {
     name: 'log',
     description: 'Interacts with the log',
     aliases: ['editlog'],
-    async execute(client, message, args, Discord) {
+    async execute(client, message, args, Discord, server) {
         const STAFFROLE = '857060867676831805';
         let logMessage;
         
@@ -37,6 +37,7 @@ module.exports = {
                 return message.channel.send("What are you trying to do with this log <@"+message.member.id+">?\n`sb log add/remove <Description>`");
         }
 
+        client.channels.fetch(server.CHANNELS.ACTION_LOG).then(ch => ch.send(`**${message.member.tag}** edited a log in <#${message.channel.id}>:\n\`${message.content}\``))
         message.delete().catch(()=>null);
 
         //FUNCTIONS
