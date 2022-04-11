@@ -1,4 +1,4 @@
-const {hasAnyOfRoles} = require('../utils/permsManager.js')
+const {hasAnyOfRoles, isUser} = require('../utils/permsManager.js')
 const channelDataModel = require('../models/channelDataSchema.js');
 
 module.exports = {
@@ -7,6 +7,7 @@ module.exports = {
     aliases: ['channelclaim'],
     async execute(client, message, args, Discord, server) {
         const { ROLES } = server;
+        if(isUser(message.member, ['745918918073253919'])) return
         if(!hasAnyOfRoles(message.member, [ROLES.METEOR, ROLES.SOLAR_FLARE, ROLES.COMET, ROLES.ECLIPSE, ROLES.SUPERNOVA, ROLES.TWILIGHT, ROLES.ZENITH, ROLES.ROGUE, ROLES.BLOOD_MOON, ROLES.ASCENDED_STAR, ROLES.THE_VOID])) return message.channel.send("Sorry, you can't claim a channel yet, channels become available at amari level 20+.\nCheck yours by writing `+r` in a play channel.")
 
         if(hasAnyOfRoles(message.member, [ROLES.CHANNEL_OWNER])) return message.channel.send("You already have a channel. <:cr_ztshrug:854747210205364234>")
