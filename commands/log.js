@@ -10,7 +10,7 @@ module.exports = {
         else return message.channel.send("You can't use this.");
 
         if(message.type != 'REPLY') return message.channel.send("You didn't reply to any log message.");
-        if(!args[1]) return message.channel.send("You have to include what you're editing.");
+        if(!args[1] && args[0]!='clear') return message.channel.send("You have to include what you're editing.");
 
         let logMessageEdit = "\n"+args.slice(1).join(" ");
         logMessage = await message.channel.messages.fetch(message.reference.messageId);
@@ -26,6 +26,11 @@ module.exports = {
 
             case 'add':
                 addLogField(logMessage, logMessageEdit);
+                break;
+
+            case 'clear':
+                clearLog(logMessage);
+                message.channel.send('Successfully cleared this log. <:cr_thumbsupyes:859094584982372362>')
                 break;
 
             default:
@@ -49,7 +54,7 @@ module.exports = {
             logMessage.edit({embeds:[logMessage.embeds[0]
                 .setDescription(newDescription.join("\n"))
                 .setFooter("Last edited")
-                .setTimestamp(Date.now())
+                .setTimestamp()
             ]});
 
         }
@@ -60,9 +65,18 @@ module.exports = {
             logMessage.edit({embeds:[logMessage.embeds[0]
                 .setDescription(logDescription+description)
                 .setFooter("Last edited")
-                .setTimestamp(Date.now())
+                .setTimestamp()
             ]});
             
+        }
+
+        //Clear log
+        function clearLog(logMessage){
+            logMessage.edit({embeds:[logMessage.embeds[0]
+                .setDescription(' ')
+                .setFooter('Last edited')
+                .setTimestamp()
+            ]});
         }
 
         //Check if replied message is log message
