@@ -1,4 +1,7 @@
 const blacklistedModel = require('../../models/blacklistedSchema.js')
+const server = require('../../server-config.json')
+const permsManager = require('../../utils/permsManager.js')
+
 module.exports = {
     async execute(message, client, Discord) {
         const prefix = 'sb ';
@@ -41,7 +44,7 @@ module.exports = {
             if (blacklistedData.blStatus) return message.channel.send('You are blacklisted from the bot');
         }
         try {
-            if (command) command.execute(client, message, args, Discord);
+            if (command) command.execute(client, message, args, Discord, server, permsManager);
         } catch (err) {
             console.log(err);
         }

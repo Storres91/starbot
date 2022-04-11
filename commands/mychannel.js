@@ -1,11 +1,11 @@
-const {isAllowed, hasRoles} = require('../utils/CommandPermissions.js');
+const {hasAnyOfRoles} = require('../utils/permsManager.js');
 const channelDataModel = require('../models/channelDataSchema.js');
 
 module.exports = {
     name: 'mychannel',
     description: 'Displays your channel',
     aliases: ['mine', 'mych'],
-    async execute(client, message, args, Discord) {
+    async execute(client, message, args, Discord, server) {
         const PHRASES = [
             'Quick tp to your channel! <:cr_mmblush:874865113071513620>', 
             'Were you looking for this? <:cr_kannamagnify:853385258355654687>', 
@@ -19,8 +19,8 @@ module.exports = {
                     ];
         const random = Math.floor(Math.random() * PHRASES.length);
 
-        if (hasRoles(message, ['ARCHIVED_CHANNEL'])) return message.channel.send("Your channel is currently archived. <:cr_ztshrug:854747210205364234>\nAsk a staff member to bring it back to life (?)")
-        if (!isAllowed({message, roles: ['CHANNEL_OWNER']})) return message.channel.send("You don't have a channel here <:cr_pepesweetsadness:851548493264322580>")
+        if (hasAnyOfRoles(message.member, [server.ROLES.ARCHIVED_CHANNEL])) return message.channel.send("Your channel is currently archived. <:cr_ztshrug:854747210205364234>\nAsk a staff member to bring it back to life (?)")
+        if (!hasAnyOfRoles(message.member, [server.ROLES.CHANNEL_OWNER])) return message.channel.send("You don't have a channel here <:cr_pepesweetsadness:851548493264322580>")
 
         let channelData;
         try {

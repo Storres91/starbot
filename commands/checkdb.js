@@ -7,7 +7,6 @@ module.exports = {
     async execute(client, message, args, Discord) {
         const STAFF_ROLE_ID = '857060867676831805';
         let targetChannel, targetUser, fetchedOwners = [];
-
         var messageEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d')
             .setTimestamp()
@@ -56,11 +55,12 @@ module.exports = {
                 owner = await message.guild.members.fetch(user);
             } catch (error) {
                 //If user not found, remove from register
-                let index = channelData.owners.indexOf(user);
-                channelData.owners.splice(index, 1);
-                channelData.save();
+                // let index = channelData.owners.indexOf(user);
+                // channelData.owners.splice(index, 1);
+                // channelData.save();
 
-                message.channel.send(`I have removed this ID from this register since I was not able to find that user in the server. \`${user}\``)
+                //If user not found, skip
+                message.channel.send(`I have skipped this ID from this register since I was not able to find that user in the server. \`${user}\``)
                 continue
             }
             fetchedOwners.push(owner)

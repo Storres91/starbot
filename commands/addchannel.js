@@ -16,6 +16,16 @@ module.exports = {
         for(let owner of channelOwnersList) {
             let user = await message.guild.members.fetch(owner).catch(() => false);
             if (!user) return message.channel.send(`${owner} is not a valid user id or wasn't found in the server.`)
+
+            //Check if any of users is already in db
+            let channelDataPrev;
+            try {
+                channelDataPrev = await channelDataModel.findOne({ owners: user.id });
+            } catch (err) {
+                console.log(`Error getting channelData ${err}`)
+            }
+
+            if(channelDataPrev) return message.channel.send(`${user.id} is already in the database added in <#${channelDataPrev.channelID}>`)
         }
 
         // Target channel
@@ -37,6 +47,7 @@ module.exports = {
 
         if(channelDataPrev) return message.channel.send(`This channel is already in the database with these owners: ${channelDataPrev.owners}`)
 
+        
         //Add to db
         try {
             let channelDataMod = await channelDataModel.create({
