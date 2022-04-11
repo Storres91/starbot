@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['gettimes', 'gettime', 'timediff', 'times'],
     async execute(client, message, args, Discord) {
         const staffRoleID = '857060867676831805';
-        var messageChannel, avg;
+        var messageChannel, msg;
         if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID)){}
         else return
 
@@ -23,18 +23,20 @@ module.exports = {
         }
         if (!messageChannel) return message.channel.send("`"+args.slice(-1)+"` is not a valid channel id.")
         const messageIds = args.slice(0,-1)
-        var timestamps = [], differences = [], msgTimestamps = []
+        var timestamps = [], timestampsRaw= [], differences = [], msgTimestamps = []
 
 
         for(let messageId of messageIds){
             msg = await messageChannel.messages.fetch(messageId).catch(()=>false)
             if(!msg) return message.channel.send(`\`${messageId}\` is not a valid message id or is not in the specified channel.`)
             timestamps.push((msg.createdTimestamp).toString().slice(0, -3))
+            timestampsRaw.push((msg.createdTimestamp))
+
         }
 
         for (let i=0; i<timestamps.length; i++){
             msgTimestamps.push(`<t:${timestamps[i]}:T>`)
-            differences.push(`${i==0 ? "**N/A**":(timestamps[i]-timestamps[i-1]).toString()+"s"}`)
+            differences.push(`${i==0 ? "**N/A**":(timestamps[i]-timestamps[i-1]).toString()+'s'} ${i==0 ? "0":(timestampsRaw[i]-timestampsRaw[i-1]).toString().slice(-3)}ms`)
         }
 
         timesEmbed.addFields(
