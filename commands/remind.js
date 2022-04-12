@@ -10,7 +10,7 @@ module.exports = {
     async execute(client, message, args, Discord, server) {
         const { ROLES } = server;
         if(!hasAnyOfRoles(message.member, [ROLES.STAFF, ROLES.GA_MANAGER])) return message.channel.send("You are not allowed to use this command")
-        if(!args[2]) return message.channel.send('Use this command properly!!! `sb remind <@user/id> <reminder description> <time>`')
+        if(!args[2]) return message.channel.send('Use this command properly!!! `sb remind <@user/id> <time> <reminder description>`')
 
         const userId = transformToId(args[0]);
         const reminderDescription = args.slice(2).join(' ');
