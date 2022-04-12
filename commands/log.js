@@ -37,7 +37,7 @@ module.exports = {
                 return message.channel.send("What are you trying to do with this log <@"+message.member.id+">?\n`sb log add/remove <Description>`");
         }
 
-        client.channels.fetch(server.CHANNELS.ACTION_LOG).then(ch => ch.send(`**${message.user.tag}** edited a log in <#${message.channel.id}>:\n\`${message.content}\``))
+        client.channels.fetch(server.CHANNELS.ACTION_LOG).then(ch => ch.send(`**${message.member.user.tag}** edited a log in <#${message.channel.id}>:\n\`${message.content}\``))
         message.delete().catch(()=>null);
 
         //FUNCTIONS
