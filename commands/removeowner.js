@@ -34,7 +34,7 @@ module.exports = {
             channel = await message.guild.channels.fetch(channelData.channelID);
             channel.permissionOverwrites.delete(user.id);
         } catch (error) {
-            console.log('Tried to remove register but channel does not longer exist.')
+            message.channel.send('⚠️ Tried to remove perms from channel but it does not longer exist.')
             channel = false
         }
         

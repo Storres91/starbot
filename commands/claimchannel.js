@@ -7,11 +7,14 @@ module.exports = {
     aliases: ['channelclaim'],
     async execute(client, message, args, Discord, server) {
         const { ROLES } = server;
+        let confirmation = false;
         if(isUser(message.member, ['745918918073253919'])) return
         if(!hasAnyOfRoles(message.member, [ROLES.METEOR, ROLES.SOLAR_FLARE, ROLES.COMET, ROLES.ECLIPSE, ROLES.SUPERNOVA, ROLES.TWILIGHT, ROLES.ZENITH, ROLES.ROGUE, ROLES.BLOOD_MOON, ROLES.ASCENDED_STAR, ROLES.THE_VOID])) return message.channel.send("Sorry, you can't claim a channel yet, channels become available at amari level 20+.\nCheck yours by writing `+r` in a play channel.")
 
         if(hasAnyOfRoles(message.member, [ROLES.CHANNEL_OWNER])) return message.channel.send("You already have a channel. <:cr_ztshrug:854747210205364234>")
         if(hasAnyOfRoles(message.member, [ROLES.ARCHIVED_CHANNEL])) return message.channel.send("You already have a channel but is currently archived.")
+
+        if (args.join('').length > 99) return message.channel.send('🔴 Your channel name must contain less than 100 characters.')
 
         //Determine the category where the channel should be created
         let category;
@@ -27,25 +30,64 @@ module.exports = {
         let user = message.member;
         let channelName= args[0]?args.join(' '):user.user.username;
 
-        let channel = await category.createChannel(channelName,{
-            permissionOverwrites: [{id: user.id, allow: ['VIEW_CHANNEL', 'MANAGE_CHANNELS']}]
-
+        const filter = (m) => m.author.id === message.author.id;
+        const collector = new Discord.MessageCollector(message.channel, {
+            filter,
+            time: 1000 * 240
         });
-        user.roles.add(ROLES.CHANNEL_OWNER);
 
-        let channelData;
-        try {
-            channelData = await channelDataModel.create({
-                channelID: channel.id,
-                owners: [user.id],
+        message.channel.send(`Your channel "**${channelName}**" will be created in **${category.name}**\n\n<a:bg_starrollwhite:929572216578924615> Say **'yes' to confirm** or 'no' to abort.`);
+        collector.on('collect', (m)=>{
+            if (m.content.toLowerCase() == 'y' || m.content.toLowerCase() == 'yes'){
+                confirmation = true;
+                collector.stop();
+            } else {
+                collector.stop()
+            }
+        });
+
+        collector.on('end', async ()=>{
+            if(!confirmation) return message.channel.send('Successfully cancelled your channel creation.')
+
+            let channel = await category.createChannel(channelName,{
+                permissionOverwrites: [{id: user.id, allow: ['VIEW_CHANNEL', 'MANAGE_CHANNELS']}]
+    
             });
-            channelData.save();
-        } catch (error) {
-            console.log('Error creating channel register'+error)
-        }
-
-        message.channel.send(`You have successfully claimed your channel <#${channel.id}> in **${category.name}**, congrats! <:cr_uwucheems:868012934067019806>`)
-
+            user.roles.add(ROLES.CHANNEL_OWNER);
+    
+            let channelData;
+            try {
+                channelData = await channelDataModel.create({
+                    channelID: channel.id,
+                    owners: [user.id],
+                });
+                channelData.save();
+            } catch (error) {
+                console.log('Error creating channel register'+error)
+            }
+    
+            message.channel.send(`You have successfully claimed your channel <#${channel.id}> in **${category.name}** congrats! <:cr_uwucheems:868012934067019806>`)
+    
+            const welcomeEmbed = new Discord.MessageEmbed({
+                "footer":{
+                    "text":"Please keep this message pinned :)",
+                    "icon_url":"https://cdn.discordapp.com/attachments/857716865190068254/865437067923292200/image0.gif",
+                    "proxy_icon_url":"https://media.discordapp.net/attachments/857716865190068254/865437067923292200/image0.gif"
+                },
+                "thumbnail":{
+                    "url":message.author.avatarURL({ dynamic: true }),
+                    "width":861,
+                    "height":861
+                },
+                "color":9371903,
+                "type":"rich",
+                "description":"<a:sparkle:865266644048543784>__**Congrats on becoming a Channel Owner!**__<a:sparkle:865266644048543784>\n\n<a:cr_bluearrow:926896142262865950>**Step 1:** Use `?channelrules` to view our channel rules. \n\n<a:cr_bluearrow:926896142262865950>**Step 2:** Check `?channelhelp` for a list of super useful channel owner commands to customize who can view your channel!\n\n<a:cr_bluearrow:926896142262865950>**Step 3:** Enjoy!! <a:cr_peachspin:926897487296462868>",
+                "title":"<a:rainbowplanet:865266644170965003> __**Welcome "+user.user.username+" **__ <a:rainbowplanet:865266644170965003>"
+            });
+    
+            channel.send({embeds: [welcomeEmbed]}).then(msg=>msg.pin())
+        });
+        
 
         async function findCategoryWithSpot(categories=[]){
             for (let categoryID of categories){

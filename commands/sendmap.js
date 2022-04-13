@@ -132,36 +132,15 @@ module.exports = {
             //PUBLIC GALAXY
             await message.channel.send({files: ['./assets/img/7_PUBLIC_GALAXY.png']})
             message.channel.send('<#851086740310720512> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
             '<#851086812175794196> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
             '<#851684888918491146> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
             '<#854744139053006878> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
             '<#859846381812056094> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
             '<#859847400662368266> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            "These channels are public channels, anyone can use them but doesn't mean its free reign! **All rules** of the server still apply. No toxic, no snipe... <:cr_mmblush:874865113071513620> \n" +
-            '\n' +
-            '<#855094831306375180> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n'+
-            '<#882326282304639006> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#953177351674556446> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            'Need to find a partner or a guild? Come to our searching channels above <:cr_mmoke:907525454003585044> \n' +
-            '\n' +
-            '<#864271402488430623> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#876085020375252992> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#852215579242922057> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            '<#861118078057578506> <a:cr_pinkrollingstar:865266644346863636> \n' +
-            '\n' +
-            'Channels self explain. Come to ask for assistance from the bots for d10, d13 or enchantment. \n' +
+            "These channels are public channels, anyone can use them but doesn't mean its free reign! **All rules** of the server still apply. No toxic, no snipe... <:cr_mmblush:874865113071513620> \n\n" +
+            '<#859846381812056094> <a:cr_pinkrollingstar:865266644346863636> \n' +
+            '<#859847400662368266> <a:cr_pinkrollingstar:865266644346863636> \n' +
+            'Still public channels, but for Amari level 15+ <a:cr_kekdance:864143617047396392>\n' +
             '\n' +
             '<#852587758761541733> \n' +
             '<:cr_gamblebad:865983093114667078> or <:cr_gamblegood:865983093210087424> ?\n' +
@@ -171,6 +150,17 @@ module.exports = {
             '\n' +
             '<#855838409502228502> \n' +
             'Come and drop your epic items. This channel can be used for epic item drop giveaways.',)
+
+            //SPACE TERMINAL
+            await message.channel.send({files: ['./assets/img/SPACE_TERMINAL.png']})
+            message.channel.send('<#962760333053796412>\n'+
+            '<#882326282304639006>\n'+
+            '<#855094831306375180>\n'+
+            '<#953177351674556446>\n'+
+            '<#962752928362405908>\n'+
+            '<#864271402488430623>\n'+
+            '<#876085020375252992>\n'+
+            'Channels self explain. Come to look for a partner or assistance from the bots for dungeon.')
 
             //MISC BOTS
             await message.channel.send({files: ['./assets/img/8_MISC_BOTS.png']})
