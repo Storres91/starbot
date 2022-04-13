@@ -1,6 +1,6 @@
 const remindersModel = require('../models/remindersSchema.js');
 const { transformToId } = require('../utils/targets.js')
-const { hasAnyOfRoles } = require('../utils/permsManager.js')
+const { isAllowed } = require('../utils/permsManager.js')
 const ms = require("ms");
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
     aliases: [''],
     async execute(client, message, args, Discord, server) {
         const { ROLES } = server;
-        if(!hasAnyOfRoles(message.member, [ROLES.STAFF, ROLES.GA_MANAGER])) return message.channel.send("You are not allowed to use this command")
+        if(!isAllowed({member: message.member, roles: [ROLES.STAFF, ROLES.GA_MANAGER], users: ['299015816572043265']})) return message.channel.send("You are not allowed to use this command")
         if(!args[2]) return message.channel.send('Use this command properly!!! `sb remind <@user/id> <time> <reminder description>`')
 
         const userId = transformToId(args[0]);
