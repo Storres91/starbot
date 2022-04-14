@@ -8,7 +8,7 @@ module.exports = {
     async execute(client, message, args, Discord, server) {
         let favoritesData;
         try {
-            favoritesData = await favoritesModel.findOne({ channelID: message.author.id });
+            favoritesData = await favoritesModel.findOne({ userID: message.author.id });
         } catch (err) {
             console.log(`Error getting favoritesData at fav command ${err}`)
         }
