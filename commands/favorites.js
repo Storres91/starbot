@@ -22,12 +22,19 @@ module.exports = {
         switch (args[0].toLowerCase()) {
             case 'add':
                 if (!args[1]) return message.channel.send('You must include the channel or id to add. `sb fav add <#channel/ID>`') 
+                
                 chnID = transformToId(args[1])
                 if (isNaN(chnID)) return message.channel.send(args[1]+' is not a valid channel.')
 
-                if (!favoritesData) createRegister(chnID)
-                else addChannel(chnID)
-                showList()
+                if (!favoritesData){
+                    createRegister(chnID);
+                    showList();
+                } else {
+                    addChannel(chnID); 
+                    showList();
+                } 
+                
+                
 
                 break;
 
