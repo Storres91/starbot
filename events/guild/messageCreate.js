@@ -23,6 +23,7 @@ module.exports = {
 
         //---------Normal triggers---------//
         if (message.content.toLowerCase().startsWith("?ban") && message.channel.id == '851078982945210409') return message.channel.send("<a:bg_starrollwhite:929572216578924615> Remember to check for any alts.");
+        if (message.channel.id == '851685203281838081') return client.users.fetch('230120935804370944').then(user=>user.send(`Someone just sent a message in <#${message.channel.id}>`))
         
         if ((message.content.toLowerCase().startsWith("?ml") || 
             message.content.toLowerCase().startsWith("?modlog") || 
