@@ -28,7 +28,6 @@ module.exports = {
 
                 if (!favoritesData){
                     createRegister(chnID);
-                    showList();
                 } else {
                     addChannel(chnID); 
                     showList();
@@ -65,7 +64,7 @@ module.exports = {
             } catch (error) {
                 message.channel.send("Error adding to database, report to Noxet (Noxxy).")
             }
-            message.channel.send(`Successfully created your favorites list and added <#${channelID}>`)
+            message.channel.send(`Successfully created your favorites list and added <#${channelID}>, check it out! \`sb fav\``)
         }
 
         function addChannel(channelID){
