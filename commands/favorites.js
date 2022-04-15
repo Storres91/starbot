@@ -40,7 +40,7 @@ module.exports = {
                 break;
 
             case 'remove':
-                if (!args[1]) return message.channel.send('You must include the channel or id to remove. `sb fav remove <#channel/ID>`')
+                if (!args[1]) return message.channel.send('You must include the channel or id to remove. `sb fav remove <#channel/ID/index>`')
                 chnID = transformToId(args[1])
                 if (isNaN(chnID)) return message.channel.send(args[1]+' is not a valid channel.')
                 
@@ -78,8 +78,16 @@ module.exports = {
         }
 
         function removeChannel(channelID){
-            let index = favoritesData.channels.indexOf(channelID);
-            if (index == -1) return message.channel.send(`I did not find this channel in your favorites list.`)
+            let index;
+
+            if(args[1].length<=2){
+                index = parseInt(args[1]-1);
+                channelID = favoritesData.channels[index];
+            } 
+            else index = favoritesData.channels.indexOf(channelID);
+
+            if (index < 0 || index >=16) return message.channel.send(`I did not find this channel in your favorites list.`)
+
             favoritesData.channels.splice(index, 1);
             favoritesData.save();
             message.channel.send(`Successfully removed <#${channelID}> from your favorites.`)
@@ -88,7 +96,7 @@ module.exports = {
         function showList(){
             const listEmbed = new Discord.MessageEmbed()
                 .setTitle(`${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list (${favoritesData.channels.length}/15)`)
-                .setDescription(favoritesData.channels.map(ch => `<#${ch}>`).join('\n '))
+                .setDescription(favoritesData.channels.map((ch, i) => `**${i+1}.** <#${ch}>`).join('\n '))
                 .setColor('#b5359d')
                 .setFooter('Celestial Realm\'s favorites list')
                 .setTimestamp()
