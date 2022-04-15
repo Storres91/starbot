@@ -9,8 +9,8 @@ module.exports = {
         let targetChannel, targetUser, fetchedOwners = [];
         var messageEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d')
-            .setTimestamp()
-            .setFooter(`Requested by ${message.author.username}`);
+            .setFooter(`Requested by ${message.member.user.username}`)
+            .setTimestamp();
 
         if (!message.member.roles.cache.some(role => role.id == STAFF_ROLE_ID)) return
         if (args.length < 1) return message.channel.send("Incorrect syntax, you have to mention or write the id of a channel or user.")
@@ -66,8 +66,11 @@ module.exports = {
             fetchedOwners.push(owner)
         }
         //Display data
+        let channel = await message.guild.channels.fetch(channelData.channelID)
+
+
         messageEmbed.setTitle("Requested data")
-        .setDescription(`**Channel**\n<#${channelData.channelID}>\n\n**Owners**\n${fetchedOwners.map(owner => `<@${owner.user.id}> (${owner.user.username}#${owner.user.discriminator}) ${owner.roles.cache.some(role => role.id == '855961500702736414')?'**ALT**':''}`).join('\n')}`);
+            .setDescription(`**Channel**\n<#${channelData.channelID}>\nCreated at <t:${channel?channel.createdTimestamp.toString().slice(0, -3):null}:D>\n\n**Owners**\n${fetchedOwners.map(owner => `<@${owner.user.id}> (${owner.user.username}#${owner.user.discriminator}) ${owner.roles.cache.some(role => role.id == '855961500702736414')?'**ALT**':''}`).join('\n')}`)
 
         message.channel.send({embeds: [messageEmbed]})
         
