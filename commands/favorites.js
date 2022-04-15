@@ -85,7 +85,7 @@ module.exports = {
                 channelID = favoritesData.channels[index];
             } 
             else index = favoritesData.channels.indexOf(channelID);
-
+            if (parseInt(args[1])>favoritesData.channels.length) return message.channel.send(`What are you trying to do? You only have **${favoritesData.channels.length}** channels in your list.`)
             if (index < 0 || index >=16) return message.channel.send(`I did not find this channel in your favorites list.`)
 
             favoritesData.channels.splice(index, 1);
