@@ -4,7 +4,7 @@ const channelDataModel = require('../models/channelDataSchema.js');
 module.exports = {
     name: 'claimchannel',
     description: 'Claim a channel',
-    aliases: ['channelclaim'],
+    aliases: ['channelclaim', 'createch', 'cc', 'crch'],
     async execute(client, message, args, Discord, server) {
         const { ROLES } = server;
         let confirmation = false;
@@ -86,6 +86,8 @@ module.exports = {
             });
     
             channel.send({embeds: [welcomeEmbed]}).then(msg=>msg.pin())
+
+            client.channels.fetch('855243657396224010').then(ch=>ch.send(`**${message.member.user.tag}** just claimed a channel in **${category.name}** → <#${channel.id}>`))
         });
         
 
