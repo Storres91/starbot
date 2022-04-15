@@ -87,7 +87,7 @@ module.exports = {
 
         function showList(){
             const listEmbed = new Discord.MessageEmbed()
-                .setTitle(`${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list | ${favoritesData.channels.length}/15`)
+                .setTitle(`${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list (${favoritesData.channels.length}/15)`)
                 .setDescription(favoritesData.channels.map(ch => `<#${ch}>`).join('\n '))
                 .setColor('#b5359d')
                 .setFooter('Celestial Realm\'s favorites list')
