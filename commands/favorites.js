@@ -98,7 +98,6 @@ module.exports = {
                 .setTitle(`${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list (${favoritesData.channels.length}/15)`)
                 .setDescription(favoritesData.channels.map((ch, i) => `**${i+1}.** <#${ch}>`).join('\n '))
                 .setColor('#b5359d')
-                .setFooter('Celestial Realm\'s favorites list')
                 .setTimestamp()
 
             message.channel.send({embeds:[listEmbed]})
