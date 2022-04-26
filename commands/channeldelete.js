@@ -1,3 +1,5 @@
+const channelDataModel = require('../models/channelDataSchema.js');
+
 module.exports = {
     name: 'channeldelete',
     description: 'Deletes a channel',
@@ -115,14 +117,24 @@ module.exports = {
             }
         })
 
-        deletedReasonCollector.on('end', () => {
+        deletedReasonCollector.on('end', async () => {
             mSent.delete().catch(() => null);
             let responsible = message.author.id;
             if (cancelledDelete) return message.channel.send("Successfully cancelled.");
-
+            
             //Delete channel
             targetChannel.delete();
+            
+            let channelData;
+            try {
+                channelData = await channelDataModel.findOne({ channelID: targetChannel.id });
+                channelData.delete();
 
+            } catch (err) {
+                message.channel.send("⚠️ There was an error getting/deleting the data from this channel.")
+                console.log(`Error getting channelData ${err}`)
+            }
+            
             //Remove owner/archived role from User
             fetchedOwnerList.forEach(owner => {
                 let i = 1;
@@ -143,6 +155,7 @@ module.exports = {
 
             client.channels.fetch("855243657396224010").then(channel => channel.send({ embeds: [deletedLogEmbed] })).catch(() => null);
             message.channel.send({ embeds: [deletedLogEmbed] }).catch(() => null);
+
 
         })
     }

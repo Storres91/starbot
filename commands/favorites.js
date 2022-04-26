@@ -48,6 +48,10 @@ module.exports = {
                 showList()
                 
                 break;
+
+            case 'toggle':
+                toggleView();
+                break;
             
             default:
                 showList();
@@ -55,11 +59,19 @@ module.exports = {
                 break;
         }
 
+        function toggleView(){
+            favoritesData.embed?favoritesData.embed=false:favoritesData.embed=true;
+            favoritesData.save();
+
+            message.channel.send(`Display favorites as plain text set to **${!favoritesData.embed}.**`)
+        }
+
         async function createRegister(channelID){
             try {
                 let favoritesMod = await favoritesModel.create({
                     userID: message.author.id,
-                    channels: [channelID]
+                    channels: [channelID],
+                    embed: true
                 });
                 favoritesMod.save();
     
@@ -94,13 +106,21 @@ module.exports = {
         }
 
         function showList(){
-            const listEmbed = new Discord.MessageEmbed()
-                .setTitle(`${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list (${favoritesData.channels.length}/15)`)
-                .setDescription(favoritesData.channels.map((ch, i) => `**${i+1}.** <#${ch}>`).join('\n '))
-                .setColor('#b5359d')
-                .setTimestamp()
+            let title = `${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list (${favoritesData.channels.length}/15)`;
+            let description = favoritesData.channels.map((ch, i) => `**${i+1}.** <#${ch}>`).join('\n ');
 
-            message.channel.send({embeds:[listEmbed]})
+            const listEmbed = new Discord.MessageEmbed()
+                .setTitle(title)
+                .setDescription(description)
+                .setColor('#b5359d')
+                .setTimestamp();
+
+            
+            if(favoritesData.embed){
+                message.channel.send({embeds: [listEmbed]})
+            } else {
+                message.channel.send(`${title}\n\n ${description}`)
+            }
         }
 
 

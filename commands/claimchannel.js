@@ -94,6 +94,7 @@ module.exports = {
         async function findCategoryWithSpot(categories=[]){
             for (let categoryID of categories){
                 let category = await message.guild.channels.fetch(categoryID);
+                if (category.id == '923086668163059722' && category.children.size >= 40) continue
                 if (category.children.size < 50) return category
             }
             return false
