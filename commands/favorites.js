@@ -107,7 +107,7 @@ module.exports = {
 
         function showList(){
             let title = `${message.member.nickname?message.member.nickname:message.member.user.username}'s favorites list (${favoritesData.channels.length}/15)`;
-            let description = favoritesData.channels.map((ch, i) => `**${i+1}.** <#${ch}>`).join('\n ');
+            let description = favoritesData.channels.map((ch, i) => `> **${i+1}.** <#${ch}>`).join('\n ');
 
             const listEmbed = new Discord.MessageEmbed()
                 .setTitle(title)
