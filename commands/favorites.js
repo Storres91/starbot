@@ -119,7 +119,7 @@ module.exports = {
             if(favoritesData.embed){
                 message.channel.send({embeds: [listEmbed]})
             } else {
-                message.channel.send(`> **${title}**\n\n ${description}`)
+                message.channel.send(`> **${title}**\n ${description}`)
             }
         }
 
