@@ -2,13 +2,13 @@ const {isAllowed} = require('../utils/permsManager.js')
 
 module.exports = {
     name: 'changeicon',
-    description: 'Changes the icon of the role from booster user',
+    description: 'Changes the icon of the role',
     aliases: [],
     async execute(client, message, args, Discord, server) {
         const userRoleId = args[0];
         let userRole, iconUrl, emojiId;
 
-        if (!isAllowed({message: message.member, roles:[server.ROLES.MOD, server.ROLES.ADMIN], users: ['535176301682622474'] })) return message.channel.send("You are not allowed to use this command.")
+        if (!isAllowed({member: message.member, roles:[server.ROLES.MOD, server.ROLES.ADMIN], users: ['535176301682622474'] })) return message.channel.send("You are not allowed to use this command.")
 
         //Get the icon
         if(message.attachments.size == 0 && !args[1]) return message.channel.send("You have to either attach the image for your icon or add it in the command:\n<a:bg_starrollwhite:929572216578924615> Correct usage: `sb changeicon <roleID> <emoji/url>`")
