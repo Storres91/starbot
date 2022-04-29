@@ -34,7 +34,8 @@ module.exports = {
         }catch(err){
             console.log(`Couldn't change the role icon for ${message.author.id}, error: ${err}`);
 
-            if(err.message.includes("ENOENT")) return message.channel.send(`Sorry, I was not able to change this icon, couldn't find \`"${args[0]}"\`\n<a:bg_starrollwhite:929572216578924615> Make sure the url is correct.`);
+            if(err.message.includes("ENOENT")) return message.channel.send(`Sorry, I was not able to change this icon, couldn't find \`"${args[1]}"\`\n<a:bg_starrollwhite:929572216578924615> Make sure the url is correct.`);
+            
             if(err.message.includes("Invalid Form Body")) return message.channel.send(`Sorry, I was not able to change this icon, that is not a valid image.\n<a:bg_starrollwhite:929572216578924615> File cannot be larger than 256kb`);
 
             return message.channel.send("Sorry, I was not able to change this icon (unknown error), please ask staff for help.");
