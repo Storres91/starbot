@@ -24,8 +24,8 @@ module.exports = {
             "2+ winners <:bg_arrow:922013968556515378> 100m each\n\n" +
 
             "<a:bg_starrollpink:922013790810284072> **TT20+:**\n" +
-            "1 winner <:bg_arrow:922013968556515378> 1b\n" +
-            "2+ winners <:bg_arrow:922013968556515378> 500m each\n\n" +
+            "1 winner <:bg_arrow:922013968556515378> 10b\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 5b each\n\n" +
 
             "__**Minimum donations for epic item drop req**__\n" +
             "<a:bg_starrollpink:922013790810284072> **TT1:**\n" +
@@ -37,8 +37,10 @@ module.exports = {
             "2+ winners <:bg_arrow:922013968556515378> 1b each\n\n" +
 
             "<a:bg_starrollpink:922013790810284072> **TT20+:**\n" +
-            "1 winner <:bg_arrow:922013968556515378> 10b\n" +
-            "2+ winners <:bg_arrow:922013968556515378> 5b each";
+            "1 winner <:bg_arrow:922013968556515378> 20b\n" +
+            "2+ winners <:bg_arrow:922013968556515378> 10b each"+
+             
+            "\n\n*You can giveaway less than this but TT roles will not be pinged*";
 
         const gaDonationChannelID = '869271499800985640';
         const gaManagerChannelID = '869298472648597524';
@@ -53,21 +55,24 @@ module.exports = {
                 gaTemp = 'c1';
                 footerTT = 'TT1 ';
                 donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT1:**\n1 winner <:bg_arrow:922013968556515378> 30m\n2+ winners <:bg_arrow:922013968556515378> 15m each" +
-                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT1:**\n1 winner <:bg_arrow:922013968556515378> 200m \n2+ winners <:bg_arrow:922013968556515378> 100m each";
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT1:**\n1 winner <:bg_arrow:922013968556515378> 200m \n2+ winners <:bg_arrow:922013968556515378> 100m each"+ 
+                    "\n\n*You can giveaway less than this but TT roles will not be pinged*";
 
             } else if (message.member.roles.cache.some(role => role.id == tt2_19ID)) {
                 timetravel = tt2_19ID;
                 gaTemp = 'c2';
                 footerTT = 'TT2-19 ';
                 donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 200m\n2+ winners <:bg_arrow:922013968556515378> 100m each" +
-                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 2b \n2+ winners <:bg_arrow:922013968556515378> 1b each";
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT2-19:**\n1 winner <:bg_arrow:922013968556515378> 2b \n2+ winners <:bg_arrow:922013968556515378> 1b each"+ 
+                    "\n\n*You can giveaway less than this but TT roles will not be pinged*";
 
             } else if (message.member.roles.cache.some(role => role.id == tt20ID)) {
                 timetravel = tt20ID;
                 gaTemp = 'c3';
                 footerTT = 'TT20+ '
-                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 1b\n2+ winners <:bg_arrow:922013968556515378> 500m each" +
-                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 10b \n2+ winners <:bg_arrow:922013968556515378> 5b each";
+                donationMinimum = "\n__**Minimum donations for normal giveaways**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 10b\n2+ winners <:bg_arrow:922013968556515378> 5b each" +
+                    "\n\n__**Minimum donations for epic item drop req**__\n<a:bg_starrollpink:922013790810284072> **TT20+:**\n1 winner <:bg_arrow:922013968556515378> 20b \n2+ winners <:bg_arrow:922013968556515378> 10b each" + 
+                    "\n\n*You can giveaway less than this but TT roles will not be pinged*";
             }
 
             //Embeds and buttons
