@@ -7,6 +7,7 @@ module.exports = {
     aliases: ['ban', 'kick'],
     async execute(client, message, args, Discord, server) {
         if(!isOwnerOfChannel({channel:message.channel, member:message.member})) return message.channel.send("You can't use this here, `Manage Channel` permission is required to hide/unhide a channel.")
+        if(!args[0]) return message.channel.send(`You have to mention or put the id of the person you are trying to ${this.name}. \`sb ${this.name} <@user/id>\``)
         const targetId = transformToId(args[0]);
         let target;
 
