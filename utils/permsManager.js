@@ -39,4 +39,8 @@ module.exports = {
         return false
 
     },
+
+    isOwnerOfChannel({channel, member}){
+        if(channel.permissionsFor(member).has('MANAGE_CHANNELS')) return true
+    }
 }
