@@ -6,8 +6,9 @@ const ALL_ROLES = [ROLES.TT1, ROLES.TT2_19, ROLES.TT20P, ROLES.MB500_1500, ROLES
 module.exports = {
     name: 'ttVerify',
     async execute(message, Discord) {
-        if (message.content.toLowerCase().startsWith('rpg bg')) return
+        const args = message.content.split()
         if (!(message.content.toLowerCase().startsWith('rpg p') || message.content.toLowerCase().startsWith('rpg progress'))) return 
+        if (args[2] && args[2]!='s') return message.channel.send("Do not try to check other people profiles.")
 
         const ttEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d');
