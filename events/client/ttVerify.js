@@ -48,7 +48,7 @@ module.exports = {
                 return;
 
             } else if (ttCount == 1) {
-                rolesToGive = [ROLES.TT1, ROLES.MB500_1500]
+                rolesToGive = [ROLES.TT1]
 
             } else if (ttCount > 2 && ttCount < 3) {
                 rolesToGive = [ROLES.TT2_19, ROLES.MB500_1500, ROLES.MB1500P]

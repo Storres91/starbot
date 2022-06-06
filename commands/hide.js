@@ -11,6 +11,6 @@ module.exports = {
             VIEW_CHANNEL: false
         })
 
-        message.channel.send(`**${message.channel.name}** is now hidden.`)
+        message.channel.send(`__**${message.channel.name}** is now hidden.__`)
     }
 }
