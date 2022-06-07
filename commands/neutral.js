@@ -23,7 +23,11 @@ module.exports = {
         } catch (error) {
             return message.channel.send(`${args[0]} is not a valid person.`)
         }
-
-        message.channel.send(`__**${target.user.tag}** perms have been reset in **${message.channel.name}**.__`)
+        
+        const embed = new Discord.MessageEmbed()
+        .setColor('#b5359d')
+        .setDescription(`<:cr_neutral:983543552401342474> **${target.user.tag}** perms have been reset in <#${message.channel.id}>`);
+        
+        message.channel.send({embeds: embed})
     }
 }
