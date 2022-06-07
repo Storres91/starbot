@@ -28,6 +28,6 @@ module.exports = {
         .setColor('#b5359d')
         .setDescription(`<:cr_neutral:983543552401342474> **${target.user.tag}** perms have been reset in <#${message.channel.id}>`);
         
-        message.channel.send({embeds: embed})
+        message.channel.send({embeds: [embed]})
     }
 }

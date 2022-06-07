@@ -29,6 +29,6 @@ module.exports = {
             .setColor('#b5359d')
             .setDescription(`<:checkno:983532674377449502> **${target.user.tag}** has been banished from <#${message.channel.id}>`);
             
-        message.channel.send({embeds: embed})
+        message.channel.send({embeds: [embed]})
     }
 }

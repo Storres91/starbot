@@ -30,7 +30,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor('#b5359d')
             .setDescription(`<:checkyes:983532639501844551> **${target.user.tag}** has been invited to <#${message.channel.id}>`);
-            
-        message.channel.send({embeds: embed})
+
+        message.channel.send({embeds: [embed]})
     }
 }
