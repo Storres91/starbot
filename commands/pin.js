@@ -1,7 +1,7 @@
 const {isOwnerOfChannel} = require('../utils/permsManager.js')
 
 module.exports = {
-    name: 'hide',
+    name: 'pin',
     description: 'Hides the current channel',
     aliases: [''],
     async execute(client, message, args, Discord, server) {
