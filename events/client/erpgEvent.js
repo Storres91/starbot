@@ -17,10 +17,10 @@ module.exports = {
         } else if (message.embeds[0].fields[0].value.toLowerCase().includes('summon')){
             message.channel.send('<@&851518913974894603>')
 
-        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('fight')){
+        } else if (message.embeds[0].fields[0].name.toLowerCase().includes('fight')){
             message.channel.send('<@&854865647740387339>')
 
-        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('join')){
+        } else if (message.embeds[0].fields[0].name.toLowerCase().includes('join')){
             message.channel.send('<@&854865339883978772>')
         }
     }

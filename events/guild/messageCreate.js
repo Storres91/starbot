@@ -18,7 +18,7 @@ module.exports = {
         const reminderChannels = ['859527785738141716', '862321500471427072', '851104820336001084', '873745846150266900']
         if(reminderChannels.indexOf(message.channel.id) > -1 && message.author.id == '530082442967646230') return client.emit('reminderCreate', client, message, Discord)
         if(message.author.id == '555955826880413696' && message.embeds[0]){
-            if(message.embeds[0].fields[0]?.value.toLowerCase().startsWith('type')) return client.emit('erpgEvent', client, message, Discord)
+            if(message.embeds[0].fields[0]?.value.toLowerCase().startsWith('type') || message.embeds[0].fields[0]?.name.toLowerCase().startsWith('type')) return client.emit('erpgEvent', client, message, Discord)
         }
         
         
