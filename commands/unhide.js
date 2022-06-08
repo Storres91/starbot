@@ -8,9 +8,13 @@ module.exports = {
         if(!isOwnerOfChannel({channel:message.channel, member:message.member})) return message.channel.send("You can't use this here, `Manage Channel` permission is required to hide/unhide a channel.")
 
         message.channel.permissionOverwrites.edit(message.guild.id, {
-            VIEW_CHANNEL: true
+            VIEW_CHANNEL: null
         })
 
-        message.channel.send(`__**${message.channel.name}** is now unhidden.__`)
+        const embed = new Discord.MessageEmbed()
+            .setColor('#b5359d')
+            .setDescription("<:cr_sun:984232735071666196> **Channel is now visible.**");
+
+        message.channel.send({embeds: [embed]})
     }
 }

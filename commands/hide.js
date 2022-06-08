@@ -11,6 +11,10 @@ module.exports = {
             VIEW_CHANNEL: false
         })
 
-        message.channel.send(`__**${message.channel.name}** is now hidden.__`)
+        const embed = new Discord.MessageEmbed()
+            .setColor('#b5359d')
+            .setDescription("<:cr_moon:984231415040340068> **Channel is now hidden.**");
+
+        message.channel.send({embeds: [embed]})
     }
 }

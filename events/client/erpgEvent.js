@@ -53,11 +53,20 @@ module.exports = {
         })
 
         eventEndCollector.on('end', ()=>{
-            setTimeout(() => {
-                message.channel.permissionOverwrites.edit(eventRoleId, {
-                    VIEW_CHANNEL: null
-                })
-            }, 2000);
+            let embed = new Discord.MessageEmbed()
+                .setColor('#b5359d');
+
+            if(message.channel.permissionOverwrites.cache?.get('672574313433399336')?.allow.any('0x0000000000000400')){
+                embed.setDescription("**Event is over, time to go home.**");
+            } else {
+                embed.setDescription("<:cr_lock:983546206061994014> **Event is over, back into hiding mode.**");
+            } 
+
+            message.channel.send({embeds:[embed]})
+
+            message.channel.permissionOverwrites.edit(eventRoleId, {
+                VIEW_CHANNEL: null
+            })
         })
 
 
