@@ -22,7 +22,7 @@ module.exports = {
 
             let categoryLast = await message.guild.channels.fetch('923086668163059722');
             let {name, children} = categoryLast;
-            mensaje += `\n\n${name} \n${children.size == 40 ? "<:bg_xmark:932680409504972810>":"<:bg_checkmark:932680409198764095>"} ${children.size}/40 channels.`
+            mensaje += `\n\n${name} \n${children.size >= 40 ? "<:bg_xmark:932680409504972810>":"<:bg_checkmark:932680409198764095>"} ${children.size}/40 channels.`
 
             message.channel.send({embeds: [channelcountEmbed.setDescription(mensaje)]});
         }
