@@ -8,6 +8,7 @@ module.exports = {
         if(!isOwnerOfChannel({channel:message.channel, member:message.member})) return message.channel.send("You can't use this here, `Manage Channel` permission is required to hide/unhide a channel.")
         if(!message.reference) return message.channel.send('You didn\'t reply to any message');
 
-        await message.reference.pin();
+        let reference = await message.channel.messages.fetch(message.reference.messageId);
+        reference.pin();
     }
 }
