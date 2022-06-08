@@ -2,6 +2,7 @@ module.exports = {
     name: 'erpgEvent',
     description: 'Sample description',
     async execute(client, message, Discord) {
+        if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082' ) return
         if(message.embeds[0].fields[0].value.toLowerCase().includes('catch')){
             message.channel.send('<@&851519388963700790>')
 
