@@ -68,9 +68,8 @@ module.exports = {
         let channel = await message.guild.channels.fetch(channelData.channelID)
 
 
-        messageEmbed.setTitle("Requested data")
-            .setDescription(`**Channel**\n<#${channelData.channelID}>\nCreated at <t:${channel?channel.createdTimestamp.toString().slice(0, -3):null}:D>\n\n**Owners**\n${fetchedOwners.map(owner => `<@${owner.user.id}> (${owner.user.username}#${owner.user.discriminator}) ${owner.roles.cache.some(role => role.id == '855961500702736414')?'**ALT**':''}`).join('\n')}`)
-            .setFooter(channel.parent.name)
+        messageEmbed.setTitle("Channel data")
+            .setDescription(`${channel.parent.name}\n**Channel**\n<#${channelData.channelID}>\nCreated at <t:${channel?channel.createdTimestamp.toString().slice(0, -3):null}:D>\n\n**Owners**\n${fetchedOwners.map(owner => `<@${owner.user.id}> (${owner.user.username}#${owner.user.discriminator}) ${owner.roles.cache.some(role => role.id == '855961500702736414')?'**ALT**':''}`).join('\n')}`)
         message.channel.send({embeds: [messageEmbed]})
         
 
