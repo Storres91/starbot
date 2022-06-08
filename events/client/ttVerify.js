@@ -31,6 +31,8 @@ module.exports = {
             try {
                 ttCount = m.embeds[0].fields[0].value.split(' ').slice(-1).join();
                 ttCount = parseInt(ttCount)
+
+                if(m.embeds[0].fields[0].value.split(' ').length < 8) ttCount = 0
                 
             } catch (error) {
                 return message.channel.send("Unknown error please try again or inform a staff member.")
@@ -51,7 +53,7 @@ module.exports = {
             } else if (ttCount == 1) {
                 rolesToGive = [ROLES.TT1]
 
-            } else if (ttCount >= 2 && ttCount <= 3) {
+            } else if (ttCount >= 2 && ttCount < 3) {
                 rolesToGive = [ROLES.TT2_19, ROLES.MB500_1500, ROLES.MB1500P]
 
             }else if (ttCount >=3  && ttCount < 20) {
