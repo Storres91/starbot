@@ -57,7 +57,6 @@ module.exports = {
                 message.channel.permissionOverwrites.edit(eventRoleId, {
                     VIEW_CHANNEL: null
                 })
-                message.channel.send('Channel is now hidden.')
             }, 2000);
         })
 
