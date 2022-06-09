@@ -9,7 +9,13 @@ module.exports = {
         if(!message.reference) return message.channel.send('You didn\'t reply to any message');
 
         let reference = await message.channel.messages.fetch(message.reference.messageId);
-        reference.pin();
+        
+        try {
+            reference.pin();
+        } catch (error) {
+            return message.channel.send('Error pinning the message, is there enough space?')
+        }
+
 
         const embed = new Discord.MessageEmbed()
             .setColor('#b5359d')
