@@ -59,7 +59,7 @@ module.exports = {
             if(message.channel.permissionOverwrites.cache?.get('672574313433399336')?.deny.any('0x0000000000000400')){
                 embed.setDescription("<:cr_lock:983546206061994014> **Event is over, back into hiding mode.**");
             } else {
-                embed.setDescription("**Event is over, time to go home.**");
+                embed.setDescription("<:cr_unlock:983546252413243413> **Event is over, time to go home.**");
             } 
 
             message.channel.send({embeds:[embed]})
