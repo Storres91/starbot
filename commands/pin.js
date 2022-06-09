@@ -9,12 +9,11 @@ module.exports = {
         if(!message.reference) return message.channel.send('You didn\'t reply to any message');
 
         let reference = await message.channel.messages.fetch(message.reference.messageId);
+        let limitReached;
         
-        try {
-            reference.pin();
-        } catch (error) {
-            return message.channel.send('Error pinning the message, is there enough space?')
-        }
+        
+        await reference.pin().catch(()=>{limitReached = true});
+        if(limitReached) return message.channel.send('Error pinning the message, maximum number of pins (50) reached.')
 
 
         const embed = new Discord.MessageEmbed()
