@@ -17,7 +17,7 @@ module.exports = {
         try{
             target = await message.guild.members.fetch(targetId);
 
-            if(isOwnerOfChannel({channel:message.channel, member:target}) && !target.bot) return message.channel.send("They are already added here.")
+            if(isOwnerOfChannel({channel:message.channel, member:target}) && !target.user.bot) return message.channel.send("They are already added here.")
             if(target.id == message.author.id) return message.channel.send("You are already added here.")
             
             message.channel.permissionOverwrites.edit(target.id, {

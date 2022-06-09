@@ -14,7 +14,7 @@ module.exports = {
         try{
             target = await message.guild.members.fetch(targetId);
 
-            if(isOwnerOfChannel({channel:message.channel, member:target}) && !target.bot) return message.channel.send("You can't change the perms of this person.")
+            if(isOwnerOfChannel({channel:message.channel, member:target}) && !target.user.bot) return message.channel.send("You can't change the perms of this person.")
             if(target.id == message.author.id) return message.channel.send("You can't reset yourself.")
 
             message.channel.permissionOverwrites.edit(target.id, {
