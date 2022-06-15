@@ -1,7 +1,7 @@
 module.exports = {
     name: 'erpgEvent',
     description: 'Sample description',
-    async execute(client, message, Discord) {
+    async execute(client, message, Discord, slash) {
         if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082' ) return
         let eventRoleId;
 
@@ -25,13 +25,14 @@ module.exports = {
 
         } else if (message.embeds[0].fields[0].name.toLowerCase().includes('join')){
             eventRoleId = '854865339883978772';
-        }
+        } else return
 
         //Return true if channel is hidden (Everyone's view perm is off)
         await message.channel.permissionOverwrites.edit(eventRoleId, {
             VIEW_CHANNEL: true
         })
-        message.channel.send(`<@&${eventRoleId}>`)
+        if(slash) message.channel.send(`<@&${eventRoleId}>`)
+        else message.channel.send(`<@&${eventRoleId}> **PRESS THE BUTTON^^**`)
 
 
         //Wait for event to end to hide again
@@ -45,7 +46,7 @@ module.exports = {
             // If another event starts return
             const events = ['join', 'fight', 'summon', 'time to fight', 'fish', 'chop', 'catch']
             for (let ev of events){
-                if(m.embeds[0]?.fields[0]?.name.toLowerCase().includes(ev)) return
+                if(m.embeds[0]?.fields[0]?.value.toLowerCase().includes(ev) || m.embeds[0]?.fields[0]?.name.toLowerCase().includes(ev)) return
             }
 
             //End event on embed
