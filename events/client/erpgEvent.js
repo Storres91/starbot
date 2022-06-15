@@ -31,8 +31,8 @@ module.exports = {
         await message.channel.permissionOverwrites.edit(eventRoleId, {
             VIEW_CHANNEL: true
         })
-        if(slash) message.channel.send(`<@&${eventRoleId}>`)
-        else message.channel.send(`<@&${eventRoleId}> **PRESS THE BUTTON^^**`)
+        if(slash) message.channel.send(`<@&${eventRoleId}> **PRESS THE BUTTON^^**`)
+        else message.channel.send(`<@&${eventRoleId}>`)
 
 
         //Wait for event to end to hide again
