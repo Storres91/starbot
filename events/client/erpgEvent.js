@@ -2,7 +2,7 @@ module.exports = {
     name: 'erpgEvent',
     description: 'Sample description',
     async execute(client, message, Discord, slash) {
-        if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082' ) return
+        if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082' || message.channel.id == '859876959521079328') return
         let eventRoleId;
 
         if(message.embeds[0].fields[0].value.toLowerCase().includes('catch')){
