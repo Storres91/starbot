@@ -14,17 +14,18 @@ module.exports = {
         } else if (message.embeds[0].fields[0].value.toLowerCase().includes('fish')){
             eventRoleId = '851519530815586317';
 
-        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('time to fight')){
-            eventRoleId = '851519112084455464';
-
-        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('summon')){
-            eventRoleId = '851518913974894603';
-
         } else if (message.embeds[0].fields[0].name.toLowerCase().includes('fight')){
             eventRoleId = '854865647740387339';
 
         } else if (message.embeds[0].fields[0].name.toLowerCase().includes('join')){
             eventRoleId = '854865339883978772';
+
+        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('time to fight')){
+            eventRoleId = '851519112084455464';
+
+        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('summon')){
+            eventRoleId = '851518913974894603';
+            
         } else return
 
         //Return true if channel is hidden (Everyone's view perm is off)
