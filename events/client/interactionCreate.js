@@ -2,6 +2,7 @@ const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const donationModel = require('../../models/donationSchema.js')
 const confessionModel = require('../../models/confessionSchema.js')
 const countersModel = require('../../models/countersSchema.js')
+const mbManager = require("../../utils/mbManager.js");
 
 
 module.exports = {
@@ -257,6 +258,27 @@ module.exports = {
     
                     if (interaction.message.content == '') postChannel.send({content: ' ', embeds: [interaction.message.embeds[0]]})
                     else postChannel.send({content: interaction.message.content})
+                }
+
+                if(interaction.message.embeds[0]?.title == 'Mb template' && interaction.message.embeds[0]?.footer?.text.match(/\d+/)+"" == interaction.member.id){
+
+                    if(interaction.customId == 'minibossCancel'){
+                        const embed = new Discord.MessageEmbed()
+                            .setColor('#826afc')
+                            .setDescription('<:cr_checkno:983546312639258634> **Cancelled this mb.**');
+    
+                        await interaction.deferUpdate();
+                        interaction.editReply({embeds: [embed], components:[]})
+                    }
+    
+                    if(interaction.customId == 'minibossEdit'){
+                        await interaction.deferUpdate();
+                        interaction.editReply({components:[]})
+                        mbManager.editTemplate(interaction.message);
+                    }
+                    
+                }else if(interaction.message.embeds[0]?.title == 'Mb template' && interaction.message.embeds[0]?.footer?.text.match(/\d+/)+"" != interaction.member.id){
+                    interaction.reply({content:'**This is not your template!**', ephemeral:true})
                 }
 
             }

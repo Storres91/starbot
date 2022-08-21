@@ -1,6 +1,7 @@
 module.exports = {
     name: 'channelcount',
     description: 'Counts the channels in each category',
+    aliases: ['coconut'],
     async execute(client, message, args, Discord) {
         const staffRoleID = '857060867676831805';
         if (message.member.user.id == '313351494361677845' || message.member.roles.cache.some(role => role.id == staffRoleID)){
@@ -11,7 +12,7 @@ module.exports = {
             const channelcountEmbed = new Discord.MessageEmbed()
                 .setTitle("<a:starpurplehover:905575054161641483> Celestial Realm's channel count <a:starpurplehover:905575054161641483>")
                 .setColor("#b5359d")
-                .setFooter(`Requested by ${message.member.nickname}`)
+                .setFooter(`Requested by ${message.member.nickname != null?message.member.nickname:message.author.username}`)
                 .setTimestamp();
 
             for(let categoryId of privateCategoriesId){
