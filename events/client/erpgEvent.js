@@ -6,7 +6,9 @@ module.exports = {
     description: 'Sample description',
     async execute(client, message, Discord, slash) {
         let eventData = getData(eventsModel, {channelID: message.channel.id});
-        if(!eventData?.trigger) return;
+        if(eventData){
+            if(!eventData.trigger) return;
+        }
 
         if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082' || message.channel.id == '859876959521079328') return
         let eventRoleId;
