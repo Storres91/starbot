@@ -1,16 +1,20 @@
-const channelDataModel = require('../../models/channelDataSchema.js');
 const eventsModel = require('../../models/eventsSchema.js');
 
 module.exports = {
     name: 'erpgEvent',
     description: 'Sample description',
     async execute(client, message, Discord, slash) {
-        let eventData = getData(eventsModel, {channelID: message.channel.id});
+        let eventData;
+        try {
+            eventData = await eventsModel.findOne({channelID:message.channel.id});
+        } catch (err) {
+            console.log(`Error getting eventData ${err}`);
+        }
         if(eventData){
             if(!eventData.trigger) return;
         }
 
-        if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082' || message.channel.id == '859876959521079328') return
+        if(message.channel.id == '928163057430061136' || message.channel.id == '852321070022787082') return
         let eventRoleId;
 
         if(message.embeds[0].fields[0].value.toLowerCase().includes('catch')){
@@ -78,16 +82,6 @@ module.exports = {
                 VIEW_CHANNEL: null
             })
         })
-
-        async function getData(model, attribute={}){
-            try {
-                return data = await model.findOne(attribute);
-            } catch (err) {
-                console.log(`Error getting channelData ${err}`);
-                return null;
-            }
-        }
-
 
     }
 }
