@@ -77,7 +77,7 @@ module.exports = {
             })
         })
 
-        function getData(model, attribute={}){
+        async function getData(model, attribute={}){
             try {
                 return data = await model.findOne(attribute);
             } catch (err) {
