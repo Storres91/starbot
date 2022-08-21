@@ -22,23 +22,20 @@ module.exports = {
             console.log(`Error getting eventsData ${err}`)
         }
 
-        if(eventData) {
-            eventData.trigger = !eventData.trigger; 
-            eventData.save();
-        }
+        if(eventData)eventData.trigger = !eventData.trigger; 
         else{
             try {
-                let eventsMod = await eventsModel.create({
+                eventData = await eventsModel.create({
                     userID: message.author.id,
                     channelID: channelData.channelID,
                     trigger: false
                 });
-                eventsMod.save();
     
             } catch (error) {
                 message.channel.send("Error toggling event trigger, report to Noxet (Noxxy).")
             }
         }
+        eventData.save()
         message.channel.send(`Successfully set auto event trigger in <#${channelData.channelID}> to **${eventData.trigger}**`)
     }
 }
