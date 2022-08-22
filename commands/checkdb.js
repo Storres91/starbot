@@ -6,12 +6,13 @@ module.exports = {
     aliases: ['check', 'chcheck', 'search'],
     async execute(client, message, args, Discord) {
         const STAFF_ROLE_ID = '857060867676831805';
+        const GA_MANAGER_ROLE_ID= '869250517791019088';
         let targetChannel, targetUser, fetchedOwners = [];
         var messageEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d')
             .setTimestamp();
 
-        if (!message.member.roles.cache.some(role => role.id == STAFF_ROLE_ID)) return
+        if (!message.member.roles.cache.some(role => role.id == STAFF_ROLE_ID || role.id== GA_MANAGER_ROLE_ID)) return
         if (args.length < 1) return message.channel.send("Incorrect syntax, you have to mention or write the id of a channel or user.")
 
         // Target channel
