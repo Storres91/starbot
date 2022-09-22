@@ -4,11 +4,11 @@ const { hasAnyOfRoles, hasAllOfRoles } = require('../../utils/permsManager.js')
 const ALL_ROLES = [ROLES.TT1, ROLES.TT2_19, ROLES.TT20P, ROLES.MB500_1500, ROLES.MB1500P, ROLES.MB_GODLY]
 
 module.exports = {
-    name: 'ttVerify',
+    name: 'ttVerifySlash',
     async execute(message, Discord) {
-        const args = message.content.split(" ")
-        if (!(message.content.toLowerCase().startsWith('<@555955826880413696> p') || message.content.toLowerCase().startsWith('<@555955826880413696> progress'))) return 
-        if (args[2] && args[2]!='s') return message.reply("Do not attempt to use other people's profiles.")
+        if (message.interaction.commandName != "profile" || message.author.id != "555955826880413696") return 
+        let authorUsername = (message.embeds[0].author.name.split(" "))[0]
+        if(authorUsername != message.interaction.user.username) return message.reply("Do not attempt to use other people's profiles.");
 
         const ttEmbed = new Discord.MessageEmbed()
             .setColor('#b5359d');
@@ -18,21 +18,16 @@ module.exports = {
             .setDescription("Hi, I can only read the **Default ERPG Background**.\nDo `<@555955826880413696> bg default` and `<@555955826880413696> p` again!\n")
             .setColor("#b5359d");
         
-
-        const filter = (m) => m.author.id === '555955826880413696';
-        const collector = new Discord.MessageCollector(message.channel, { filter, time: 30000 });
         let ttCount
-        collector.on('collect', m => {
-            if (m.attachments.size != 0) {
-                m.reply({embeds:[invalidProfileEmbed]})
-                collector.stop();
+            if (message.attachments.size != 0) {
+                message.reply({embeds:[invalidProfileEmbed]})
                 return;
             }
             try {
-                ttCount = m.embeds[0].fields[0].value.split(' ').slice(-1).join();
+                ttCount = message.embeds[0].fields[0].value.split(' ').slice(-1).join();
                 ttCount = parseInt(ttCount)
 
-                if(m.embeds[0].fields[0].value.split(' ').length < 8) ttCount = 0
+                if(message.embeds[0].fields[0].value.split(' ').length < 8) ttCount = 0
                 
             } catch (error) {
                 return message.channel.send("Unknown error please try again or inform a staff member.")
@@ -98,8 +93,5 @@ module.exports = {
 
             ttEmbed.setDescription(actionSummary);
             message.reply({ embeds: [ttEmbed] })
-
-            collector.stop();
-        });
     }
 }
