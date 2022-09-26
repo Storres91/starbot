@@ -54,9 +54,11 @@ module.exports = {
             }else if (ttCount >=3  && ttCount < 20) {
                 rolesToGive = [ROLES.TT2_19, ROLES.MB500_1500, ROLES.MB1500P, ROLES.MB_GODLY]
 
-            } else {
+            } else if (ttCount>= 20){
                 rolesToGive = [ROLES.TT20P, ROLES.MB500_1500, ROLES.MB1500P, ROLES.MB_GODLY]
 
+            } else{
+                return message.channel.send("Unable to read, please contact staff.")
             }
 
             //Give roles
