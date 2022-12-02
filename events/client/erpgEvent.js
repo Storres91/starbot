@@ -20,7 +20,7 @@ module.exports = {
         if(message.embeds[0].fields[0].value.toLowerCase().includes('catch')){
             eventRoleId = '851519388963700790';
 
-        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('chop')){
+        } else if (message.embeds[0].fields[0].value.toLowerCase().includes('cut')){
             eventRoleId = '851520347588132915';
 
         } else if (message.embeds[0].fields[0].value.toLowerCase().includes('fish')){
@@ -57,7 +57,7 @@ module.exports = {
 
         eventEndCollector.on('collect', (m)=>{
             // If another event starts return
-            const events = ['join', 'fight', 'summon', 'time to fight', 'fish', 'chop', 'catch']
+            const events = ['join', 'fight', 'summon', 'time to fight', 'fish', 'cut', 'catch']
             for (let ev of events){
                 if(m.embeds[0]?.fields[0]?.value.toLowerCase().includes(ev) || m.embeds[0]?.fields[0]?.name.toLowerCase().includes(ev)) return
             }
