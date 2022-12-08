@@ -45,7 +45,10 @@ module.exports = {
         else return message.channel.send("You can't use this ");
 
         //if (!args[1]) return message.channel.send("Missing arguments, correct usage `sb archive <ChannelOwner> <Channel>`")
-        message.react("<a:bg_catyes:927728342331949056>")
+        try {message.react("<a:bg_catyes:927728342331949056>")}
+        catch(err){
+            console.log(err)
+        }
 
         //Get channelOwner users
         for (let owner of channelOwnersList) {

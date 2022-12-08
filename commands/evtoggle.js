@@ -35,7 +35,12 @@ module.exports = {
                 message.channel.send("Error toggling event trigger, report to Noxet (Noxxy).")
             }
         }
-        eventData.save()
+        try {
+            eventData.save()
+            
+        } catch (error) {
+            console.log(error)
+        }
         message.channel.send(`Successfully set auto event trigger in <#${channelData.channelID}> to **${eventData.trigger}**`)
     }
 }
